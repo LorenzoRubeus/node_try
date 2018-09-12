@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { User, validateUser } = require('../models/user');
 const _ = require('lodash');
+const bcrypt = require('bcrypt');
 
 router.get('/', (req, res) => {
     res.render('index');
@@ -15,12 +16,13 @@ router.post('/api/registerUser', async (req, res) => {
     /*const user = new User(
         _.pick(req.body, ['txtFirstName', 'txtLastName', 'txtEmail', 'txtPassword', 'txtConfirmPassword'])
     );*/
+    const hash = await bcrypt.genSalt(10);
 
     const user = new User({
         firstName: req.body.txtFirstName,
         lastName: req.body.txtLastName,
         email: req.body.txtEmail, 
-        password: req.body.txtPassword      
+        password: await bcrypt.hash(req.body.txtPassword, hash)     
     }); //TODO Sostituire req.body con .pick() di lodash
 
     await user.save();
@@ -28,11 +30,16 @@ router.post('/api/registerUser', async (req, res) => {
 });
 
 router.post('/api/loginUser', async (req, res) => {
-    const user = await User.findOne({ email: req.body.txtEmail, password: req.body.txtEmail });
+    let user = await User.findOne({ email: req.body.txtEmailLogin });
     if(!user) {
-        res.send("The email or/and the password is/are wrong");
+        return res.status(400).send("Invalid email or password");
+    }
+
+    if(!bcrypt.compare(req.body.txtPasswordLogin, user.password)){
+        return res.status(400).send('Invalid email or password');
     }
     res.send('User Logged');
+    
 });
 
 module.exports = router;
