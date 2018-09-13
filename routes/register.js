@@ -4,7 +4,7 @@ const { User, validateUser } = require('../models/user');
 const _ = require('lodash');
 const bcrypt = require('bcrypt');
 
-router.post('/api/registerUser', async (req, res) => {
+router.post('/', async (req, res) => {
     /*const user = new User(
         _.pick(req.body, ['txtFirstName', 'txtLastName', 'txtEmail', 'txtPassword', 'txtConfirmPassword'])
     );*/

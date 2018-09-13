@@ -4,7 +4,7 @@ const { User, validateUser } = require('../models/user');
 const _ = require('lodash');
 const bcrypt = require('bcrypt');
 
-router.post('/api/loginUser', async (req, res) => {
+router.post('/', async (req, res) => {
     let user = await User.findOne({ email: req.body.txtEmailLogin });
     if(!user) {
         return res.status(400).send("Invalid email or password");

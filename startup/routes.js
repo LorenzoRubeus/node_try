@@ -10,4 +10,6 @@ module.exports = function(app) {
     app.use(bodyParser.urlencoded({ extended: true }));
     app.use(express.json());
     app.use('/', home);
+    app.use('/api/registerUser', register);
+    app.use('/api/loginUser', auth);
 }
