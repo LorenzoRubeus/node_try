@@ -1,5 +1,7 @@
 const express = require('express');
 const home = require('../routes/home');
+const auth = require('../routes/auth');
+const register = require('../routes/register');
 const bodyParser = require('body-parser');
 
 module.exports = function(app) {
