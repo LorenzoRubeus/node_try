@@ -53,6 +53,16 @@ function validateUser(user){
     return Joi.validate(user, schema);
 }
 
+function validateUserLogin(user){
+    const schema = {
+        txtEmailLogin: Joi.string().min(4).max(255).required(),
+        txtPasswordLogin: Joi.string().min(5).max(255).required()
+    }
+
+    return Joi.validate(user, schema);
+}
+
 
 exports.User = User;
 exports.validateUser = validateUser;
+exports.validateUserLogin = validateUserLogin;
