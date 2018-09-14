@@ -4,6 +4,8 @@ const { User, validateUser } = require('../models/users');
 const _ = require('lodash');
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
+const config = require('config');
+const jwt = require('jsonwebtoken');
 
 router.post('/', async (req, res) => {
     /*const user = new User(
@@ -13,10 +15,9 @@ router.post('/', async (req, res) => {
     const { error } = validateUser(req.body);
     if(error){ return res.status(400).send(error.details[0].message); } // TODO Da modificare il send con render o qualcosa
 
-    let user = await User.findOne({ email: req.body.email });
+    let user = await User.findOne({ email: req.body.txtEmail });
     if(user) { return res.status(400).send('This email is already registered'); }  // TODO Da modificare il send con render o qualcosa
 
-    
     const hash = await bcrypt.genSalt(10);
 
     user = new User({
@@ -27,7 +28,9 @@ router.post('/', async (req, res) => {
     }); //TODO Sostituire req.body con .pick() di lodash
 
     await user.save();
-    res.send('User Registered');
+    const token = jwt.sign({ _id: user._id }, config.get('jwtPrivateKey'));
+    
+    res.send('User Registered ' + token);
 });
 
 module.exports = router;

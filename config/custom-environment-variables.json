@@ -1,3 +1,4 @@
 {
-    "db": "storeApp_db"
+    "db": "storeApp_db",
+    "jwtPrivateKey": "storeApp_ jwtPrivateKey"
 }

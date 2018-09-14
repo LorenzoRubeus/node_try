@@ -1,3 +1,4 @@
 {
-    "db": "mongodb://localhost/storeApp"
+    "db": "mongodb://localhost/storeApp",
+    "jwtPrivateKey": ""
 }
