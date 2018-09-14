@@ -28,9 +28,9 @@ router.post('/', async (req, res) => {
     }); //TODO Sostituire req.body con .pick() di lodash
 
     await user.save();
-    const token = jwt.sign({ _id: user._id }, config.get('jwtPrivateKey'));
     
-    res.send('User Registered ' + token);
+    const token = user.generateAuthToken();
+    res.header('x-auth-token', token).send('User Registered and logged'); // TODO Da modificare il send con render o qualcosa
 });
 
 module.exports = router;

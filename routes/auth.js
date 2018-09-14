@@ -5,6 +5,10 @@ const _ = require('lodash');
 const bcrypt = require('bcrypt');
 
 router.post('/', async (req, res) => {
+
+    const { error } = validateUser(req.body);
+    if(error) { return res.status(400).send(error.details[0].message); } // TODO Da modificare il send con render o qualcosa
+
     let user = await User.findOne({ email: req.body.txtEmailLogin });
     if(!user) {
         return res.status(400).send("Invalid email or password");
@@ -13,6 +17,10 @@ router.post('/', async (req, res) => {
     if(!bcrypt.compare(req.body.txtPasswordLogin, user.password)){
         return res.status(400).send('Invalid email or password');
     }
+
+    const token = user.generateAuthToken();
+    res.header('x-auth-token', token);
+
     res.send('User Logged'); 
 });
 
