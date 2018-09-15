@@ -2,6 +2,8 @@ const mongoose = require('mongoose');
 const Joi = require('joi');
 const jwt = require('jsonwebtoken');
 const config = require('config');
+const { paymentSchema } = require('./payments');
+const { addressSchema } = require('./addresses');
 
 const userSchema = new mongoose.Schema({
     firstName: {
@@ -32,6 +34,12 @@ const userSchema = new mongoose.Schema({
     isAdmin: {
         type: Boolean,
         default: false
+    },
+    paymentMethod: {
+        type: paymentSchema
+    },
+    address: {
+        type: addressSchema
     }
 });
 
