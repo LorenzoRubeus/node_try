@@ -3,7 +3,7 @@ const Joi = require('joi');
 const { userSchema } = require('./users');
 const { productSchema } = require('./products');
 
-const orderSchema = new mongoose.SchemaType({
+const orderSchema = new mongoose.Schema({
     dateOrder: {
         type: Date,
         default: Date.now

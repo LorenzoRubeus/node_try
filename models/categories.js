@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Joi = require('joi');
 
-const categorySchema = new mongoose.SchemaType({
+const categorySchema = new mongoose.Schema({
     name: {
         type: String,
         minlength: 3,

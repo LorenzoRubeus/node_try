@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Joi = require('joi');
 
-const addressSchema = new mongoose.SchemaType({
+const addressSchema = new mongoose.Schema({
     name: {
         type: String,
         minlength: 2,

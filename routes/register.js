@@ -2,10 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { User, validateUser } = require('../models/users');
 const _ = require('lodash');
-const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
-const config = require('config');
-const jwt = require('jsonwebtoken');
 
 router.post('/', async (req, res) => {
     /*const user = new User(

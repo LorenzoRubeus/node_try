@@ -3,7 +3,7 @@ const Joi = require('joi');
 const { categorySchema } = require('./categories');
 const { userSchema } = require('./users');
 
-const productSchema = new mongoose.SchemaType({
+const productSchema = new mongoose.Schema({
     name: {
         type: String,
         minlength: 2,

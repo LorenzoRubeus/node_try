@@ -1,7 +1,9 @@
 const express = require('express');
 const home = require('../routes/home');
 const auth = require('../routes/auth');
+const product = require('../routes/product');
 const register = require('../routes/register');
+const category = require('../routes/category');
 const bodyParser = require('body-parser');
 
 module.exports = function(app) {
@@ -12,4 +14,6 @@ module.exports = function(app) {
     app.use('/', home);
     app.use('/api/registerUser', register);
     app.use('/api/loginUser', auth);
+    app.use('/api/products', product);
+    app.use('/api/categories', category);
 }

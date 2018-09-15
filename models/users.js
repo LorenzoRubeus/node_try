@@ -5,6 +5,7 @@ const config = require('config');
 //const { paymentSchema } = require('./payments');
 const { addressSchema } = require('./addresses');
 
+
 const userSchema = new mongoose.Schema({
     firstName: {
         type: String,
