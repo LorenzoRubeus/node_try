@@ -33,5 +33,9 @@ const productSchema = new mongoose.SchemaType({
         maxlength: 65536,
         required: true
     }
-
 });
+
+const Product = mongoose.model('Product', productSchema);
+
+exports.Product = Product;
+exports.productSchema = productSchema;
