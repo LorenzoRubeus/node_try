@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 const Joi = require('joi');
+const { categorySchema } = require('./categories');
+const { userSchema } = require('./users');
 
 const productSchema = new mongoose.SchemaType({
     name: {
@@ -7,6 +9,13 @@ const productSchema = new mongoose.SchemaType({
         minlength: 2,
         maxlength: 255,
         required: true
+    },
+    category: {
+        type: [categorySchema],
+        required: true
+    },
+    seller: {
+        type: userSchema
     },
     price: {
         type: Number,

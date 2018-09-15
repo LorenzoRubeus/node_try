@@ -19,3 +19,7 @@ function validateCategory(category){
 
     return Joi.validate(category, schema)
 }
+
+exports.Category = Category;
+exports.categorySchema = categorySchema;
+exports.validateCategory = validateCategory;

@@ -64,5 +64,6 @@ function validateUserLogin(user){
 
 
 exports.User = User;
+exports.userSchema = userSchema;
 exports.validateUser = validateUser;
 exports.validateUserLogin = validateUserLogin;
