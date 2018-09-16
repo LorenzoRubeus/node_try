@@ -9,6 +9,8 @@ router.get('/', async (req, res) => {
     res.send(product);
 });
 
+
+
 router.post('/', async(req, res) => {
 
     const category = await Category.findOne({ name: req.body.category}); //TODO IF ERROR

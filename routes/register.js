@@ -30,4 +30,5 @@ router.post('/', async (req, res) => {
     res.header('x-auth-token', token).send('User Registered and logged'); // TODO Da modificare il send con render o qualcosa
 });
 
+
 module.exports = router;
