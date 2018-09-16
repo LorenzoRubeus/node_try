@@ -24,8 +24,7 @@ const productSchema = new mongoose.Schema({
     },
     estimatedTime: {
         type: Date,
-        default: Date.now,
-        required: true,
+        default: Date.now
     },
     description: {
         type: String,
