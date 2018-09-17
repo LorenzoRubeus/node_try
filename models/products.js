@@ -25,7 +25,7 @@ const productSchema = new mongoose.Schema({
     },
     estimatedTime: {
         type: Date,
-        default: Date.now
+        default: moment(new Date()).add(3, 'days')
     },
     description: {
         type: String,

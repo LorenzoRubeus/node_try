@@ -4,6 +4,7 @@ const auth = require('../routes/auth');
 const product = require('../routes/product');
 const register = require('../routes/register');
 const category = require('../routes/category');
+const profile = require('../routes/profile');
 const bodyParser = require('body-parser');
 
 module.exports = function(app) {
@@ -16,4 +17,5 @@ module.exports = function(app) {
     app.use('/api/loginUser', auth);
     app.use('/api/products', product);
     app.use('/api/categories', category);
+    app.use('/api/myProfile', profile);
 }

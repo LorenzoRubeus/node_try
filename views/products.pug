@@ -18,4 +18,6 @@ html
                     each val in categories
                         li 
                             a(href=`/api/products/${val['_id']}`)= val['name']
+            div#divProfile
+                a(href='/api/myProfile/') My Profile
     
