@@ -1,14 +1,19 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Store App</title>
-        <meta charset="UTF-8">
-    </head>
-    <body>
-        <a href="/api/products/">Lista prodotti</a>
-        <a href="/api/products/nameCrescente">Per nome: Crescente</a><br/>
-        <a href="/api/products/nameDecrescente">Per nome: Discendente</a><br/>
-        <a href="/api/products/priceCrescente">Per prezzo: Crescente</a><br/>
-        <a href="/api/products/priceDecrescente">Per prezzo: Decrescente</a><br/>
-    </body>
-</html>
+doctype html
+html
+    head
+        title Store App
+        meta(charset = 'UTF-8')
+    body    
+        div#container
+            div#listFilter
+                a(href="/api/products/", class="linkFilter") Per nome: Crescente
+                br
+                a(href='/api/products/nameDecrescente', class="linkFilter") Per nome: Discendente
+                br
+                a(href='/api/products/priceCrescente', class="linkFilter") Per prezzo: Crescente
+                br
+                a(href='/api/products/priceDecrescente', class="linkFilter") Per prezzo: Decrescente
+            div#divListCategories
+                ul(id='listCategory')
+                    li 
+    
