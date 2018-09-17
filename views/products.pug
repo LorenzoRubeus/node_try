@@ -8,12 +8,14 @@ html
             div#listFilter
                 a(href="/api/products/", class="linkFilter") Per nome: Crescente
                 br
-                a(href='/api/products/nameDecrescente', class="linkFilter") Per nome: Discendente
+                a(href='/api/products/nameDecrescente', class="linkFilter") Per nome: Decrescente
                 br
                 a(href='/api/products/priceCrescente', class="linkFilter") Per prezzo: Crescente
                 br
                 a(href='/api/products/priceDecrescente', class="linkFilter") Per prezzo: Decrescente
             div#divListCategories
                 ul(id='listCategory')
-                    li 
+                    each val in categories
+                        li 
+                            a(href=`/api/products/${val['_id']}`)= val['name']
     

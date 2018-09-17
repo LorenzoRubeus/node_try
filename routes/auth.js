@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { User, validateUser, validateUserLogin } = require('../models/users');
+const { Category } = require('../models/categories');
 const _ = require('lodash');
 const bcrypt = require('bcrypt');
 
@@ -18,8 +19,10 @@ router.post('/', async (req, res) => {
         return res.status(400).send('Invalid email or password');
     }
 
+    let categories = await Category.find();
+
     const token = user.generateAuthToken();
-    res.header('x-auth-token', token).render('products'); // TODO Da modificare il send con render o qualcosa
+    res.header('x-auth-token', token).render('products', {categories: categories}); // TODO Da modificare il send con render o qualcosa
 });
 
 module.exports = router;
