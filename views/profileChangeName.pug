@@ -1,0 +1,14 @@
+doctype html
+html
+    head 
+        meta(http-equiv="Content-Type", content="text/html;charset=UTF-8")
+        title Change Name
+    body
+        form(action=`/api/myProfile/changeName/${token}`, method="post")
+            input#txtFirstName(type="text", name="txtFirstName", class="txtChangeName", value=user.firstName)
+            br
+            input#txtLastName(type="text", name="txtLastName", class="txtChangeName", value=user.lastName)
+            br
+            input(type="submit", value="Change")
+            input(type="reset", value="Reset")
+            a(href=`/api/myProfile/${token}`) Go Back

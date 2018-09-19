@@ -16,10 +16,13 @@ router.post('/', async (req, res) => {
     if(user) { return res.status(400).send('This email is already registered'); }  // TODO Da modificare il send con render o qualcosa
 
     const hash = await bcrypt.genSalt(10);
-    
+
+    const firstName = req.body.txtFirstName[0].toUpperCase() + req.body.txtFirstName.slice(1, req.body.txtFirstName.length).toLowerCase();
+    const lastName = req.body.txtLastName[0].toUpperCase() + req.body.txtLastName.slice(1, req.body.txtLastName.length).toLowerCase();
+
     user = new User({
-        firstName: req.body.txtFirstName.toUpperCase(),
-        lastName: req.body.txtLastName.toUpperCase(),
+        firstName: firstName,
+        lastName: lastName,
         email: req.body.txtEmail, 
         password: await bcrypt.hash(req.body.txtPassword, hash)     
     }); //TODO Sostituire req.body con .pick() di lodash

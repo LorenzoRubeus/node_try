@@ -1,0 +1,13 @@
+doctype html
+html
+    head
+        meta(http-equiv="Content-Type", content="text/html;charset=UTF-8")
+        title Change Email
+    body
+        #divContainer
+            form(action=`/api/myProfile/changeEmail/${token}`, method="post")
+                input#txtOldEmail(type="text", name="txtOldEmail", value=user.email, disabled)
+                br
+                input#txtNewEmail(type="text", name="txtNewEmail", placeholder="New Email Address")
+                br
+                input#txtConfirmNewEmail(type="text", name="txtConfirmNewEmail", placeholder="Confirm Email Address")

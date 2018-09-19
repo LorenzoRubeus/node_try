@@ -4,9 +4,9 @@ const { User, validateUser, validateUserLogin } = require('../models/users');
 const { Category } = require('../models/categories');
 const _ = require('lodash');
 const bcrypt = require('bcrypt');
+var token;
 
 router.post('/', async (req, res) => {
-
     const { error } = validateUserLogin(req.body);
     if(error) { return res.status(400).send(error.details[0].message); } // TODO Da modificare il send con render o qualcosa
 
@@ -21,8 +21,13 @@ router.post('/', async (req, res) => {
 
     let categories = await Category.find();
 
-    const token = user.generateAuthToken();
-    res.header('x-auth-token', token).render('products', {categories: categories}); // TODO Da modificare il send con render o qualcosa
+    token = user.generateAuthToken();
+    res.header('x-auth-token', token).render('products', {categories: categories, token: token}); // TODO Da modificare il send con render o qualcosa
 });
 
-module.exports = router;
+function setToken(pToken) {
+    token = pToken;
+}
+
+exports.auth = router;
+exports.token = token;

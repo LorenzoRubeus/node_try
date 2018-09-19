@@ -1,6 +1,6 @@
 const express = require('express');
 const home = require('../routes/home');
-const auth = require('../routes/auth');
+const { auth } = require('../routes/auth');
 const product = require('../routes/product');
 const register = require('../routes/register');
 const category = require('../routes/category');
