@@ -11,3 +11,11 @@ html
                 input#txtNewEmail(type="text", name="txtNewEmail", placeholder="New Email Address")
                 br
                 input#txtConfirmNewEmail(type="text", name="txtConfirmNewEmail", placeholder="Confirm Email Address")
+                br
+                input#txtPassword(type="password", name="txtPassword", placeholder="Password")
+                br
+                input(type="submit", value="Change") 
+                br
+                input(type="reset", value="Reset") 
+                br
+                a(href=`/api/myProfile/${token}`) Go Back 
