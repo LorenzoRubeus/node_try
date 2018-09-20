@@ -6,16 +6,16 @@ html
     body
         #divContainer
             form(action=`/api/myProfile/changeEmail/${token}`, method="post")
-                input#txtOldEmail(type="text", name="txtOldEmail", value=user.email, disabled)
+                input#txtOldEmail(type="email", name="txtOldEmail", value=user.email, disabled)
                 br
-                input#txtNewEmail(type="text", name="txtNewEmail", placeholder="New Email Address")
+                input#txtNewEmail(type="email", name="txtNewEmail", placeholder="New Email Address")
                 br
-                input#txtConfirmNewEmail(type="text", name="txtConfirmNewEmail", placeholder="Confirm Email Address")
+                input#txtConfirmNewEmail(type="email", name="txtConfirmNewEmail", placeholder="Confirm Email Address")
                 br
-                input#txtPassword(type="password", name="txtPassword", placeholder="Password")
+                input#txtPassword(type="text", name="txtPassword", placeholder="Password")
                 br
-                input(type="submit", value="Change") 
+                input(type="submit", value="Change")
                 br
-                input(type="reset", value="Reset") 
+                input(type="reset", value="Reset")
                 br
                 a(href=`/api/myProfile/${token}`) Go Back 
