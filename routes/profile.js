@@ -78,17 +78,18 @@ router.post('/changePassword/:token', async (req, res) => {
     const decoded = jwt.verify(token, config.get('jwtPrivateKey'));
     const hash = await bcrypt.genSalt(10);
 
-    const user = await User.findById(decoded._id);
-    const validPassword = await bcrypt.compare(req.body.txtNewPassword, user.password);
-    if( !validPassword ) {
-        return res.status(400).send('Your old password is wrong'); //TODO Da cambiare
-    }
-
-    if( req.body.txtNewPassword !== req.body.txtConfirmNewPassword ) {
+    if(req.body.txtPassword !== req.body.txtConfirmPassword) {
         return res.status(400).send('The passwords do not correspond'); //TODO Da cambiare
     }
-    
-    user.password = await bcrypt.hash(req.body.txtNewPassword, hash);
+
+    const user = await User.findById(decoded._id);    
+
+    const validPassword = await bcrypt.compare(req.body.txtOldPassword, user.password);
+    if(!validPassword) {
+        return res.status(400).send('Your current password is wrong'); //TODO Da cambiare
+    }
+
+    user.password = await bcrypt.hash(req.body.txtPassword, hash);
     await user.save();
 
     res.render('profile', { user: user, token: token});

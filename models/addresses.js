@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Joi = require('joi');
+const { userSchema } = require('./users');
 
 const addressSchema = new mongoose.Schema({
     name: {
