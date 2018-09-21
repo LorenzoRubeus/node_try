@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { User } = require('../models/users');
+const { Address } = require('../models/addresses');
 const config = require('config');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
@@ -41,6 +42,16 @@ router.get('/changePassword/:token', async (req, res) => {
 
     res.render('profileChangePassword', { user: user, token: token});
 });
+
+router.get('/changeAddress/:token', async (req, res) => {
+    const token = req.params.token;
+    const decoded = jwt.verify(token, config.get('jwtPrivateKey'));
+
+    const address = await Address.findOne({ customer: decoded._id });
+    const user = await User.findOne({ _id: address.customer }).select({ password: 0, isAdmin: 0});
+
+    res.render('profileChangeAddress', { address: address, user: user, token: token });
+})
 
 
 
@@ -93,6 +104,13 @@ router.post('/changePassword/:token', async (req, res) => {
     await user.save();
 
     res.render('profile', { user: user, token: token});
+});
+
+router.post('/changeAddress/:token', async (req, res) => {
+    const token = req.params.token;
+    const decoded = jwt.verify(token, config.get('jwtPrivateKey'));
+
+    const 
 });
 
 module.exports = router;

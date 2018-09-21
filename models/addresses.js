@@ -1,13 +1,11 @@
 const mongoose = require('mongoose');
 const Joi = require('joi');
-const { userSchema } = require('./users');
+const { User } = require('./users');
 
 const addressSchema = new mongoose.Schema({
-    name: {
-        type: String,
-        minlength: 2,
-        maxlength: 255,
-        required: true
+    customer: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
     },
     street: {
         type: String, 
@@ -45,7 +43,6 @@ const Address = mongoose.model('Address', addressSchema);
 
 function validateAddress(address){
     const schema = {
-        txtName: Joi.string().min(2).max(255).required(),
         txtStreet: Joi.string().min(2).max(355).required(),
         txtCity: Joi.string().min(2).max(255).required(),
         txtCountry: Joi.string().min(2).max(255).required(),

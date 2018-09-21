@@ -1,0 +1,25 @@
+doctype html
+html
+    head
+        meta(http-equiv="Content-Type", content="text/html;charset=UTF-8")
+        title Change Address
+    body
+        div#divContainer
+            form(action=`/api/myProfile/changeAddress/${token}`, method="post")
+                input#txtFirstName(type="text", name="txtFirstName", value=user.firstName, disabled)
+                br
+                input#txtLastName(type="text", name="txtLastName", value=user.lastName, disabled)
+                br
+                input#txtCity(type="text", name="txtCity", value=address.city)
+                br
+                input#txtCountry(type="text", name="txtCountry", value=address.country)
+                br
+                input#txtZipCode(type="text", name="txtZipCode", value=address.zipCode)
+                br
+                input#txtPhoneNumber(type="text", name="txtPhoneNumber", value=address.phoneNumber)
+                br
+                input(type="submit", value="Change")
+                br
+                input(type="reset", value="Reset")
+                br
+                a(href=`/api/myProfile/${token}`) Go Back
