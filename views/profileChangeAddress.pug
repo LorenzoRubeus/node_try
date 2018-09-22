@@ -6,9 +6,9 @@ html
     body
         div#divContainer
             form(action=`/api/myProfile/changeAddress/${token}`, method="post")
-                input#txtFirstName(type="text", name="txtFirstName", value=user.firstName, disabled)
+                input#txtName(type="text", name="txtName", value=address.name)
                 br
-                input#txtLastName(type="text", name="txtLastName", value=user.lastName, disabled)
+                input#txtStreet(type="text", name="txtStreet", value=address.street)
                 br
                 input#txtCity(type="text", name="txtCity", value=address.city)
                 br

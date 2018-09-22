@@ -110,7 +110,18 @@ router.post('/changeAddress/:token', async (req, res) => {
     const token = req.params.token;
     const decoded = jwt.verify(token, config.get('jwtPrivateKey'));
 
-    const 
+    const address = await Address.findOneAndUpdate({ customer: decoded._id }, {
+        name: req.body.txtName,
+        street: req.body.txtStreet,
+        city: req.body.txtCity,
+        ZipCode: req.body.txtZipCode,
+        PhoneNumber: req.body.txtPhoneNumber
+    });
+    
+    const user = await User.findById(address.customer);
+
+    res.render('profile', { user: user, token: token });
+
 });
 
 module.exports = router;

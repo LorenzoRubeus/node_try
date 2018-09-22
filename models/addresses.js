@@ -7,6 +7,12 @@ const addressSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
     },
+    name: {
+        type: String,
+        minlength: 2,
+        maxlength: 355,
+        required: true
+    },
     street: {
         type: String, 
         minlength: 2,
