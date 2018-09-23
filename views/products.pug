@@ -4,8 +4,8 @@ html
         title Store App
         meta(charset = 'UTF-8')
     body    
-        div#container
-            div#listFilter
+        #container
+            #listFilter
                 a(href="/api/products/", class="linkFilter") Per nome: Crescente
                 br
                 a(href='/api/products/nameDecrescente', class="linkFilter") Per nome: Decrescente
@@ -13,11 +13,23 @@ html
                 a(href='/api/products/priceCrescente', class="linkFilter") Per prezzo: Crescente
                 br
                 a(href='/api/products/priceDecrescente', class="linkFilter") Per prezzo: Decrescente
-            div#divListCategories
+            #divListCategories
                 ul(id='listCategory')
                     each val in categories
                         li 
                             a(href=`/api/products/${val['_id']}`)= val['name']
-            div#divProfile
+            #divProfile
                 a(href=`/api/myProfile/${token}`) My Profile
+            br
+            #divListProducts
+                each val in products
+                    a(href=`#`)= val.name
+                    label  di
+                    label= " " + val.seller.firstName + " " + val.seller.lastName
+                    #divButtonsProduct
+                        a(href=`/api/product/addBasket/${val._id}/${token}`) Add to the basket
+                    hr
+
+                
+
     

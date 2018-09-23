@@ -23,13 +23,12 @@ router.post('/', async (req, res) => {
 
     let categories = await Category.find();
 
+    let products = await Product.find();
+
     token = user.generateAuthToken();
-    res.header('x-auth-token', token).render('products', {user: user, categories: categories, token: token}); // TODO Da modificare il send con render o qualcosa
+    res.header('x-auth-token', token).render('products', {user: user, categories: categories, products:products, token: token}); // TODO Da modificare il send con render o qualcosa
 });
 
-function setToken(pToken) {
-    token = pToken;
-}
 
 exports.auth = router;
 exports.token = token;
