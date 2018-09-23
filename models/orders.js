@@ -1,20 +1,18 @@
 const mongoose = require('mongoose');
 const Joi = require('joi');
-const { productSchema } = require('./products');
-const { userSchema } = require('./users');
 
-const ordersSchema = new mongoose.SchemaType({
+const ordersSchema = new mongoose.Schema({
     dateOrder: {
         type: Date,
         default: Date.now
     },
-    product: {
-        type: productSchema,
-        required: true
+    products: {
+        type: [mongoose.Schema.Types.ObjectId],
+        ref: 'Product'
     },
     customer: {
-        type: userSchema,
-        required: true
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
     }
 });
 

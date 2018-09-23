@@ -4,6 +4,20 @@ html
         meta(http-equiv="Content-Type", content="text/html;charset=UTF-8")
         title Add Address
     body
-        input#txtName(type="text", name="txtName", placeholder="Name and Surname")
-        br
-         
+        #divContainer
+            form(action=`/api/address/${token}`, method="post")
+                input#txtName(type="text", name="txtName", placeholder="Name and Surname")
+                br
+                input#txtStreet(type="text", name="txtStreet", placeholder="Street")
+                br
+                input#txtCity(type="text", name="txtCity", placeholder="City")
+                br
+                input#txtCountry(type="text", name="txtCountry", placeholder="Country")
+                br
+                input#txtZipCode(type="text", name="txtZipCode", placeholder="Zip Code")
+                br
+                input#txtPhoneNumber(type="text", name="txtPhoneNumber", placeholder="Phone Number")
+                br
+                input(type="submit", value="Add")
+                br
+                a(href=`/api/myProfile/${token}`) Go Back

@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { User, validateUser, validateUserLogin } = require('../models/users');
 const { Category } = require('../models/categories');
+const { Product } = require('../models/products');
 const _ = require('lodash');
 const bcrypt = require('bcrypt');
 var token;
@@ -23,7 +24,7 @@ router.post('/', async (req, res) => {
     let categories = await Category.find();
 
     token = user.generateAuthToken();
-    res.header('x-auth-token', token).render('products', {categories: categories, token: token}); // TODO Da modificare il send con render o qualcosa
+    res.header('x-auth-token', token).render('products', {user: user, categories: categories, token: token}); // TODO Da modificare il send con render o qualcosa
 });
 
 function setToken(pToken) {

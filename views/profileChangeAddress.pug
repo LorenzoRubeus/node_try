@@ -5,21 +5,22 @@ html
         title Change Address
     body
         div#divContainer
-            form(action=`/api/myProfile/changeAddress/${token}`, method="post")
-                input#txtName(type="text", name="txtName", value=address.name)
-                br
-                input#txtStreet(type="text", name="txtStreet", value=address.street)
-                br
-                input#txtCity(type="text", name="txtCity", value=address.city)
-                br
-                input#txtCountry(type="text", name="txtCountry", value=address.country)
-                br
-                input#txtZipCode(type="text", name="txtZipCode", value=address.zipCode)
-                br
-                input#txtPhoneNumber(type="text", name="txtPhoneNumber", value=address.phoneNumber)
-                br
-                input(type="submit", value="Change")
-                br
-                input(type="reset", value="Reset")
-                br
-                a(href=`/api/myProfile/${token}`) Go Back
+            each val in address
+                form(action=`/api/myProfile/changeAddress/${token}/${val._id}`, method="post")
+                    input#txtName(type="text", name="txtName", value=val.name)
+                    br
+                    input#txtStreet(type="text", name="txtStreet", value=val.street)
+                    br
+                    input#txtCity(type="text", name="txtCity", value=val.city)
+                    br
+                    input#txtCountry(type="text", name="txtCountry", value=val.country)
+                    br
+                    input#txtZipCode(type="text", name="txtZipCode", value=val.zipCode)
+                    br
+                    input#txtPhoneNumber(type="text", name="txtPhoneNumber", value=val.phoneNumber)
+                    br
+                    input(type="submit", value="Change")
+                    input(type="reset", value="Reset")
+                    a(href=`/api/myProfile/${token}`) Go Back
+                    br
+                    br

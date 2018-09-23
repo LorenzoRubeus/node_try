@@ -2,7 +2,7 @@ const config = require('config');
 const jwt = require('jsonwebtoken');
 const express = require('express');
 const router = express.Router();
-const { Address } = require('../models/addresses');
+const { Address, validateAddress } = require('../models/addresses');
 const { User } = require('../models/users');
 
 router.get('/:token', async (req, res) => {
@@ -19,6 +19,11 @@ router.post('/:token', async (req, res) => {
     const token = req.params.token;
     const decoded = jwt.verify(token, config.get('jwtPrivateKey'));
 
+    const { error } = validateAddress(req.body);
+    if(error) {
+        return res.status(400).send(error.details[0].message);
+    }
+
     let address = new Address({
         customer: {
             _id: decoded._id,
@@ -30,11 +35,12 @@ router.post('/:token', async (req, res) => {
         zipCode: req.body.txtZipCode,
         phoneNumber: req.body.txtPhoneNumber
     });
-
     await address.save();
     address = await Address.findOne({ _id: address._id }).populate('customer', {firstName: 1, lastName: 1, email: 1});
 
-    res.send(address);
+    const user = await User.findById(address.customer);
+
+    res.render('profile', { user: user, token: token })
 });
 
 module.exports = router;
