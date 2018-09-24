@@ -23,12 +23,13 @@ html
             br
             #divListProducts
                 each val in products
-                    a(href=`#`)= val.name
-                    label  di
-                    label= " " + val.seller.firstName + " " + val.seller.lastName
-                    #divButtonsProduct
-                        a(href=`/api/product/addBasket/${val._id}/${token}`) Add to the basket
-                    hr
+                    form(action=`/api/product/addBasket/${val._id}/${token}`, method="post")
+                        a(href=`#`)= val.name
+                        label  di
+                        label= " " + val.seller.firstName + " " + val.seller.lastName
+                        #divButtonsProduct
+                            button(type="submit") Add to the basket 
+                        hr
 
                 
 

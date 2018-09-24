@@ -3,6 +3,8 @@ const router = express.Router();
 const { Product } = require('../models/products');
 const { Category } = require('../models/categories');
 const { User } = require('../models/users');
+const config = require('config');
+const jwt = require('jsonwebtoken');
 
 router.get('/', async (req, res) => {
     const product = await Product.find().select(
@@ -70,6 +72,15 @@ router.post('/', async(req, res) => {
 
     res.send(product);
 });
+
+router.post('/addBasket/:idProduct/:token', async (req, res) => {
+    const token = req.params.token;
+    const decoded = jwt.verify(token, config.get('jwtPrivateKey'));
+    const idProduct = req.params.idProduct;
+
+    
+});
+
 
 async function getProductsFilter(filter){
     return await Product.find().select(
