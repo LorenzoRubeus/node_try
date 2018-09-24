@@ -23,7 +23,7 @@ html
             br
             #divListProducts
                 each val in products
-                    form(action=`/api/product/addBasket/${val._id}/${token}`, method="post")
+                    form(action=`/api/products/addBasket/${val._id}/${token}`, method="post")
                         a(href=`#`)= val.name
                         label  di
                         label= " " + val.seller.firstName + " " + val.seller.lastName

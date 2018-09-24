@@ -3,6 +3,7 @@ const router = express.Router();
 const { Product } = require('../models/products');
 const { Category } = require('../models/categories');
 const { User } = require('../models/users');
+const { Basket } = require('../models/baskets');
 const config = require('config');
 const jwt = require('jsonwebtoken');
 
@@ -78,7 +79,20 @@ router.post('/addBasket/:idProduct/:token', async (req, res) => {
     const decoded = jwt.verify(token, config.get('jwtPrivateKey'));
     const idProduct = req.params.idProduct;
 
+    const user = await User.findById(decoded._id);
+    const basket = await Basket.findOne({ customer: decoded._id });
+    const product = await Product.findById(idProduct);
+
+   // basket.count++;
+   // basket = await basket.save();
+    /*basket.products._id = product;
+    basket = await basket.save();
     
+    basket = await Basket.findOne({ customer: decoded._id }).populate('products', { name: 1, seller: 1, price: 1, description: 1});
+
+    res.render('profile', { user: user, basket: basket, product: product, token: token, categories: categories })*/
+    res.render('products', { user: user, product: product, token: token, basket: basket });
+
 });
 
 
