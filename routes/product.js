@@ -50,7 +50,7 @@ router.get('/priceDecrescente', async (req, res) => {
 });
 
 router.post('/', async(req, res) => {
-    const category = await Category.findOne({ name: req.body.category}); //TODO IF ERROR
+    const category = await Category.findOne({ name: req.body.category }); //TODO IF ERROR
     
     const user = await User.findOne({ _id: req.body.id }); //TODO IF ERROR E PRENDERE JWT TOKEN INFO
 
@@ -80,19 +80,18 @@ router.post('/addBasket/:idProduct/:token', async (req, res) => {
     const idProduct = req.params.idProduct;
 
     const user = await User.findById(decoded._id);
-    const basket = await Basket.findOne({ customer: decoded._id });
-    const product = await Product.findById(idProduct);
+    let basket = await Basket.findOne({ customer: decoded._id });
+    //const product = await Product.findById(idProduct);
+    const categories = await Category.find();
+    const products = await Product.find();
 
-   // basket.count++;
-   // basket = await basket.save();
-    /*basket.products._id = product;
+    basket.count++;
+    basket.products.push(idProduct);
     basket = await basket.save();
     
-    basket = await Basket.findOne({ customer: decoded._id }).populate('products', { name: 1, seller: 1, price: 1, description: 1});
+    //basket = await Basket.findOne({ customer: decoded._id }).populate('products', { name: 1, seller: 1, price: 1, description: 1});
 
-    res.render('profile', { user: user, basket: basket, product: product, token: token, categories: categories })*/
-    res.render('products', { user: user, product: product, token: token, basket: basket });
-
+    res.render('products', { user: user, products: products, categories: categories, token: token, basket: basket });
 });
 
 
