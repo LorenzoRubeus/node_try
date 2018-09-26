@@ -10,9 +10,15 @@ router.get('/:token', async (req, res) => {
     const decoded = jwt.verify(token, config.get('jwtPrivateKey'));
 
     const user = await User.findById(decoded._id).select({ password: 0, isAdmin: 0 });
-
+    
     res.render('profileAddAddress', { user: user, token: token });
 
+
+
+    //const address = await Address.findOne({ customer: decoded._id });
+    //res.render('index', { user: user, token: token, user: address.customer.firstName })
+
+   
 });
 
 router.post('/:token', async (req, res) => {
@@ -39,7 +45,6 @@ router.post('/:token', async (req, res) => {
     address = await Address.findOne({ _id: address._id }).populate('customer', {firstName: 1, lastName: 1, email: 1});
 
     const user = await User.findById(address.customer);
-
     res.render('profile', { user: user, token: token })
 });
 

@@ -6,6 +6,7 @@ const register = require('../routes/register');
 const category = require('../routes/category');
 const address = require('../routes/address');
 const profile = require('../routes/profile');
+const basket = require('../routes/basket');
 const bodyParser = require('body-parser');
 
 module.exports = function(app) {
@@ -20,4 +21,5 @@ module.exports = function(app) {
     app.use('/api/categories', category);
     app.use('/api/address', address);
     app.use('/api/myProfile', profile);
+    app.use('/api/basket', basket);
 }

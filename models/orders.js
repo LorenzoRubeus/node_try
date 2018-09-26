@@ -13,6 +13,11 @@ const ordersSchema = new mongoose.Schema({
     customer: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
+    },
+    price: {
+        type: Number,
+        min: 0,
+        default: 0
     }
 });
 
