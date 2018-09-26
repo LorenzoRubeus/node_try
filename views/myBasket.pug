@@ -7,7 +7,13 @@ html
         #divContainer
             #divProducts
                 each val in basket.products
-                    a(href=``)= val.name
-                    hr
-                p= basket.price
+                     form(action=`/api/basket/addBasket/${val._id}/${token}`, method="post")
+                        a(href=`#`)= val.name
+                        label  di
+                        label= " " + val.seller.firstName + " " + val.seller.lastName
+                        p= " Price: " + val.price + "€"
+                        #divButtonsProduct
+                            button(type="submit") Remove from the basket
+                        hr
+                p= "Total: " + basket.price
                 

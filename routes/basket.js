@@ -35,14 +35,15 @@ router.post('/addBasket/:idProduct/:token', async (req, res) => {
     basket = await basket.save();   
     basket = await Basket.findOne({ customer: decoded._id }).populate('products.product', { name: 1, seller: 1, price: 1, description: 1 });
 
-    /*const order = await Order.findOne({ customer: decoded._id });
-    order.products.push(idProduct);
-    order.price += products.price;
-    await order.save();*/
-
     products = await Product.find();
 
     res.render('products', { user: user, products: products, categories: categories, token: token, basket: basket });
 });
+
+router.post('/removeProductBasket/:idProduct/:token', async (req, res) => {
+    const token = req.params.token;
+    const decoded = jwt.verify(token, config.get('jwtPrivateKey'));
+    const idProduct = req.params.idProduct;
+}); 
 
 module.exports = router;
