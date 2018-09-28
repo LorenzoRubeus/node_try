@@ -5,16 +5,18 @@ html
         title Edit Payment
     body
         #divContainer
-            form(action=`/api/payments/updatePayment/${token}`, method="post")
+            form(action=`/api/payments/updatePayment/${token}/${payment._id}`, method="post")
                 input#txtCardHolder(type="text", name="txtCardHolder", value=payment.cardHolder)
                 br
                 input#txtCardNumber(type="text", name="txtCardNumber", value=payment.cardNumber)
                 br
-                input#txtMonthExpired(type="number", name="txtMonthExpired", value=payment.monthExpired)
+                input#txtMonthExpired(type="number", name="txtMonthExpired", min=1, max=12, value=payment.monthExpired)
                 label  / 
-                input#txtCardHolder(type="number", name="txtYearExpired", value=payment.yearExpired)
+                input#txtCardHolder(type="number", name="txtYearExpired", min=2018, max=2030, value=payment.yearExpired)
                 br
                 input(type="submit", value="Change")
                 input(type="reset", value="Reset")
                 br
-                a(href=`/api/myProfile/${token}`) Go Back
+            form(action=`/api/payments/deletePayment/${token}/${payment._id}`, method="post")
+                input(type="submit", value="Delete")
+            a(href=`/api/myProfile/${token}`) Go Back

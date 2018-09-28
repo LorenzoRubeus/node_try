@@ -6,6 +6,9 @@ const ordersSchema = new mongoose.Schema({
         type: Date,
         default: Date.now
     },
+    dateEstimated: {
+        type: Date
+    },
     products: {
         type: [mongoose.Schema.Types.ObjectId],
         ref: 'Product'

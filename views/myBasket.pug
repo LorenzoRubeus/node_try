@@ -16,7 +16,7 @@ html
                             button(type="submit") Remove from the basket
                         hr
                 a(href=`/api/products/showProducts/${token}`) Go Back 
-                form(action="DA FARE", method="post")
+                form(action=`/api/payments/pay/${token}`, method="post")
                     p= "Total: " + basket.price
                     button(type="submit") Buy Now
                 
