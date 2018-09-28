@@ -52,32 +52,32 @@ router.post('/deletePayment/:token/:idPayment', async (req, res) => {
     res.render('managePayments', { token: token, payments: payments, count: 0 });
 });
 
-/*router.post('/pay/:token', async (req, res) => {
+router.post('/confirmPayment/:token', async (req, res) => {
     const token = req.params.token;
     const decoded = jwt.verify(token, config.get('jwtPrivateKey'));
 
-    const basket = await Basket.findOne({ customer: decoded._id });
-    const order = await Order.findOneAndUpdate({ customer: decoded._id }, {
+    const basket = await Basket.findOne({ customer: decoded._id }).populate('products');
+    const user = await User.findById(decoded._id);
+    await Order.findOneAndUpdate({ customer: decoded._id }, {
         price: basket.price,
-        dateOrder: Date.now,
+        dateOrder: new Date(),
         dateEstimated: moment(new Date(), "DD-MM-YYYY").add(4, 'days'),
         products: basket.products
     });
 
-    res.render()
-
-});*/
+    res.render('myBasket', { token: token, user: user, basket: basket, count: 0 })
+});
 
 router.post('/pay/:token', async (req, res) => {
     const token = req.params.token;
     const decoded = jwt.verify(token, config.get('jwtPrivateKey'));
 
     const basket = await Basket.findOne({ customer: decoded._id }).populate('products');
-    const addresses = await Address.findOne({ customer: decoded._id });
-    const payments = await Payment.findOne({ customer: decoded._id });
+    const addresses = await Address.find({ customer: decoded._id });
+    const payments = await Payment.find({ customer: decoded._id });
 
 
-    res.render('pay', {basket: basket, addresses: addresses, payments: payments});
+    res.render('pay', {token: token, basket: basket, addresses: addresses, payments: payments});
 })
 
 module.exports = router;

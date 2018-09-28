@@ -4,15 +4,28 @@ html
         meta(http-equiv="Content-Type", content="text/html;charset=UTF-8")
         title Pay Now!
     body
-        form(action="", method="post")
+        form(action=`/api/payments/confirmPayment/${token}`, method="post")
+            div#divAddresses
+            label Choose your address
+                each val in addresses
+                    ul
+                        li
+                            input#rdbAddress(type="radio", name="rdbAddress", value=val._id)
+                            label= " " + val.street
+            div#divPayments
+                label Choose your method of payment
+                each val in payments
+                    ul
+                        li
+                            input#rdbPayment(type="radio", name="rdbPayment", value=val._id)
+                            label= " " + val.cardNumber
             p Your basket:
-            br
             each val in basket.products
                 a(href=`#`)= val.name
                 label  di
                 label= " " + val.seller.firstName + " " + val.seller.lastName
                 p= " Price: " + val.price + "€"
-                #divButtonsProduct
-                    button(type="submit", id="btnRemoveProduct") Remove from the basket
                 hr
+            #divButtons
+                input(type="submit", value="Pay")
             
