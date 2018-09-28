@@ -6,8 +6,6 @@ html
         title= user.firstName + " " + user.lastName + "'s profile"
     body
         #divContainer
-            p Ciao
-            p= user
             div#divOperationsAccount
                 ul#listOperationsAccount
                     li
@@ -21,7 +19,7 @@ html
                     li
                         a(href=`/api/myProfile/changeAddress/${token}`) Change your address
                     li
-                        a(href=`/api/myProfile/changePayment/${token}`) Manage your payment methods
+                        a(href=`/api/payments/managePayment/${token}`) Manage your payment methods
                     li
                         a(href=`/api/myProfile/deleteProfile/${token}`, data-method="delete") Delete your account
-
+            a(href=`/api/products/showProducts/${token}`) Go Back

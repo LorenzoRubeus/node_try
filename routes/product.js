@@ -17,7 +17,7 @@ router.get('/', async (req, res) => {
     res.send(product);
 });
 
-router.get('/:id', async (req, res) => {
+router.get('/filterCategory/:id', async (req, res) => {
     const category = await Category.findById(req.params.id).select({ _id: 0 });
     if(!category) { return res.status(404).send('Category not found.'); }
 
@@ -28,6 +28,18 @@ router.get('/:id', async (req, res) => {
             "seller.isAdmin": 0
         });
     res.send(product);
+});
+
+router.get('/showProducts/:token', async (req, res) => {
+    const token = req.params.token;
+    const decoded = jwt.verify(token, config.get('jwtPrivateKey'));
+
+    const categories = await Category.find();
+    const products = await Product.find();
+    const user = await User.findById(decoded._id);
+
+    const basket = await Basket.findOne({ customer: user._id });
+    res.render('products', {user: user, basket: basket, categories: categories, products:products, token: token}); // TODO Da modificare il send con render o qualcosa
 });
 
 router.get('/nameCrescente', async (req, res) => {

@@ -19,7 +19,7 @@ html
                 ul(id='listCategory')
                     each val in categories
                         li 
-                            a(href=`/api/products/${val['_id']}`)= val['name']
+                            a(href=`/api/products/filterCategory/${val['_id']}`)= val['name']
             #divProfile
                 a(href=`/api/myProfile/${token}`) My Profile
             br

@@ -1,0 +1,15 @@
+doctype html
+html
+    head
+        meta(http-equiv="Content-Type", content="text/html;charset=UTF-8")
+        title Manage Payment Methods
+    body
+        #divContainer
+            form(action=`/api/payments/editPayment/${token}`, method="post")
+                each val in payments
+                    ul
+                        li
+                            input(type="checkbox", id=`checkPayment_${++count}`, name="checkPayment", value=`${val._id}`) 
+                            label(for=`checkPayment_${count}`)= val.cardNumber
+                input(type="submit", value="Edit")
+            a(href=`/api/products/showProducts/${token}`) Go Back
