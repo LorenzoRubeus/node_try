@@ -3,6 +3,8 @@ const { User } = require('../models/users');
 const { Order } = require('../models/orders'); 
 const { Basket } = require('../models/baskets'); 
 const { Address } = require('../models/addresses');
+const { Product } = require('../models/products');
+const { Category } = require('../models/categories');
 const config = require('config');
 const moment = require('moment');
 const jwt = require('jsonwebtoken');
@@ -56,16 +58,27 @@ router.post('/confirmPayment/:token', async (req, res) => {
     const token = req.params.token;
     const decoded = jwt.verify(token, config.get('jwtPrivateKey'));
 
-    const basket = await Basket.findOne({ customer: decoded._id }).populate('products');
+    const products = await Product.find();
+    const categories = await Category.find();
+
+    let basket = await Basket.findOne({ customer: decoded._id }).populate('products');
     const user = await User.findById(decoded._id);
-    await Order.findOneAndUpdate({ customer: decoded._id }, {
+
+    let order = new Order({
+        customer: decoded._id,
         price: basket.price,
         dateOrder: new Date(),
         dateEstimated: moment(new Date(), "DD-MM-YYYY").add(4, 'days'),
         products: basket.products
     });
+    await order.save();
 
-    res.render('myBasket', { token: token, user: user, basket: basket, count: 0 })
+    basket.price = 0;
+    basket.products = [];
+    basket.count = 0;
+    await basket.save();
+
+    res.render('products', { token: token, user: user, categories: categories, products: products, basket: basket, count: 0 })
 });
 
 router.post('/pay/:token', async (req, res) => {

@@ -7,13 +7,13 @@ html
         #divContainer
             #divProducts
                 each val in basket.products
-                     form(action=`/api/basket/removeProductBasket/${val._id}/${token}/${count++}`, method="post")
+                    form(action=`/api/basket/removeProductBasket/${val._id}/${token}/${count++}`, method="post")
                         a(href=`#`)= val.name
                         label  di
                         label= " " + val.seller.firstName + " " + val.seller.lastName
                         p= " Price: " + val.price + "€"
                         #divButtonsProduct
-                            button(type="submit") Remove from the basket
+                            button(type="submit", id="") Remove from the basket
                         hr
                 a(href=`/api/products/showProducts/${token}`) Go Back 
                 form(action=`/api/payments/pay/${token}`, method="post")
