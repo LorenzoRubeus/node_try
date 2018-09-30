@@ -1,16 +1,13 @@
 $(document).ready(function() {
     $("#linkRegister").click(function(){
         $("#formRegister").css({"display": "block"});
+        $(".divButtons").css({"display": "none"});
     });
 
     $("#linkLogin").click(function(){
         $("#formLogin").css({"display": "block"});
+        $(".divButtons").css({"display": "none"});
     });
-
-    /*$("#btnRemoveProductBasket").click(function(e) {
-        e.preventDefault();
-
-    });*/
 }); 
 
 function buttonProva(e, basket){

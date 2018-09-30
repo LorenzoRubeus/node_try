@@ -14,12 +14,33 @@
             </div>
     
             <form id="formRegister" action='/api/registerUser' method='POST'>
-                <input type="text" id="txtFirstName" name="txtFirstName" class="txtRegister" placeholder="First Name" required><br/>
-                <input type="text" id="txtLastName" name="txtLastName" class="txtRegister" placeholder="Last Name" required><br/>
-                <input type="email" id="txtEmail" name="txtEmail" class="txtRegister" placeholder="Email Address" required><br/>
-                <input type="password" id="txtPassword" name="txtPassword" class="txtRegister" placeholder="Password" required><br/>
-                <input type="password" id="txtConfirmPassword" name="txtConfirmPassword" class="txtRegister" placeholder="Repeat Password" required><br/>
-                <input type="submit" value="Sign Up">
+                <center><h1>Register</h1></center>
+                <div class="divInput">
+                    <label>First Name</label><br/>
+                    <input type="text" id="txtFirstName" name="txtFirstName" class="txtRegister" placeholder="First Name" required><br/>
+                </div>
+                <div class="divInput">  
+                    <label>Last Name</label><br/>
+                    <input type="text" id="txtLastName" name="txtLastName" class="txtRegister" placeholder="Last Name" required><br/>
+                </div>
+                <div class="divInput">
+                    <label>Email Address</label><br/>
+                    <input type="email" id="txtEmail" name="txtEmail" class="txtRegister" placeholder="Email Address" required><br/>
+                </div>
+                <div class="divInput">
+                    <label>Password</label><br/>
+                    <input type="password" id="txtPassword" name="txtPassword" class="txtRegister" placeholder="Password" required><br/>
+                </div>
+                <div class="divInput">
+                    <label>Confirm Password</label><br/>
+                    <input type="password" id="txtConfirmPassword" name="txtConfirmPassword" class="txtRegister" placeholder="Repeat Password" required><br/>                
+                </div>
+                <div class="divInput">
+                    <input type="submit" value="Sign Up">
+                </div>
+                <div class="divInput">
+                    <input type="reset" value="Reset">
+                </div>
             </form>
 
             <form id="formLogin" action='/api/loginUser' method='POST'>
