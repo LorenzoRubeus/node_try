@@ -9,6 +9,14 @@ const ordersSchema = new mongoose.Schema({
     dateEstimated: {
         type: Date
     },
+    address: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Address'
+    },
+    payment: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Payment'
+    },
     products: {
         type: [mongoose.Schema.Types.ObjectId],
         ref: 'Product'

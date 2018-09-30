@@ -2,6 +2,7 @@ doctype html
 html
     head
         meta(http-equiv="Content-Type", content="text/html;charset=UTF-8")
+        script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js")
         title= user.firstName + " " + user.lastName + "'s basket"
     body
         #divContainer
@@ -13,10 +14,10 @@ html
                         label= " " + val.seller.firstName + " " + val.seller.lastName
                         p= " Price: " + val.price + "€"
                         #divButtonsProduct
-                            button(type="submit", id="") Remove from the basket
+                            button(type="submit", id="btnRemoveProductBasket") Remove from the basket
                         hr
                 a(href=`/api/products/showProducts/${token}`) Go Back 
                 form(action=`/api/payments/pay/${token}`, method="post")
                     p= "Total: " + basket.price
                     button(type="submit") Buy Now
-                
+    script(src="mainScript.js", type="text/javascript")

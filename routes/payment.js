@@ -66,6 +66,8 @@ router.post('/confirmPayment/:token', async (req, res) => {
 
     let order = new Order({
         customer: decoded._id,
+        address: req.body.rdbAddress,
+        payment: req.body.rdbPayment,
         price: basket.price,
         dateOrder: new Date(),
         dateEstimated: moment(new Date(), "DD-MM-YYYY").add(4, 'days'),

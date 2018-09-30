@@ -1,13 +1,57 @@
-html, body{
+html, body {
     margin: 0;
     width: 100%;
     height: 100%;
 }
 
-#formRegister{
+.container {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+
+.divButtons {
+    width: 300px;
+    height: 6.75rem;
+    position: relative;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    margin: 0 auto;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.divButtons a {
+    width: 30%;
+    display: inline-block;
+    text-decoration: none;
+    line-height: 3.75rem;
+    border: 1px solid black;
+    text-align: center;
+    color: black;
+    font-weight: bold;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.btnHome:hover {
+    background-color: lightgray;
+    transition-duration: 0.5s;
+}
+
+.divButtons #linkRegister {
+    margin-left: 3rem;
+}
+
+.divButtons #linkLogin {
+    margin-left: 1rem;
+}
+
+#formRegister {
     display: none;    
 }
 
-#formLogin{
+#formLogin {
     display: none;
 }
