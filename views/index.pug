@@ -37,15 +37,26 @@
                     <input type="password" id="txtConfirmPassword" name="txtConfirmPassword" class="txtRegister" placeholder="Repeat Password" required><br/>                
                 </div>
                 <div class="divInput">
-                    <input type="submit" id="btnSignUp" value="Sign Up">
-                    <input type="reset" value="Reset">
+                    <input type="submit" id="btnSignUp" value="SIGN UP">
+                    <input type="reset" value="RESET">
                 </div>
             </form>
 
             <form id="formLogin" action='/api/loginUser' method='POST'>
-                <input type="email" id="txtEmailLogin" name="txtEmailLogin" class="txtLogin" placeholder="Email Address" required><br/>
-                <input type="password" id="txtPasswordLogin" name="txtPasswordLogin" class="txtLogin" placeholder="Password" required><br/>
-                <input type="submit" value="Sign In">
+                <img src="img/close.png" alt="Button close login" id="btnCloseLogin">
+                <center><h1>Login</h1></center>
+                <div class="divInputLogin">
+                    <label>Email Address</label>
+                    <input type="email" id="txtEmailLogin" name="txtEmailLogin" class="txtLogin" placeholder="Email Address" required><br/>
+                </div>
+                <div class="divInputLogin">
+                    <label>Password</label>
+                    <input type="password" id="txtPasswordLogin" name="txtPasswordLogin" class="txtLogin" placeholder="Password" required><br/>
+                </div>
+                <div class="divInputLogin">
+                    <input type="submit" value="Sign In">
+                    <input type="reset" value="Reset">
+                </div>
             </form>
         </div>
     </body>

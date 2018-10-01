@@ -3,36 +3,51 @@ html
     head
         title Store App
         meta(charset = 'UTF-8')
+        link(rel="stylesheet", href="/css/styleProducts.css")
+        link(rel="stylesheet", href="https://use.fontawesome.com/releases/v5.3.1/css/all.css")
     body    
         #container
-            #divBasket
-                a(href=`/api/basket/${token}`)= basket.count + " elements in the basket"
-            #listFilter
-                a(href="/api/products/", class="linkFilter") Per nome: Crescente
-                br
-                a(href='/api/products/nameDecrescente', class="linkFilter") Per nome: Decrescente
-                br
-                a(href='/api/products/priceCrescente', class="linkFilter") Per prezzo: Crescente
-                br
-                a(href='/api/products/priceDecrescente', class="linkFilter") Per prezzo: Decrescente
-            #divListCategories
-                ul(id='listCategory')
-                    each val in categories
-                        li 
-                            a(href=`/api/products/filterCategory/${val['_id']}`)= val['name']
-            #divProfile
-                a(href=`/api/myProfile/${token}`) My Profile
-            br
-            #divListProducts
-                each val in products
-                    form(action=`/api/basket/addBasket/${val._id}/${token}`, method="post")
-                        a(href=`#`)= val.name
-                        label  di
-                        label= " " + val.seller.firstName + " " + val.seller.lastName
-                        p= " Price: " + val.price + "€"
-                        #divButtonsProduct
-                            button(type="submit") Add to the basket 
-                        hr
+            #divNav
+                #divBasket
+                    a(href=`/api/basket/${token}`)= basket.count + " Basket" 
+                #divProfile
+                    a(href=`/api/myProfile/${token}`) My Profile
+            #divProducts
+                #listFilter
+                    p Filters
+                    label(id="typeFitler1") Name:
+                    ul
+                        li
+                            a(href="/api/products/", class="linkFilter") From A to Z
+                        li    
+                            a(href='/api/products/nameDecrescente', class="linkFilter") From Z to A
+                    br
+                    #divTypeFitler2
+                        label(id="typeFitler2") Price:
+                        ul
+                            li
+                                a(href='/api/products/priceCrescente', class="linkFilter") Increasing
+                            li
+                                a(href='/api/products/priceDecrescente', class="linkFilter") Decreasing
+                #divListCategories
+                    ul(id='listCategory')
+                        each val in categories
+                            li 
+                                a(href=`/api/products/filterCategory/${val['_id']}`)= val['name']
+                #divListProducts
+                    h2 Products
+                    each val in products
+                        ul
+                            li
+                                form(action=`/api/basket/addBasket/${val._id}/${token}`, method="post", class="formProduct")
+                                    div.divSingleProduct
+                                        a(href=`#`)= val.name
+                                        label  di
+                                        label= " " + val.seller.firstName + " " + val.seller.lastName
+                                        p= " Price: " + val.price + "€"
+                                    .divButtonsProduct
+                                        input(type="submit", value="Add to the basket ") 
+                            hr
 
                 
 

@@ -1,0 +1,128 @@
+@import "http://fonts.googleapis.com/css?family=Raleway";
+
+html, body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    /*font-family: "Raleway";*/
+}
+
+#container {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+#divNav {
+    width: 100%;
+    height: 95px;
+    background-color: rgb(35, 47, 62);
+}
+
+#divNav a {
+    color: white;
+    width: 100%;
+    height: 100%;
+    padding-bottom: 0;
+}
+
+#divBasket {
+    display: inline-block;
+    position: relative;
+    top: 45px;
+    height: 45px;
+    border: 1px solid white;
+    width: 100px;
+    padding-bottom: 0;
+}
+
+#divProfile {
+    display: inline-block;
+}
+
+#divProducts {
+    height: 100%;
+    width: 100%;
+}
+
+#listFilter, #divListProducts, #divListCategories {
+    display: inline-block;
+}
+
+#listFilter {
+    position: relative;
+    width: 170px;
+    height: 100%;
+    float: left;
+    border-right: 1px solid rgb(138, 138, 138);
+    padding-left: 2em;
+}
+
+#listFilter label {
+    font-style: italic;
+}
+
+#listFilter p {     
+    font-weight: bold;
+    margin-top: 30px;
+    margin-bottom: 15px;
+}
+
+#divTypeFitler2 {
+    position: relative;
+    top: -10px;
+}
+
+#listFilter ul {
+    margin-top: 5px;
+    list-style: none;
+    padding-left: 0;
+}
+
+#divListProducts {
+    width: calc(100% - 205px - 1em);
+    display: inline-block;
+}
+
+#divListProducts h2 {
+    padding-left: 0.6em;
+}
+
+.divSingleProduct {
+    width: 75%;
+    display: inline-block;
+}
+
+.divButtonsProduct {
+    width: 20%;
+    display: inline-block;
+}
+
+input[type="submit"] {
+    background-color: rgb(49, 104, 221);
+    height: 68px;
+    position: relative;
+    top: -10px;
+    border: 1px solid white;
+    border-radius: 3px;
+    color: white;
+    cursor: pointer;
+    letter-spacing: 0.12em;
+}
+
+input[type="submit"]:hover {
+    background-color: rgba(84, 128, 221, 0.9);
+    border: 1px solid rgb(68, 199, 255);
+    transition-duration: 0.3s;
+}
+
+#divListCategories {
+    display: none;
+}
+
+#divListProducts ul {
+    list-style: none;
+    padding-left: 1em;
+}

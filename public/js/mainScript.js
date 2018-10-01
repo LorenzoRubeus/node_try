@@ -11,6 +11,11 @@ $(document).ready(function() {
 
     $("#btnCloseRegister").click( () => {
         $("#formRegister").css({"display": "none"});
-        $(".divButtons").css({ "display": "block"});
+        $(".divButtons").css({"display": "block"});
+    });
+
+    $("#btnCloseLogin").click( () => {
+        $("#formLogin").css({"display": "none"});
+        $(".divButtons").css({"display": "block"});
     });
 }); 
