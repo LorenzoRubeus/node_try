@@ -8,10 +8,9 @@ $(document).ready(function() {
         $("#formLogin").css({"display": "block"});
         $(".divButtons").css({"display": "none"});
     });
+
+    $("#btnCloseRegister").click( () => {
+        $("#formRegister").css({"display": "none"});
+        $(".divButtons").css({ "display": "block"});
+    });
 }); 
-
-function buttonProva(e, basket){
-    e.preventDefault();
-
-    alert(basket);
-}
