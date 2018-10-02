@@ -72,6 +72,12 @@ html, body {
     font-size: 15px;
 }
 
+p.error {
+    padding-left: 1em;
+    font-style: italic;
+    font-size: 15px;
+}
+
 #divTypeFilter2 {
     position: relative;
     top: -10px;

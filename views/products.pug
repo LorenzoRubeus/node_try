@@ -18,46 +18,49 @@ html
                     label(id="typeFitler1") Name:
                     ul
                         li
-                            a(href="/api/products/", class="linkFilter") From A to Z
+                            a(href=`/api/products/nameCrescente/${token}`, class="linkFilter") From A to Z
                         li    
-                            a(href='/api/products/nameDecrescente', class="linkFilter") From Z to A
+                            a(href=`/api/products/nameDecrescente/${token}`, class="linkFilter") From Z to A
                     br
                     #divTypeFilter2
                         label Price:
                         ul
                             li
-                                a(href='/api/products/priceCrescente', class="linkFilter") Increasing
+                                a(href=`/api/products/priceCrescente/${token}`, class="linkFilter") Increasing
                             li
-                                a(href='/api/products/priceDecrescente', class="linkFilter") Decreasing
+                                a(href=`/api/products/priceDecrescente/${token}`, class="linkFilter") Decreasing
                     
                     #divListCategoriesLeft
                         label Category:
                         ul(id='listCategory')
                             each val in categories
                                 li 
-                                    a(href=`/api/products/filterCategory/${val['_id']}`)= val['name']
+                                    a(href=`/api/products/filterCategory/${val['_id']}/${token}`)= val['name']
                 #divListCategories
                     ul(id='listCategory')
                         each val in categories
                             li 
-                                a(href=`/api/products/filterCategory/${val['_id']}`)= val['name']
+                                a(href=`/api/products/filterCategory/${val['_id']}/${token}`)= val['name']
                 #divListProducts
                     h2 Products
-                    each val in products
-                        ul
-                            li
-                                form(action=`/api/basket/addBasket/${val._id}/${token}`, method="post", class="formProduct")
-                                    div.divSingleProduct
-                                        a(href=`#`)= val.name
-                                        label  di
-                                        label(class="nameSeller")= " " + val.seller.firstName + " " + val.seller.lastName
-                                        p(class="pDescriptionProduct")= val.description
-                                    div.divPrice
-                                        label= "Price"
-                                        p(class="pPriceProduct")= val.price + "€"
-                                    .divButtonsProduct
-                                        input(type="submit", value="Add to the basket ") 
-                            hr
+                    if products.length == 0
+                        p(class="error") There are not products to be shown in this category.
+                    else
+                        each val in products
+                            ul
+                                li
+                                    form(action=`/api/basket/addBasket/${val._id}/${token}`, method="post", class="formProduct")
+                                        div.divSingleProduct
+                                            a(href=`#`)= val.name
+                                            label  di
+                                            label(class="nameSeller")= " " + val.seller.firstName + " " + val.seller.lastName
+                                            p(class="pDescriptionProduct")= val.description
+                                        div.divPrice
+                                            label= "Price"
+                                            p(class="pPriceProduct")= val.price + "€"
+                                        .divButtonsProduct
+                                            input(type="submit", value="Add to the basket ") 
+                                hr
 
                 
 
