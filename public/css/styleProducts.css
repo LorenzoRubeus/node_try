@@ -4,7 +4,7 @@ html, body {
     margin: 0;
     width: 100%;
     height: 100%;
-    /*font-family: "Raleway";*/
+    font-family: "Raleway";
 }
 
 #container {
@@ -88,6 +88,23 @@ html, body {
 
 #divListProducts h2 {
     padding-left: 0.6em;
+}
+
+#divListProducts label {
+    font-size: 12px;
+}
+
+#divListProducts a {
+    text-decoration: none;
+}
+
+.nameSeller:hover {
+    color: rgb(255, 26, 26);
+    cursor: pointer;
+}
+
+#divListProducts a:hover{
+    color: rgb(255, 153, 0);
 }
 
 .divSingleProduct {
