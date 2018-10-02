@@ -22,13 +22,20 @@ html
                         li    
                             a(href='/api/products/nameDecrescente', class="linkFilter") From Z to A
                     br
-                    #divTypeFitler2
-                        label(id="typeFitler2") Price:
+                    #divTypeFilter2
+                        label Price:
                         ul
                             li
                                 a(href='/api/products/priceCrescente', class="linkFilter") Increasing
                             li
                                 a(href='/api/products/priceDecrescente', class="linkFilter") Decreasing
+                    
+                    #divListCategoriesLeft
+                        label Category:
+                        ul(id='listCategory')
+                            each val in categories
+                                li 
+                                    a(href=`/api/products/filterCategory/${val['_id']}`)= val['name']
                 #divListCategories
                     ul(id='listCategory')
                         each val in categories
@@ -44,7 +51,10 @@ html
                                         a(href=`#`)= val.name
                                         label  di
                                         label(class="nameSeller")= " " + val.seller.firstName + " " + val.seller.lastName
-                                        p= " Price: " + val.price + "€"
+                                        p(class="pDescriptionProduct")= val.description
+                                    div.divPrice
+                                        label= "Price"
+                                        p(class="pPriceProduct")= val.price + "€"
                                     .divButtonsProduct
                                         input(type="submit", value="Add to the basket ") 
                             hr

@@ -68,9 +68,11 @@ html, body {
     font-weight: bold;
     margin-top: 30px;
     margin-bottom: 15px;
+    font-style: italic;
+    font-size: 15px;
 }
 
-#divTypeFitler2 {
+#divTypeFilter2 {
     position: relative;
     top: -10px;
 }
@@ -79,6 +81,25 @@ html, body {
     margin-top: 5px;
     list-style: none;
     padding-left: 0;
+}
+
+#listFilter ul a {
+    text-decoration: none;
+    font-style: italic;
+    font-size: 14px;
+}
+
+#listFilter ul a:hover {
+    color: rgb(255, 153, 0);
+}
+
+#listFilter ul a:visited {
+    text-decoration: none;
+    color: blue;
+}
+
+#listFilter ul a:visited:hover {
+    color: rgb(255, 153, 0);
 }
 
 #divListProducts {
@@ -98,18 +119,48 @@ html, body {
     text-decoration: none;
 }
 
+.divSingleProduct {
+    width: 70%;
+    display: inline-block;
+}
+
 .nameSeller:hover {
     color: rgb(255, 26, 26);
     cursor: pointer;
 }
 
-#divListProducts a:hover{
+#divListProducts a:hover {
     color: rgb(255, 153, 0);
 }
 
-.divSingleProduct {
-    width: 75%;
+#divListProducts a:visited {
+    text-decoration: none;
+    color:blue; 
+}
+
+#divListProducts a:visited:hover {
+    color: rgb(255, 153, 0);
+}
+
+.pDescriptionProduct {
+    margin-top: 10px;
+    font-size: 15px;
+    font-style: italic;
+}
+
+.divPrice {
     display: inline-block;
+    width: 10%;
+}
+
+.divPrice label {
+    font-size: 14px !important;
+}
+
+.pPriceProduct {
+    margin-top: 0;
+    color: rgb(255, 26, 26);
+    font-weight: bold;
 }
 
 .divButtonsProduct {
