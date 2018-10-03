@@ -3,23 +3,36 @@ html
     head
         meta(charset = "UTF-8") 
         script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js")
+        link(rel="stylesheet", href="/css/styleProfile.css")
         title= user.firstName + " " + user.lastName + "'s profile"
     body
         #divContainer
-            div#divOperationsAccount
-                ul#listOperationsAccount
-                    li
-                        a(href=`/api/myProfile/changeName/${token}`) Edit your profile
-                    li
-                        a(href=`/api/myProfile/changeEmail/${token}`) Change your email
-                    li
-                        a(href=`/api/myProfile/changePassword/${token}`) Change your password
-                    li
-                        a(href=`/api/address/${token}`) Add an address
-                    li
-                        a(href=`/api/myProfile/changeAddress/${token}`) Change your address
-                    li
-                        a(href=`/api/payments/managePayment/${token}`) Manage your payment methods
-                    li
-                        a(href=`/api/myProfile/deleteProfile/${token}`, data-method="delete") Delete your account
-            a(href=`/api/products/showProducts/${token}`) Go Back
+            div#profileOperations
+                h1 Your Account
+                div#divTopLeft(class="divTop")
+                    a(href=`/api/myProfile/changeName/${token}`) Change name
+                div#divTopCenter(class="divTop")
+                    a(href=`/api/myProfile/changeEmail/${token}`) Change email
+                div#divTopRight(class="divTop")
+                    a(href=`/api/myProfile/changePassword/${token}`) Change password
+                br
+                div#divBottomLeft(class="divBottom")
+                    a(href=`/api/address/${token}`) Add an address
+                    a(href=`/api/myProfile/changeAddress/${token}`) Change addresses
+                div#divBottomCenter(class="divBottom")
+                    a(href=`/api/payments/managePayment/${token}`) Manage payment methods
+                div#divBottomRight(class="divBottom")
+                    a(href=`/api/myProfile/deleteProfile/${token}`, data-method="delete") Delete your account
+                br
+                a(href=`/api/products/showProducts/${token}`) Go Back
+        #divFooter
+                    #divFooterLeft
+                        a(href="#")
+                            h4 About Us
+                    #divFooterCenter
+                        a(href="#")
+                            h4 General Information
+                    #divFooterRight
+                        a(href="#")
+                            h4 Contact Us
+            
