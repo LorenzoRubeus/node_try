@@ -8,23 +8,37 @@ html
     body
         #divContainer
             div#profileOperations
-                h1 Your Account
-                div#divTopLeft(class="divTop")
-                    a(href=`/api/myProfile/changeName/${token}`) Change name
-                div#divTopCenter(class="divTop")
-                    a(href=`/api/myProfile/changeEmail/${token}`) Change email
-                div#divTopRight(class="divTop")
-                    a(href=`/api/myProfile/changePassword/${token}`) Change password
-                br
-                div#divBottomLeft(class="divBottom")
-                    a(href=`/api/address/${token}`) Add an address
-                    a(href=`/api/myProfile/changeAddress/${token}`) Change addresses
-                div#divBottomCenter(class="divBottom")
-                    a(href=`/api/payments/managePayment/${token}`) Manage payment methods
-                div#divBottomRight(class="divBottom")
-                    a(href=`/api/myProfile/deleteProfile/${token}`, data-method="delete") Delete your account
-                br
-                a(href=`/api/products/showProducts/${token}`) Go Back
+                h2 Your Account
+                div#divContainerTop
+                    div#divTopLeft(class="divTop")
+                        a(href=`/api/myProfile/changeName/${token}`)
+                            img(src="/img/profile.png" alt="Icon Name")
+                            h3(class="headerLabelLink") Change name
+                    div#divTopCenter(class="divTop")
+                        a(href=`/api/myProfile/changeEmail/${token}`)
+                            img(src="/img/email.png" alt="Icon Email")
+                            h3(class="headerLabelLink") Change email address
+                    div#divTopRight(class="divTop")
+                        a(href=`/api/myProfile/changePassword/${token}`)
+                            img(src="/img/padlock.png" alt="Icon Password")
+                            h3(class="headerLabelLink") Change password
+                div#divContainerBot
+                    div#divBottomLeft(class="divBottom")
+                        a(href=`/api/address/${token}`) 
+                            img(src="/img/address.png" alt="Icon Add Address")
+                            h3(class="headerLabelLink") Add an address
+                    div#divBottomCenter(class="divBottom")
+                        a(href=`/api/myProfile/changeAddress/${token}`)
+                            img(src="/img/address.png" alt="Icon Address")
+                            h3(class="headerLabelLink") Manage addresses
+                    div#divBottomRight(class="divBottom")
+                        a(href=`/api/payments/managePayment/${token}`)
+                            img(src="/img/cardsvg.png" alt="Icon Card")
+                            h3(class="headerLabelLink") Manage payment methods
+                    br
+                div#divBack
+                    a(href=`/api/products/showProducts/${token}`, id="btnBack") 
+                        label Go Back
         #divFooter
                     #divFooterLeft
                         a(href="#")

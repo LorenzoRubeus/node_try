@@ -12,6 +12,7 @@ html, body {
     height: calc(100% - 60px);
     position: absolute;
     top: 0;
+    background-color: transparent;
     left: 0;
 }
 
