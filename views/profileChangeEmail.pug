@@ -2,20 +2,26 @@ doctype html
 html
     head
         meta(http-equiv="Content-Type", content="text/html;charset=UTF-8")
+        link(rel="stylesheet", href="/css/styleOperations.css")
         title Change Email
     body
         #divContainer
-            form(action=`/api/myProfile/changeEmail/${token}`, method="post")
-                input#txtOldEmail(type="email", name="txtOldEmail", value=user.email, disabled)
-                br
-                input#txtNewEmail(type="email", name="txtNewEmail", placeholder="New Email Address")
-                br
-                input#txtConfirmNewEmail(type="email", name="txtConfirmNewEmail", placeholder="Confirm Email Address")
-                br
-                input#txtPassword(type="password", name="txtPassword", placeholder="Password")
-                br
-                input(type="submit", value="Change")
-                br
-                input(type="reset", value="Reset")
-                br
-                a(href=`/api/myProfile/${token}`) Go Back 
+            div#divForm
+                a(href=`/api/myProfile/${token}`) 
+                    img(src="/img/back.png", alt="Go Back", class="btnCloseForm")
+                form(action=`/api/myProfile/changeEmail/${token}`, method="post")
+                    div(class="divInput")
+                        label Old Email
+                        input#txtOldEmail(type="email", name="txtOldEmail", value=user.email, disabled)
+                    div(class="divInput")
+                        label New Email
+                        input#txtNewEmail(type="email", name="txtNewEmail", placeholder="New Email Address")
+                    div(class="divInput")
+                        label Confirm New Email
+                        input#txtConfirmNewEmail(type="email", name="txtConfirmNewEmail", placeholder="Confirm Email Address")
+                    div(class="divInput")
+                        label Password
+                        input#txtPassword(type="password", name="txtPassword", placeholder="Password")
+                    div(class="divInput")
+                        input(type="submit", value="Change")
+                        input(type="reset", value="Reset")

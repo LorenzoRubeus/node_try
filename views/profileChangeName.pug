@@ -7,6 +7,8 @@ html
     body
         div#divContainer
             div#divForm
+                a(href=`/api/myProfile/${token}`)
+                    img(src="/img/back.png", class="btnCloseForm", alt="Go back")
                 form(action=`/api/myProfile/changeName/${token}`, method="post")
                     div(class="divInput")
                         label First Name
@@ -17,4 +19,3 @@ html
                     div(class="divInput")
                         input(type="submit", value="Change")
                         input(type="reset", value="Reset")
-                        a(href=`/api/myProfile/${token}`) Go Back
