@@ -52,7 +52,6 @@ router.get('/changeAddress/:token', async (req, res) => {
     const user = await User.findOne({ _id: address.customer }).select({ password: 0, isAdmin: 0});
 
     
-
     res.render('profileChangeAddress', { address: address, user: user, token: token });
 })
 
@@ -125,15 +124,6 @@ router.post('/changeAddress/:token/:id', async (req, res) => {
     const user = await User.findById(address.customer);
 
     res.render('profile', { user: user, token: token });
-});
-
-router.delete(`/deleteProfile/:token`, async (req, res) => {
-    const token = req.params.token;
-    const decoded = jwt.verify(token, config.get('jwtPrivateKey'));
-
-    const user = await User.findByIdAndRemove(decoded._id);
-
-    res.render('index'); //TODO Da evitare la possibilità di andare indietro
 });
 
 
