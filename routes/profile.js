@@ -43,6 +43,20 @@ router.get('/changePassword/:token', async (req, res) => {
     res.render('profileChangePassword', { user: user, token: token});
 });
 
+/*router.get('/changeAddress/:token', async (req, res) => {
+    const token = req.params.token;
+    const decoded = jwt.verify(token, config.get('jwtPrivateKey'));
+
+    const address = await Address.find({ customer: decoded._id });
+    //const address = await Address.findOne({ customer: decoded._id });
+    const user = await User.findOne({ _id: address.customer }).select({ password: 0, isAdmin: 0});
+
+    
+    //res.render('profileChangeAddress', { address: address, user: user, token: token });
+    res.render('manageAddresses', { address: address, user: user, token: token });
+});*/
+
+
 router.get('/changeAddress/:token', async (req, res) => {
     const token = req.params.token;
     const decoded = jwt.verify(token, config.get('jwtPrivateKey'));
@@ -52,9 +66,19 @@ router.get('/changeAddress/:token', async (req, res) => {
     const user = await User.findOne({ _id: address.customer }).select({ password: 0, isAdmin: 0});
 
     
-    res.render('profileChangeAddress', { address: address, user: user, token: token });
-})
+    //res.render('profileChangeAddress', { address: address, user: user, token: token });
+    res.render('manageAddresses', { address: address, user: user, token: token });
+});
 
+router.get('/changeAddress/pick/:token/:id', async (req, res) => {
+    const token = req.params.token;
+    const id = req.params.id;
+
+    const address = await Address.findOne({ _id: id });
+    
+    res.render('profileChangeAddress', { address: address, token: token });
+
+});
 
 
 router.post('/changeName/:token', async (req, res) => {
@@ -113,17 +137,19 @@ router.post('/changeAddress/:token/:id', async (req, res) => {
     const id = req.params.id;
     const decoded = jwt.verify(token, config.get('jwtPrivateKey'));
 
-    const address = await Address.findOneAndUpdate({ customer: decoded._id, _id: id }, {
+    let address = await Address.findOneAndUpdate({ customer: decoded._id, _id: id }, {
         name: req.body.txtName,
         street: req.body.txtStreet,
         city: req.body.txtCity,
         ZipCode: req.body.txtZipCode,
         PhoneNumber: req.body.txtPhoneNumber
-    });
+    }, { new: true });
     
-    const user = await User.findById(address.customer);
+    //const user = await User.findById(address.customer);
+    //res.render('profile', { user: user, token: token });
+    address = await Address.find();
 
-    res.render('profile', { user: user, token: token });
+    res.render('manageAddresses', { address: address, token: token });
 });
 
 

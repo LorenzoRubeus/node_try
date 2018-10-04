@@ -131,3 +131,65 @@ input[type="submit"]:hover {
     height: 42px;
     transition-duration: 0.6s;
 }
+
+
+
+/* ==== Address ==== */
+
+#divAddresses {
+    width: 60%;
+    height: 450px;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    margin: 0 auto;
+    text-align: center;
+}
+
+#divContainerTop {
+    padding-top: 5em;
+}
+
+#divContainerTop img, #divContainerBottom img {
+    margin-top: 0.9em;
+    display: inline-block;
+}
+
+.headerLabelLink {
+    font-size: 17px;    
+    font-weight: 400;
+}
+
+.divLinkTop, .divLinkBottom {
+    width: 220px;
+    height: 130px;
+    border: 1px solid white;
+    display: inline-block;
+}
+
+.divLinkTop a, .divLinkBottom a {
+    width: 100%;
+    height: 100%;
+    display: inline-block;
+    text-decoration: none;
+    color: white;
+}
+
+.divLinkTop:hover, .divLinkBottom:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+    border: 1px solid rgb(68, 199, 255);
+    transition-duration: 0.3s;
+    cursor: pointer;
+}
+
+#divAddresses .divLinkTop:nth-child(2), #divAddresses .divLinkTop:nth-child(3) {
+    margin-left: 3em;
+}
+
+#divAddresses .divLinkBottom:nth-child(2), #divAddresses .divLinkBottom:nth-child(3) {
+    margin-left: 3em;
+}
+
+.divLinkBottom {
+    margin-top: 32px;
+}

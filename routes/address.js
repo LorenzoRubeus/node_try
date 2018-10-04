@@ -5,13 +5,14 @@ const router = express.Router();
 const { Address, validateAddress } = require('../models/addresses');
 const { User } = require('../models/users');
 
-router.get('/:token', async (req, res) => {
+router.get('/:token/:btnBack', async (req, res) => {
     const token = req.params.token;
     const decoded = jwt.verify(token, config.get('jwtPrivateKey'));
+    const btnBack = req.params.btnBack;
 
     const user = await User.findById(decoded._id).select({ password: 0, isAdmin: 0 });
     
-    res.render('profileAddAddress', { user: user, token: token });
+    res.render('profileAddAddress', { user: user, btnBack: btnBack, token: token });
 
 
 
@@ -45,7 +46,7 @@ router.post('/:token', async (req, res) => {
     address = await Address.findOne({ _id: address._id }).populate('customer', {firstName: 1, lastName: 1, email: 1});
 
     const user = await User.findById(address.customer);
-    res.render('profile', { user: user, token: token })
+    res.render('profileAddAddress', { user: user, token: token })
 });
 
 module.exports = router;

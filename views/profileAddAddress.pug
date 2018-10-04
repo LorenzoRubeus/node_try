@@ -7,8 +7,12 @@ html
     body
         #divContainer
             div#divForm
-                a(href=`/api/myProfile/${token}`)
-                    img(src="/img/back.png", alt="Go Back", class="btnCloseForm")
+                if btnBack == 'address'
+                    a(href=`/api/myProfile/changeAddress/${token}`)
+                        img(src="/img/back.png", alt="Go Back", class="btnCloseForm")
+                else
+                    a(href=`/api/myProfile/${token}`)
+                        img(src="/img/back.png", alt="Go Back", class="btnCloseForm")
                 form(action=`/api/address/${token}`, method="post")
                     div(class="divInput")
                         label Name

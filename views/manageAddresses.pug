@@ -1,0 +1,72 @@
+doctype html
+html
+    head
+        meta(http-equiv="Content-Type", content="text/html;charset=UTF-8")
+        link(rel="stylesheet", href="/css/styleOperations.css")
+        title Change Address
+    body
+        - var count = 0 
+        #divContainer
+            div#divAddresses
+                #divContainerTop
+                    while count < 3
+                        div(class="divLinkTop")
+                            if address.length > count 
+                                a(href=`/api/myProfile/changeAddress/pick/${token}/${address[count]._id}`)
+                                    h5(class="headerLabelLink")= address[count].name
+                                    h5(class="headerLabelLink")= address[count].street
+                            else
+                                a(href=`/api/address/${token}/address`)
+                                    img(src="/img/addAddress.png" alt="Icon Add Address")
+                                    p(class="headerLabelLink") Add an address
+                        - count++  
+                #divContainerBottom
+                    while count < 6
+                        div(class="divLinkBottom")
+                            if address.length > count 
+                                a(href=`/api/myProfile/changeAddress/${token}/${address[count]._id}`)
+                                    h5(class="headerLabelLink")= address[count].name
+                                    h5(class="headerLabelLink")= address[count].street
+                            else
+                                a(href=`/api/address/${token}/address`)
+                                    img(src="/img/addAddress.png" alt="Icon Add Address")
+                                    p(class="headerLabelLink") Add an address
+                        - count++
+
+
+                //
+                    - var count = 0 
+                    each val in address
+                        if count < 3
+                            div(class="divLinkTop")
+                                a(href='#')
+                                    h5= val.name
+                                    h5= val.street  
+                        else
+                            br
+                            div(class="divLinkBottom")
+                                a(href='#')
+                                    h5= val.name
+                                    h5= val.street  
+                        - count = count + 1;
+                //
+                    each val in address
+                    form(action=`/api/myProfile/changeAddress/${token}/${val._id}`, method="post")
+                        input#txtName(type="text", name="txtName", value=val.name)
+                        br
+                        input#txtStreet(type="text", name="txtStreet", value=val.street)
+                        br
+                        input#txtCity(type="text", name="txtCity", value=val.city)
+                        br
+                        input#txtCountry(type="text", name="txtCountry", value=val.country)
+                        br
+                        input#txtZipCode(type="text", name="txtZipCode", value=val.zipCode)
+                        br
+                        input#txtPhoneNumber(type="text", name="txtPhoneNumber", value=val.phoneNumber)
+                        br
+                        input(type="submit", value="Change")
+                        input(type="reset", value="Reset")
+                        a(href=`/api/myProfile/${token}`) Go Back
+                        br
+                        br
+            

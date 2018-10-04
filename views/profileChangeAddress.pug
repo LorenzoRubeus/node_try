@@ -2,25 +2,32 @@ doctype html
 html
     head
         meta(http-equiv="Content-Type", content="text/html;charset=UTF-8")
+        link(rel="stylesheet", href="/css/styleOperations.css")
         title Change Address
     body
         div#divContainer
-            each val in address
-                form(action=`/api/myProfile/changeAddress/${token}/${val._id}`, method="post")
-                    input#txtName(type="text", name="txtName", value=val.name)
-                    br
-                    input#txtStreet(type="text", name="txtStreet", value=val.street)
-                    br
-                    input#txtCity(type="text", name="txtCity", value=val.city)
-                    br
-                    input#txtCountry(type="text", name="txtCountry", value=val.country)
-                    br
-                    input#txtZipCode(type="text", name="txtZipCode", value=val.zipCode)
-                    br
-                    input#txtPhoneNumber(type="text", name="txtPhoneNumber", value=val.phoneNumber)
-                    br
-                    input(type="submit", value="Change")
-                    input(type="reset", value="Reset")
-                    a(href=`/api/myProfile/${token}`) Go Back
-                    br
-                    br
+            div#divForm
+                a(href=`/api/myProfile/changeAddress/${token}`)
+                    img(src="/img/back.png", alt="Go Back", class="btnCloseForm")
+                form(action=`/api/myProfile/changeAddress/${token}/${address._id}`, method="post")
+                    div(class="divInput")
+                        label Name
+                        input#txtName(type="text", name="txtName", value=address.name)
+                    div(class="divInput")
+                        label Street
+                        input#txtStreet(type="text", name="txtStreet", value=address.street)
+                    div(class="divInput")
+                        label City
+                        input#txtCity(type="text", name="txtCity", value=address.city)
+                    div(class="divInput")
+                        label Country
+                        input#txtCountry(type="text", name="txtCountry", value=address.country)
+                    div(class="divInput")
+                        label ZIP Code
+                        input#txtZipCode(type="text", name="txtZipCode", value=address.zipCode)
+                    div(class="divInput")
+                        label Phone Number
+                        input#txtPhoneNumber(type="text", name="txtPhoneNumber", value=address.phoneNumber)
+                    div(class="divInput")
+                        input(type="submit", value="Change")
+                        input(type="reset", value="Reset")
