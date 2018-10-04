@@ -2,9 +2,37 @@ doctype html
 html
     head
         meta(http-equiv="Content-Type", content="text/html;charset=UTF-8")
+        link(rel="stylesheet", href="/css/styleOperations.css")
         title Manage Payment Methods
     body
+        - var count = 0
         #divContainer
+            div#divPayments
+                #divContainerTop
+                    while count <3
+                        div(class="divLinkTop")
+                            if payments.length > count
+                                a(href="#")
+                                    h5(class="headerLabelLink") C
+                                    h5(class="headerLabelLinK") C
+                            else
+                                a(href="#")
+                                    img(src="/img/add.png", alt="Icon add payment")
+                                    p(class="headerLabelLink") Add payment
+                        - count++
+                #divContainerBottom
+                    while count < 6
+                        div(class="divLinkBottom")
+                            if payments.length > count
+                                a(href="#")
+                                    h5(class="headerLabelLink") C
+                                    h5(class="headerLabelLink") C
+                            else
+                                a(href="#")
+                                    img(src="/img/add.png", alt="icon add payment")
+                                    p(class="headerLabelLink") Add payment
+                        - count++
+        //#divContainer
             form(action=`/api/payments/editPayment/${token}`, method="post")
                 each val in payments
                     ul
