@@ -81,14 +81,6 @@ input[type="text"], input[type="email"], input[type="password"] {
     color: white;
 }
 
-/*#formRegister h1, #formLogin h1 {
-    color: white;
-    font-style: italic;
-    width: 100%;
-    margin-left: -3rem;
-    letter-spacing: 0.10em;
-}*/
-
 input[type="text"]:hover, input[type="email"]:hover, input[type="password"]:hover, input[type="reset"]:hover {
     border: 1px solid rgb(68, 199, 255);
     background-color: rgba(255, 255, 255, 0.075);
@@ -144,6 +136,7 @@ input[type="submit"]:hover {
     transform: translateY(-50%);
     margin: 0 auto;
     text-align: center;
+    min-width: 1400px;
 }
 
 #divContainerTop {
@@ -196,7 +189,7 @@ input[type="submit"]:hover {
 
 /* ===== Payments ===== */
 
-#divAddresses {
+#divPayments {
     width: 60%;
     height: 450px;
     position: relative;
@@ -204,4 +197,31 @@ input[type="submit"]:hover {
     transform: translateY(-50%);
     margin: 0 auto;
     text-align: center;
+    min-width: 1400px;
 }
+
+#divPayments .divLinkTop:nth-child(2), #divPayments .divLinkTop:nth-child(3) {
+    margin-left: 3em;
+}
+
+#divPayments .divLinkBottom:nth-child(2), #divPayments .divLinkBottom:nth-child(3) {
+    margin-left: 3em;
+}
+
+/* ===== Edit Payment ===== */
+
+#inputDate {
+    margin-left: 5.6em;
+}
+
+#inputDate input[type="number"] {
+    padding-left: 1em;
+    width: 20%;
+    height: 2.5em;
+    background-color: transparent;  
+    border: 1px solid white;
+    border-radius: 5px;
+    margin-top: 5px;
+    color: white;
+}
+

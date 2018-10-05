@@ -9,35 +9,46 @@ html
         #divContainer
             div#divPayments
                 #divContainerTop
-                    while count <3
+                    while count < 3
                         div(class="divLinkTop")
                             if payments.length > count
-                                a(href="#")
-                                    h5(class="headerLabelLink") C
-                                    h5(class="headerLabelLinK") C
+                                a(href=`/api/payments/editPayment/${token}/${payments[count]._id}`)
+                                    case payments[count].cardCircuit
+                                        when "Visa"
+                                            img(src="/img/visa.png" alt="Icon Visa")
+                                        when "Maestro"
+                                            img(src="/img/maestro.png" alt="Icon Maestro")
+                                        when "American Express"
+                                            img(src="/img/americanex.png" alt="Icon American Express")
+                                        when "MasterCard"
+                                            img(src="/img/mastercard.png" alt="Icon Mastercard")
+                                        default 
+                                            img(src="/img/cardsvg.png" alt="Icon card")
+                                    h5(class="headerLabelLink")= payments[count].cardNumber
                             else
-                                a(href="#")
+                                a(href=`#`)
                                     img(src="/img/add.png", alt="Icon add payment")
-                                    p(class="headerLabelLink") Add payment
+                                    h5(class="headerLabelLink") Add payment
                         - count++
                 #divContainerBottom
                     while count < 6
                         div(class="divLinkBottom")
                             if payments.length > count
-                                a(href="#")
-                                    h5(class="headerLabelLink") C
-                                    h5(class="headerLabelLink") C
+                                a(href=`/api/payments/editPayment/${token}`)
+                                    case payments[count].cardCircuit
+                                        when "Visa"
+                                            img(src="/img/visa.png" alt="Icon Visa")
+                                        when "Maestro"
+                                            img(src="/img/maestro.png" alt="Icon Maestro")
+                                        when "American Express"
+                                            img(src="/img/americanex.png" alt="Icon American Express")
+                                        when "MasterCard"
+                                            img(src="/img/mastercard.png" alt="Icon Mastercard")
+                                        default 
+                                            img(src="/img/cardsvg.png" alt="Icon card")
+                                    h5(class="headerLabelLink")= payments[count].cardNumber
                             else
                                 a(href="#")
-                                    img(src="/img/add.png", alt="icon add payment")
+                                    img(src="/img/add.png", alt="Icon add payment")
                                     p(class="headerLabelLink") Add payment
                         - count++
-        //#divContainer
-            form(action=`/api/payments/editPayment/${token}`, method="post")
-                each val in payments
-                    ul
-                        li
-                            input(type="checkbox", id=`checkPayment_${++count}`, name="checkPayment", value=`${val._id}`) 
-                            label(for=`checkPayment_${count}`)= val.cardNumber
-                input(type="submit", value="Edit")
-            a(href=`/api/products/showProducts/${token}`) Go Back

@@ -15,15 +15,16 @@ router.get('/managePayment/:token', async (req, res) => {
     const token = req.params.token;
     const decoded = jwt.verify(token, config.get('jwtPrivateKey'));
 
-    const payment = await Payment.find({ customer: decoded._id });
+    const payments = await Payment.find({ customer: decoded._id });
 
-    res.render('managePayments', { token:token, payments: payment, count: 0 });
+    res.render('managePayments', { token: token, payments: payments, count: 0 });
 });
 
-router.post('/editPayment/:token', async (req, res) => {
+router.get('/editPayment/:token/:id', async (req, res) => {
     const token = req.params.token;
+    const idPayment = req.params.id;
 
-    const payment = await Payment.findById(req.body.checkPayment);
+    const payment = await Payment.findById(idPayment);
     res.render('editPayment', { token: token, payment: payment });
 });
 
