@@ -20,12 +20,36 @@ router.get('/managePayment/:token', async (req, res) => {
     res.render('managePayments', { token: token, payments: payments, count: 0 });
 });
 
+router.get('/addPayment/:token', async (req, res) => {
+    const token = req.params.token;
+    
+    res.render('profileAddPayment', { token: token });
+});
+
 router.get('/editPayment/:token/:id', async (req, res) => {
     const token = req.params.token;
     const idPayment = req.params.id;
 
     const payment = await Payment.findById(idPayment);
     res.render('editPayment', { token: token, payment: payment });
+});
+
+router.post('/addPayment/:token', async (req, res) => {
+    const token = req.params.token;
+    const decoded = jwt.verify(token, config.get('jwtPrivateKey'));
+
+    let payment = new Payment({
+        customer: decoded._id,
+        cardHolder: req.body.txtCardHolder,
+        cardCircuit: req.body.selCardCircuit,
+        cardNumber: req.body.txtCardNumber,
+        monthExpired: req.body.txtMonthExpired,
+        yearExpired: req.body.txtYearExpired
+    });
+    await payment.save();
+
+    const payments = await Payment.find({ customer: decoded._id });
+    res.render('managePayments', { token: token, payments: payments });
 });
 
 router.post('/updatePayment/:token/:idPayment', async (req, res) => {
@@ -36,12 +60,13 @@ router.post('/updatePayment/:token/:idPayment', async (req, res) => {
     await Payment.findByIdAndUpdate(idPayment, {
         cardHolder: req.body.txtCardHolder,
         cardNumber: req.body.txtCardNumber,
+        cardCircuit: req.body.selCardCircuit,
         monthExpired: req.body.txtMonthExpired,
         yearExpired: req.body.txtYearExpired,
     }, { new: true });
     const payments = await Payment.find({ customer: decoded._id }); 
 
-    res.render('managePayments', { token: token, payments: payments, count: 0 });
+    res.render('managePayments', { token: token, payments: payments });
 });
 
 router.post('/deletePayment/:token/:idPayment', async (req, res) => {
@@ -52,7 +77,7 @@ router.post('/deletePayment/:token/:idPayment', async (req, res) => {
     await Payment.findByIdAndRemove(idPayment);
     const payments = await Payment.find({ customer: decoded._id });
 
-    res.render('managePayments', { token: token, payments: payments, count: 0 });
+    res.render('managePayments', { token: token, payments: payments });
 });
 
 router.post('/confirmPayment/:token', async (req, res) => {

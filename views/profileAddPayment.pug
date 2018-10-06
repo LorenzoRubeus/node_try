@@ -1,0 +1,34 @@
+doctype html
+html
+    head
+        meta(http-equiv="Content-Type", content="text/html;charset=UTF-8")
+        link(rel="stylesheet", href="/css/styleOperations.css")
+        title Add Payment
+    body
+        #divContainer
+            #divForm
+                a(href=`/api/myProfile/${token}`)
+                    img(src="/img/back.png", id="btnGoBackEditPayment", alt="Go Back")
+                form(action=`/api/payments/addPayment/${token}`, method="post")       
+                    div(class="divInput")
+                        label Card Owner
+                        input#txtCardHolder(type="text", name="txtCardHolder")
+                    div(class="divInput")
+                        label Card Circuit
+                        select(name="selCardCircuit")
+                            option(value="Visa") Visa
+                            option(value="MasterCard") MasterCard
+                            option(value="American Express") American Express
+                            option(value="Maestro") Maestro
+                    div(class="divInput")
+                        label Card Number
+                        input#txtCardNumber(type="text", name="txtCardNumber")
+                    div(class="divInput", id="inputDate")
+                        label Expired Date
+                        br
+                        input#txtMonthExpired(type="number", name="txtMonthExpired", min=1, max=12, placeholder="MM")
+                        label / 
+                        input#txtYearExpired(type="number", name="txtYearExpired", min=2018, max=2030, placeholder="YYYY")
+                    div(class="divInput")
+                        input(type="submit", value="Add")
+                        input(type="reset", value="Reset")

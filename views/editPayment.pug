@@ -7,21 +7,53 @@ html
     body
         #divContainer
             #divForm
+                a(href=`/api/myProfile/${token}`)
+                    img(src="/img/back.png", id="btnGoBackEditPayment", alt="Go Back")
                 form(action=`/api/payments/updatePayment/${token}/${payment._id}`, method="post")
                     div(class="divInput")
                         label Card Owner
                         input#txtCardHolder(type="text", name="txtCardHolder", value=payment.cardHolder)
                     div(class="divInput")
+                        label Card Circuit
+                        select(name="selCardCircuit")
+                            case payment.cardCircuit
+                                when "Visa"
+                                    option(value="Visa" selected disabled) Visa
+                                    option(value="MasterCard") MasterCard
+                                    option(value="American Express") American Express
+                                    option(value="Maestro") Maestro 
+                                when "Maestro"
+                                    option(value="Visa") Visa
+                                    option(value="MasterCard") MasterCard
+                                    option(value="American Express" selected) American Express
+                                    option(value="Maestro") Maestro 
+                                when "American Express"
+                                    option(value="Visa") Visa
+                                    option(value="MasterCard") MasterCard
+                                    option(value="American Express") American Express
+                                    option(value="Maestro" selected) Maestro 
+                                when "MasterCard"
+                                    option(value="Visa") Visa
+                                    option(value="MasterCard" selected) MasterCard
+                                    option(value="American Express") American Express
+                                    option(value="Maestro") Maestro 
+                                default 
+                                    option(value="Visa") Visa
+                                    option(value="MasterCard") MasterCard
+                                    option(value="American Express") American Express
+                                    option(value="Maestro") Maestro 
+                    div(class="divInput")
                         label Card Number
                         input#txtCardNumber(type="text", name="txtCardNumber", value=payment.cardNumber)
                     div(class="divInput", id="inputDate")
+                        label Expired Date
+                        br
                         input#txtMonthExpired(type="number", name="txtMonthExpired", min=1, max=12, value=payment.monthExpired)
                         label / 
                         input#txtYearExpired(type="number", name="txtYearExpired", min=2018, max=2030, value=payment.yearExpired)
                     div(class="divInput")
-                        input(type="submit", value="Change")
-                        input(type="reset", value="Reset")
-                    div(class="divInput")
-                        form(action=`/api/payments/deletePayment/${token}/${payment._id}`, method="post")
-                            input(type="submit", value="Delete")
-                a(href=`/api/myProfile/${token}`) Go Back
+                        input(type="submit", id="btnChange", value="Confirm")
+                        input(type="reset", id="btnReset", value="Reset")
+                div(class="divInput")
+                    form(action=`/api/payments/deletePayment/${token}/${payment._id}`, method="post")
+                        input(type="submit", id="btnDelete", value="Delete")

@@ -38,9 +38,8 @@ router.get('/changePassword/:token', async (req, res) => {
     const token = req.params.token;
     const decoded = jwt.verify(token, config.get('jwtPrivateKey'));
 
-    const user = await User.findById(decoded._id).select({ password: 0, isAdmin: 0 });
-
-    res.render('profileChangePassword', { user: user, token: token});
+    const user = await User.findById(decoded._id).select({ isAdmin: 0, password: 0});
+    res.render('profileChangePassword', { user: user, token: token });
 });
 
 /*router.get('/changeAddress/:token', async (req, res) => {
