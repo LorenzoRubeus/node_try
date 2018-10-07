@@ -43,10 +43,26 @@ router.post('/:token', async (req, res) => {
         phoneNumber: req.body.txtPhoneNumber
     });
     await address.save();
-    address = await Address.findOne({ _id: address._id }).populate('customer', {firstName: 1, lastName: 1, email: 1});
 
-    const user = await User.findById(address.customer);
-    res.render('profileAddAddress', { user: user, token: token })
+    //address = await Address.findOne({ _id: address._id }).populate('customer', {firstName: 1, lastName: 1, email: 1});
+    //const user = await User.findById(address.customer);
+
+    const addresses = await Address.find({ customer: decoded._id });
+    
+    res.render('manageAddresses', { address: addresses, token: token })
 });
+
+
+router.post('/deleteAddress/:token/:idProduct', async (req, res) => {
+    const token = req.params.token;
+    const decoded = jwt.verify(token, config.get('jwtPrivateKey'));
+    const idProduct = req.params.idProduct;
+
+    await Address.findByIdAndRemove(idProduct);
+    const addresses = await Address.find({ customer: decoded._id });
+
+    res.render('manageAddresses', { address: addresses, token: token });
+});
+
 
 module.exports = router;

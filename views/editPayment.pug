@@ -18,20 +18,20 @@ html
                         select(name="selCardCircuit")
                             case payment.cardCircuit
                                 when "Visa"
-                                    option(value="Visa" selected disabled) Visa
+                                    option(value="Visa" selected) Visa
                                     option(value="MasterCard") MasterCard
                                     option(value="American Express") American Express
                                     option(value="Maestro") Maestro 
                                 when "Maestro"
                                     option(value="Visa") Visa
                                     option(value="MasterCard") MasterCard
-                                    option(value="American Express" selected) American Express
-                                    option(value="Maestro") Maestro 
+                                    option(value="American Express") American Express
+                                    option(value="Maestro" selected) Maestro 
                                 when "American Express"
                                     option(value="Visa") Visa
                                     option(value="MasterCard") MasterCard
-                                    option(value="American Express") American Express
-                                    option(value="Maestro" selected) Maestro 
+                                    option(value="American Express" selected) American Express
+                                    option(value="Maestro" ) Maestro 
                                 when "MasterCard"
                                     option(value="Visa") Visa
                                     option(value="MasterCard" selected) MasterCard

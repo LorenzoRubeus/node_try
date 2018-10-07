@@ -148,6 +148,20 @@ input[type="submit"]:hover, #btnChange:hover, input[type="submit"]:focus, #btnCh
     display: inline-block;
 }
 
+
+#p1Bottom {
+    margin-top: 14px;
+    display: inline-block;
+    font-size: 17px;
+    font-weight: 400;
+}
+
+#p2Bottom {
+    margin-top: 23px !important;
+    font-size: 17px;
+    font-weight: 400;
+}
+
 .headerLabelLink {
     font-size: 17px;    
     font-weight: 400;
@@ -209,8 +223,9 @@ input[type="submit"]:hover, #btnChange:hover, input[type="submit"]:focus, #btnCh
     margin-left: 3em;
 }
 
-
-/* ===== Edit Payment ===== */
+#divContainerBottom p {
+    margin-top: 28px;
+}
 
 #inputDate input[type="number"] {
     padding-left: 1em;

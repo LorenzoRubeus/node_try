@@ -34,7 +34,7 @@ html
                     while count < 6
                         div(class="divLinkBottom")
                             if payments.length > count
-                                a(href=`/api/payments/editPayment/${token}`)
+                                a(href=`/api/payments/editPayment/${token}/${payments[count]._id}`)
                                     case payments[count].cardCircuit
                                         when "Visa"
                                             img(src="/img/visa.png" alt="Icon Visa")

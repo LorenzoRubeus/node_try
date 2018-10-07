@@ -34,7 +34,6 @@ router.get('/filterCategory/:id/:token', async (req, res) => {
             "seller.isAdmin": 0
         });
 
-
     //res.send(product);
     res.render('products', {user: user, basket: basket, categories: categories, products: products, token: token}); // TODO Da modificare il send con render o qualcosa
 });

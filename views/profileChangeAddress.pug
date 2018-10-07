@@ -31,3 +31,6 @@ html
                     div(class="divInput")
                         input(type="submit", value="Change")
                         input(type="reset", value="Reset")
+                div(class="divInput")
+                    form(action=`/api/address/deleteAddress/${token}/${address._id}`, method="post")
+                        input(type="submit", id="btnDelete", value="Delete")

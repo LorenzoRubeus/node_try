@@ -7,7 +7,7 @@ const paymentSchema = new mongoose.Schema({
     },
     cardHolder: {
         type: String,
-        minlength: 16,
+        minlength: 3,
         maxlength: 16,
         required: true
     },
