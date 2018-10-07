@@ -1,0 +1,115 @@
+@import "http://fonts.googleapis.com/css?family=Raleway";
+
+html, body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../img/background.png');
+    font-family: "Raleway";
+}
+
+#divContainer {
+    position: absolute;
+    top: 0%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+#divForm {
+    width: 350px;
+    border: 1px solid white;  
+    border-radius: 6px; 
+    position: relative;
+    margin: 0 auto; 
+    padding-left: 2rem;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+#divForm label{
+    color: white;
+    margin-top: 5px;
+    padding-left: 0.5em;
+    font-size: 14px;
+    letter-spacing: 0.15em;
+    font-style: italic;
+}
+
+#divAddresses {
+    margin-top: 20px;
+}
+
+#divPrice {
+    padding-left: 8em;
+    margin-top: 30px;
+}
+
+#divPrice p{
+    margin-top: 5px;
+    margin-left: -5px;
+    color: #e2c416;
+    font-weight: bold;
+}
+
+.headerLabel {
+    font-style: normal !important;
+    font-size: 14px !important;    
+    font-weight: 500;
+}
+
+#divForm ul {
+    list-style: none;
+}
+
+input[type="submit"] {
+    height: 3rem;
+    width: 46%;
+    margin-left: 5.7em;
+    margin-bottom: 20px;
+    background-color: #d1d1d1;
+    color: black;
+    border: 1.2px solid #d1d1d1;
+    cursor: pointer;
+    letter-spacing: 0.10em;
+    padding-top: 5px !important;
+    font-size: 14px;
+}
+
+input[type="submit"]:hover {
+    border: 1px solid rgb(68, 199, 255);
+    transition-duration: 0.3s;
+}
+
+#btnGoBack {
+    display: inline-block;
+    height: 3rem;
+    width: 46%;
+    margin-top: -10px;
+    margin-left: 5.7em;
+    margin-bottom: 20px;
+    background-color: transparent;
+    color: white;
+    border: 1.2px solid #d1d1d1;
+    cursor: pointer;
+    letter-spacing: 0.10em;
+    padding-top: 5px !important;
+    font-size: 14px;
+    font-weight: 500;
+    text-align: center;
+}
+
+#btnGoBack:hover {
+    border: 1.2px solid rgb(68, 199, 255);
+    background-color: rgba(255, 255, 255, 0.3);
+    transition-duration: 0.3s;
+}
+
+#btnGoBack a {
+    width: 100%;
+    height: 100%;
+    padding-top: 10px;
+    display: inline-block;
+    text-decoration: none;
+    color: white;
+}

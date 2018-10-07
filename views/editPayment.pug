@@ -7,7 +7,7 @@ html
     body
         #divContainer
             #divForm
-                a(href=`/api/myProfile/${token}`)
+                a(href=`/api/payments/managePayment/${token}`)
                     img(src="/img/back.png", id="btnGoBackEditPayment", alt="Go Back")
                 form(action=`/api/payments/updatePayment/${token}/${payment._id}`, method="post")
                     div(class="divInput")

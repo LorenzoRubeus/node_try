@@ -40,18 +40,18 @@ router.get('/filterCategory/:id/:token', async (req, res) => {
 });
 
 router.get('/showProducts/:token', async (req, res) => {
-    /*const token = req.params.token;
+    const token = req.params.token;
     const decoded = jwt.verify(token, config.get('jwtPrivateKey'));
 
     const categories = await Category.find();
     const user = await User.findById(decoded._id);
-    const basket = await Basket.findOne({ customer: user._id });*/
+    const basket = await Basket.findOne({ customer: user._id });
 
-    const models = getModels(req.params.token);
+    //const models = getModels(req.params.token);
     const products = await Product.find();
 
-    //res.render('products', {user: user, basket: basket, categories: categories, products:products, token: token}); // TODO Da modificare il send con render o qualcosa
-    res.render('products', {user: models.user, basket: models.basket, categories: models.categories, products: products, token: req.params.token}); // TODO Da modificare il send con render o qualcosa
+    res.render('products', {user: user, basket: basket, categories: categories, products:products, token: token}); // TODO Da modificare il send con render o qualcosa
+    //res.render('products', {user: models.user, basket: models.basket, categories: models.categories, products: products, token: req.params.token}); // TODO Da modificare il send con render o qualcosa
 
 });
 

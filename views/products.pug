@@ -46,13 +46,13 @@ html
                     if products.length == 0
                         p(class="error") There are not products to be shown in this category.
                     else
-                        each val in products
-                            ul
+                        ul
+                            each val in products
                                 li
                                     form(action=`/api/basket/addBasket/${val._id}/${token}`, method="post", class="formProduct")
                                         div.divSingleProduct
                                             a(href=`#`)= val.name
-                                            label  di
+                                            label  by
                                             label(class="nameSeller")= " " + val.seller.firstName + " " + val.seller.lastName
                                             p(class="pDescriptionProduct")= val.description
                                         div.divPrice

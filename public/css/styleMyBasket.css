@@ -1,0 +1,202 @@
+@import "http://fonts.googleapis.com/css?family=Raleway";
+
+html, body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    font-family: "Raleway";
+}
+
+#container {
+    width: 100%;
+    height: calc(100% - 60px);
+    position: absolute;
+    top: 0;
+    background-color: transparent;
+    left: 0;
+}
+
+#divNav {
+    width: 100%;
+    height: 95px;
+    background-color: rgb(35, 47, 62);
+}
+
+#divNav a {
+    color: white;
+    width: 100%;
+    height: 100%;
+    padding-bottom: 0;
+}
+
+#divHome {
+    display: inline-block;
+    position: relative;
+    top: 45px;
+    height: 45px;
+    border: 1px solid white;
+    width: 100px;
+    padding-bottom: 0;
+}
+
+#divProfile {
+    display: inline-block;
+}
+
+#divProducts {
+    height: 100%;
+    width: 65%;
+    display: inline-block;
+    float: left;
+}
+
+#divProducts h2 {
+    padding-left: 0.6em;
+}
+
+#divProducts label {
+    font-size: 12px;
+}
+
+#divProducts a {
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.nameSeller:hover {
+    color: rgb(255, 26, 26);
+    cursor: pointer;
+}
+
+#divProducts a:hover {
+    color: rgb(255, 153, 0);
+}
+
+#divProducts a:visited {
+    text-decoration: none;
+    color:blue; 
+}
+
+.divSingleProduct {
+    width: 55%;
+    display: inline-block;
+}
+
+#divProducts ul {
+    list-style: none;
+    padding-left: 1em;
+}
+
+#divProducts a:visited:hover {
+    color: rgb(255, 153, 0);
+}
+
+.pDescriptionProduct {
+    margin-top: 10px;
+    font-size: 15px;
+    font-style: italic;
+}
+
+.divPrice {
+    display: inline-block;
+    width: 10%;
+    margin-left: 5em;
+}
+
+.divPrice label {
+    font-size: 14px !important;
+}
+
+.pPriceProduct {
+    margin-top: 0;
+    color: rgb(255, 26, 26);
+    font-weight: bold;
+}
+
+#divButtonsProduct {
+    width: 15%;
+    display: inline-block;
+}
+
+input[type="submit"] {
+    background-color: rgb(49, 104, 221);
+    height: 48px;
+    position: relative;
+    top: -10px;
+    border: 1px solid white;
+    border-radius: 3px;
+    color: white;
+    cursor: pointer;
+    letter-spacing: 0.12em;
+}
+
+input[type="submit"]:hover {
+    background-color: rgba(84, 128, 221, 0.9);
+    border: 1px solid rgb(68, 199, 255);
+    transition-duration: 0.3s;
+}
+
+#divCheckout {
+    width: 260px;
+    display: inline-block;
+    border: 1px solid black;
+    position: relative;
+    top: 20px;
+    left: 13em;
+    text-align: center;
+    border-radius: 6px;
+}
+
+#divCheckout input[type="submit"] {
+    width: 220px;
+    margin-top: 10px;
+}
+
+#divNumberArticles p{
+    font-weight: 600;
+    display: inline-block;
+}
+
+#divNumberArticles label{
+    font-weight: 600;
+    font-size: 18px;
+    margin-left: 3px;
+    color: green;
+    display: inline-block;
+}
+
+#divButtonBuy p{
+    margin-top: 0px;
+    font-weight: 600;
+    color: red;
+}
+
+#divFooter {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 60px;
+    background-color: rgb(35, 47, 62);
+}
+
+#divFooterLeft, #divFooterCenter, #divFooterRight {
+    font-size: 15px;
+    float: left;
+    margin-left: 20%;
+}
+
+#divFooterLeft a, #divFooterCenter a, #divFooterRight a {
+    color: white;
+    text-decoration: none;
+}
+
+#divFooterLeft h4, #divFooterCenter h4, #divFooterRight h4 {
+    color: white;
+    text-decoration: none;
+}
+
+#divFooterLeft h4:hover, #divFooterCenter h4:hover, #divFooterRight h4:hover {
+    color: orange;
+    text-decoration: none;
+}

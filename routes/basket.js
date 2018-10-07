@@ -16,7 +16,7 @@ router.get('/:token', async (req, res) => {
     const user = await User.findById(decoded._id);
     const order = await Order.findOne({ customer: decoded._id });
 
-    res.render('myBasket', { user: user, basket: basket, count: 0, order: order, token: token });
+    res.render('myBasket', { user: user, basket: basket, count: 0, token: token });
 });
 
 router.post('/addBasket/:idProduct/:token', async (req, res) => {

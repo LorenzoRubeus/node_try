@@ -2,22 +2,49 @@ doctype html
 html
     head
         meta(http-equiv="Content-Type", content="text/html;charset=UTF-8")
+        link(rel="stylesheet", href="/css/styleMyBasket.css")
         script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js")
         title= user.firstName + " " + user.lastName + "'s basket"
     body
         #divContainer
+            #divNav
+                #divHome
+                    a(href=`/api/myProfile/${token}`) Home
+                #divProfile
+                    a(href=`/api/myProfile/${token}`) My Profile
             #divProducts
-                each val in basket.products
-                    form(action=`/api/basket/removeProductBasket/${val._id}/${token}/${count++}`, method="post")
-                        a(href=`#`)= val.name
-                        label  di
-                        label= " " + val.seller.firstName + " " + val.seller.lastName
-                        p= " Price: " + val.price + "€"
-                        #divButtonsProduct
-                            button(type="submit", id="btnRemoveProductBasket") Remove from the basket
+                ul
+                    each val in basket.products
+                        li
+                            form(action=`/api/basket/removeProductBasket/${val._id}/${token}/${count++}`, method="post")
+                                div.divSingleProduct
+                                    a(href=`#`)= val.name
+                                    label  by
+                                    label(class="nameSeller")= " " + val.seller.firstName + " " + val.seller.lastName
+                                    p(class="pDescriptionProduct")= val.description
+                                div.divPrice
+                                    label= "Price"
+                                    p(class="pPriceProduct")= val.price + "€"
+                                #divButtonsProduct
+                                    input(type="submit", id="btnRemoveProductBasket", value="Remove from the basket")
                         hr
-                a(href=`/api/products/showProducts/${token}`) Go Back 
-                form(action=`/api/payments/pay/${token}`, method="post")
-                    p= "Total: " + basket.price
-                    button(type="submit") Buy Now
+                a(href=`/api/products/showProducts/${token}`) Go Back
+            #divCheckout
+                #divNumberArticles
+                    p= "Current number of articles: " 
+                    label= basket.count
+                #divButtonBuy
+                    form(action=`/api/payments/pay/${token}`, method="post")
+                        p= "Price: EUR " + basket.price 
+                        input(type="submit" value="Checkout") 
+        #divFooter
+                #divFooterLeft
+                    a(href="#")
+                        h4 About Us
+                #divFooterCenter
+                    a(href="#")
+                        h4 General Information
+                #divFooterRight
+                    a(href="#")
+                        h4 Contact Us
     script(src="mainScript.js", type="text/javascript")
