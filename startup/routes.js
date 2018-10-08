@@ -8,6 +8,7 @@ const address = require('../routes/address');
 const profile = require('../routes/profile');
 const basket = require('../routes/basket');
 const payment = require('../routes/payment');
+const order = require('../routes/order');
 const bodyParser = require('body-parser');
 
 module.exports = function(app) {
@@ -24,4 +25,5 @@ module.exports = function(app) {
     app.use('/api/myProfile', profile);
     app.use('/api/payments', payment);
     app.use('/api/basket', basket);
+    app.use('/api/orders', order);
 }

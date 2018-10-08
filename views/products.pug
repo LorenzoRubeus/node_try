@@ -2,11 +2,15 @@ doctype html
 html
     head
         title Store App
-        meta(charset = 'UTF-8')
+        meta(http-equiv="Content-Type", content="text/html;charset=UTF-8")
         link(rel="stylesheet", href="/css/styleProducts.css")
         link(rel="stylesheet", href="https://use.fontawesome.com/releases/v5.3.1/css/all.css")
     body    
         #container
+            #divSearchBar
+                form(action=`/api/products/search/${token}`, method="post")
+                    input#txtSearchBar(type="text", name="txtSearchBar", placeholder="Look for something")
+                    input(type="submit", value="Search")
             #divNav
                 #divBasket
                     a(href=`/api/basket/${token}`)= basket.count + " Basket" 
@@ -15,6 +19,7 @@ html
             #divProducts
                 #listFilter
                     p Filters
+                    a(href=`/api/products/showProducts/${token}`, id="linkAllProducts") All Products
                     label(id="typeFitler1") Name:
                     ul
                         li
@@ -29,7 +34,6 @@ html
                                 a(href=`/api/products/priceCrescente/${token}`, class="linkFilter") Increasing
                             li
                                 a(href=`/api/products/priceDecrescente/${token}`, class="linkFilter") Decreasing
-                    
                     #divListCategoriesLeft
                         label Category:
                         ul(id='listCategory')
@@ -44,16 +48,16 @@ html
                 #divListProducts
                     h2 Products
                     if products.length == 0
-                        p(class="error") There are not products to be shown in this category.
+                        p(class="error") 0 products to be shown in this category.
                     else
                         ul
                             each val in products
                                 li
                                     form(action=`/api/basket/addBasket/${val._id}/${token}`, method="post", class="formProduct")
                                         div.divSingleProduct
-                                            a(href=`#`)= val.name
+                                            a(href=`'/api/products/showProductsByName/${val.seller._id}/${token}`)= val.name
                                             label  by
-                                            label(class="nameSeller")= " " + val.seller.firstName + " " + val.seller.lastName
+                                            a(href="", class="nameSeller")= " " + val.seller.firstName + " " + val.seller.lastName
                                             p(class="pDescriptionProduct")= val.description
                                         div.divPrice
                                             label= "Price"

@@ -24,9 +24,9 @@ html
                             h3(class="headerLabelLink") Change password
                 div#divContainerBot
                     div#divBottomLeft(class="divBottom")
-                        a(href=`/api/address/${token}/homeProfile`) 
-                            img(src="/img/address.png" alt="Icon Add Address")
-                            h3(class="headerLabelLink") Add an address
+                        a(href=`/api/orders/${token}`) 
+                            img(src="/img/order.png" alt="Icon Orders")
+                            h3(class="headerLabelLink") Orders
                     div#divBottomCenter(class="divBottom")
                         a(href=`/api/myProfile/changeAddress/${token}`)
                             img(src="/img/address.png" alt="Icon Address")
@@ -38,7 +38,7 @@ html
                     br
                 div#divBack
                     a(href=`/api/products/showProducts/${token}`, id="btnBack") 
-                        label Go Back
+                        label Go back to the store
         #divFooter
                     #divFooterLeft
                         a(href="#")
@@ -50,3 +50,6 @@ html
                         a(href="#")
                             h4 Contact Us
             
+//- a(href=`/api/address/${token}/homeProfile`) 
+                            img(src="/img/address.png" alt="Icon Add Address")
+                            h3(class="headerLabelLink") Add an address

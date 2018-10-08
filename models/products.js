@@ -9,7 +9,8 @@ const productSchema = new mongoose.Schema({
         type: String,
         minlength: 2,
         maxlength: 255,
-        required: true
+        required: true,
+        text: true
     },
     category: {
         type: [categorySchema],

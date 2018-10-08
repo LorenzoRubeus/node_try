@@ -90,22 +90,33 @@ p.error {
     padding-left: 0;
 }
 
-#listFilter ul a {
+#listFilter a {
     text-decoration: none;
     font-style: italic;
     font-size: 14px;
 }
 
-#listFilter ul a:hover {
+#linkAllProducts {
+    font-weight: bold;
+    letter-spacing: 1px;
+    margin-top: -10px;
+    margin-bottom: 15px;
+}
+
+#linkAllProducts {
+    display: block;
+}
+
+#listFilter a:hover {
     color: rgb(255, 153, 0);
 }
 
-#listFilter ul a:visited {
+#listFilter a:visited {
     text-decoration: none;
     color: blue;
 }
 
-#listFilter ul a:visited:hover {
+#listFilter a:visited:hover {
     color: rgb(255, 153, 0);
 }
 
@@ -118,10 +129,6 @@ p.error {
     padding-left: 0.6em;
 }
 
-#divListProducts label {
-    font-size: 12px;
-}
-
 #divListProducts a {
     text-decoration: none;
 }
@@ -131,8 +138,13 @@ p.error {
     display: inline-block;
 }
 
+.nameSeller {
+    color: black !important;
+    font-size: 12px;
+}
+
 .nameSeller:hover {
-    color: rgb(255, 26, 26);
+    color: rgb(255, 26, 26) !important;
     cursor: pointer;
 }
 
