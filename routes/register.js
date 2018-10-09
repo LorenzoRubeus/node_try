@@ -14,19 +14,20 @@ router.post('/', async (req, res) => {
 
     const { error } = validateUser(req.body);
     if(error){
-        /*err = "Missing Field"; 
-        return res.render('index', { err: err }).status(404);*/
-        /*err = error.details[0].message;
-        return res.render('index', { err: err }).status(404);*/
-
-        return res.send(error).status(404);
+        err = error.details[0].context.label;
+        return res.render('index', { err: err });
     } 
 
     let user = await User.findOne({ email: req.body.txtEmail });
     if(user) { 
         err = "User Registered"
-        return res.render('index', { err: err }).status(400); 
+        return res.render('index', { err: err });
     }  
+
+    if(req.body.txtPassword !== req.body.txtConfirmPassword) {
+        err = "Password No Match";
+        return res.render('index', { err: err });
+    }
 
     const firstName = req.body.txtFirstName[0].toUpperCase() + req.body.txtFirstName.slice(1, req.body.txtFirstName.length).toLowerCase();
     const lastName = req.body.txtLastName[0].toUpperCase() + req.body.txtLastName.slice(1, req.body.txtLastName.length).toLowerCase();

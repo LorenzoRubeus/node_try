@@ -13,20 +13,20 @@ router.post('/', async (req, res) => {
 
     const { error } = validateUserLogin(req.body);
     if(error) { 
-        let err = "Missing Field"
-        return res.render('index', { err: err }).status(404);
+        let err = error.details[0].context.label;
+        return res.render('index', { err: err, redirect: "login" });
     } 
 
     let user = await User.findOne({ email: req.body.txtEmailLogin });
     if(!user) {
         err = "Invalid Credential";
-        return res.render('index', { err: err }).status(400); 
+        return res.render('index', { err: err, redirect: "login" });
     }
 
     const validPassword = await bcrypt.compare(req.body.txtPasswordLogin, user.password);
     if(!validPassword){
         err = "Invalid Credential";
-        return res.render('index', { err: err }).status(400); 
+        return res.render('index', { err: err, redirect: "login" });
     }
 
     const categories = await Category.find();

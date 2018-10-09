@@ -3,9 +3,15 @@ html
     head
         title Store App
         meta(http-equiv="Content-Type", content="text/html;charset=UTF-8")
+        script(src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.4/sweetalert2.min.js")
+        link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.4/sweetalert2.min.css")
+        script(src="/js/alerts.js")
         link(rel="stylesheet", href="/css/styleProducts.css")
         link(rel="stylesheet", href="https://use.fontawesome.com/releases/v5.3.1/css/all.css")
-    body    
+    body 
+        if err
+            script.
+                errorAlertAddProductBasket("#{err}")
         #container
             #divSearchBar
                 form(action=`/api/products/search/${token}`, method="post")

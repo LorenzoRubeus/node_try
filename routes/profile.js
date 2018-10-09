@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { User } = require('../models/users');
-const { Address } = require('../models/addresses');
+const { Address, validateAddress } = require('../models/addresses');
 const config = require('config');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
@@ -135,6 +135,14 @@ router.post('/changeAddress/:token/:id', async (req, res) => {
     const token = req.params.token;
     const id = req.params.id;
     const decoded = jwt.verify(token, config.get('jwtPrivateKey'));
+    let err = "";
+
+    const { error } = validateAddress(req.body);
+    if(error) {
+        err = error.details[0].context.label;
+        let address = await Address.findOne({ _id: id });
+        return res.render("profileChangeAddress", { token: token, err: err, address: address });
+    }
 
     let address = await Address.findOneAndUpdate({ customer: decoded._id, _id: id }, {
         name: req.body.txtName,
@@ -146,7 +154,7 @@ router.post('/changeAddress/:token/:id', async (req, res) => {
     
     //const user = await User.findById(address.customer);
     //res.render('profile', { user: user, token: token });
-    address = await Address.find();
+    address = await Address.find({ customer: decoded._id });
 
     res.render('manageAddresses', { address: address, token: token });
 });

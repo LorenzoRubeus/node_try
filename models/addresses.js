@@ -48,14 +48,13 @@ const Address = mongoose.model('Address', addressSchema);
 
 function validateAddress(address){
     const schema = {
-        txtName: Joi.string().min(2).max(355).required(),
-        txtStreet: Joi.string().min(2).max(355).required(),
-        txtCity: Joi.string().min(2).max(255).required(),
-        txtCountry: Joi.string().min(2).max(255).required(),
-        txtZipCode: Joi.string().min(5).max(5).required(),
-        txtPhoneNumber: Joi.string().min(4).max(16).required()
+        txtName: Joi.string().min(2).max(355).required().label("Name must be compiled and must have at least 2 characters"),
+        txtStreet: Joi.string().min(2).max(355).required().label("Street name must be compiled and must have at least 2 characters"),
+        txtCity: Joi.string().min(2).max(255).required().label("City name must be compiled and must have at least 2 characters"),
+        txtCountry: Joi.string().min(2).max(255).required().label("Country name must be compiled and must have at least 2 characters"),
+        txtZipCode: Joi.string().min(5).max(5).regex(/^([0-9])/).required().label("Zipcode must be provided and it has to have 5 numbers only"),
+        txtPhoneNumber: Joi.string().min(4).max(16).regex(/^([0-9])/).required().label("Phone number must be provided and it has to have only numbers")
     }
-
     return Joi.validate(address, schema);
 }
 

@@ -25,10 +25,13 @@ router.get('/:token/:btnBack', async (req, res) => {
 router.post('/:token', async (req, res) => {
     const token = req.params.token;
     const decoded = jwt.verify(token, config.get('jwtPrivateKey'));
+    let err = "";
 
     const { error } = validateAddress(req.body);
     if(error) {
-        return res.status(400).send(error.details[0].message);
+        err = error.details[0].context.label;
+        //return res.status(400).send(error.details[0].message);
+        return res.render('profileAddAddress', { token: token, err: err });
     }
 
     let address = new Address({

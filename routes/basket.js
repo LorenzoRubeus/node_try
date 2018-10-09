@@ -28,6 +28,12 @@ router.post('/addBasket/:idProduct/:token', async (req, res) => {
     let basket = await Basket.findOne({ customer: decoded._id });
     const categories = await Category.find();
     let products = await Product.findById(idProduct);
+    if(!products) {
+        let err = "Product not available";
+        basket = await Basket.findOne({ customer: decoded._id }).populate('products', { name: 1, seller: 1, price: 1, description: 1 });
+        products = await Product.find();
+        return res.render('products', { token: token, err: err, basket: basket, products: products, categories: categories,})
+    }
 
     basket.count++;
     basket.price += products.price;
@@ -51,8 +57,12 @@ router.post('/removeProductBasket/:idProduct/:token/:idProductRemove', async (re
     let basket = await Basket.findOne({ customer: decoded._id }).populate('products', { name: 1, seller: 1, price: 1, description: 1 });
     basket.price = basket.price - basket.products[idProductRemove].price;
 
-    if(basket.products.length == 1) { basket.products.pull({ _id: idProduct }); }
-    else { basket.products.splice(idProductRemove, 1); }
+    if(basket.products.length == 1) { 
+        basket.products.pull({ _id: idProduct }); 
+    }
+    else { 
+        basket.products.splice(idProductRemove, 1); 
+    }
 
     basket.count--;
     basket = await basket.save();

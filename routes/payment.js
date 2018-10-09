@@ -1,4 +1,4 @@
-const { Payment } = require('../models/payments');
+const { Payment, validatePayment } = require('../models/payments');
 const { User } = require('../models/users');
 const { Order } = require('../models/orders'); 
 const { Basket } = require('../models/baskets'); 
@@ -37,6 +37,12 @@ router.get('/editPayment/:token/:id', async (req, res) => {
 router.post('/addPayment/:token', async (req, res) => {
     const token = req.params.token;
     const decoded = jwt.verify(token, config.get('jwtPrivateKey'));
+
+    const { error } = validatePayment(req.body);
+    if(error) {
+        let err = error.details[0].context.label;
+        return res.render('profileAddPayment', { token: token, err: err });
+    }
 
     let payment = new Payment({
         customer: decoded._id,

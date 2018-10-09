@@ -14,20 +14,23 @@ html
                     a(href=`/api/myProfile/${token}`) My Profile
             #divProducts
                 ul
-                    each val in basket.products
-                        li
-                            form(action=`/api/basket/removeProductBasket/${val._id}/${token}/${count++}`, method="post")
-                                div.divSingleProduct
-                                    a(href=`#`)= val.name
-                                    label  by
-                                    label(class="nameSeller")= " " + val.seller.firstName + " " + val.seller.lastName
-                                    p(class="pDescriptionProduct")= val.description
-                                div.divPrice
-                                    label= "Price"
-                                    p(class="pPriceProduct")= val.price + "€"
-                                #divButtonsProduct
-                                    input(type="submit", id="btnRemoveProductBasket", value="Remove from the basket")
-                        hr
+                    if basket.products.length == 0
+                        p There are no elements in the basket.
+                    else
+                        each val in basket.products
+                            li
+                                form(action=`/api/basket/removeProductBasket/${val._id}/${token}/${count++}`, method="post")
+                                    div.divSingleProduct
+                                        a(href=`#`)= val.name
+                                        label  by
+                                        label(class="nameSeller")= " " + val.seller.firstName + " " + val.seller.lastName
+                                        p(class="pDescriptionProduct")= val.description
+                                    div.divPrice
+                                        label= "Price"
+                                        p(class="pPriceProduct")= val.price + "€"
+                                    #divButtonsProduct
+                                        input(type="submit", id="btnRemoveProductBasket", value="Remove from the basket")
+                            hr
                 a(href=`/api/products/showProducts/${token}`) Go Back
             #divCheckout
                 #divNumberArticles

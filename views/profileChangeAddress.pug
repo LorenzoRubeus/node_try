@@ -2,9 +2,15 @@ doctype html
 html
     head
         meta(http-equiv="Content-Type", content="text/html;charset=UTF-8")
+        script(src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.4/sweetalert2.min.js")
+        link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.4/sweetalert2.min.css")
         link(rel="stylesheet", href="/css/styleOperations.css")
+        script(src="/js/alerts.js")
         title Change Address
     body
+        if err 
+            script.
+                errorAlertEditAddress("#{err}")
         div#divContainer
             div#divForm
                 a(href=`/api/myProfile/changeAddress/${token}`)

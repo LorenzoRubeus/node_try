@@ -10,9 +10,13 @@
         <title>Store Node App</title>
     </head>
     <body>
-        script.
-            errorAlertLogin("#{err}")
-            errorAlertRegister("#{err}")
+        if err
+            if redirect == "login"
+                script.
+                    errorAlertLogin("#{err}")
+            else
+                script.
+                    errorAlertRegister("#{err}")
         <div class='container'>
             <div class='divButtons'>
                 <a href="#" id="linkRegister" class="btnHome">Register</a>

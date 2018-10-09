@@ -6,7 +6,7 @@ function errorAlertLogin(error) {
                 "error");
             }, 600);
             break;
-        case "Missing Field": 
+        default: 
             setTimeout(function () { swal("Error while signing in!",
                 "All fields need to be compiled",
                 "error");
@@ -29,12 +29,61 @@ function errorAlertRegister(error) {
                 "error");
             }, 600);
             break;
-        case "BUBI SCHIFO": 
+        case "Password No Match": 
             setTimeout(function () { swal("Error while signing up!",
-            error,
+            "Passwords don't match", 
             "error");
+            }, 600);
+            break;
+        default: 
+            setTimeout(function () { swal("Error while signing up!",
+                error,
+                "error");
         }, 600);
         break;
     }
 }
 
+function errorAlertAddress(error) {
+    switch(error) {
+        default: 
+            setTimeout(function () { swal("Error while adding the address",
+                error,
+                "error");
+        }, 600);
+        break;
+    }
+}
+
+function errorAlertEditAddress(error) {
+    switch(error) {
+        default:
+            setTimeout(function () { swal("Error while editing the address", 
+                error,
+                "error");
+        }, 600);
+        break;
+    }
+}
+
+function errorAlertAddProductBasket(error) {
+    switch(error) {
+        default:
+            setTimeout(function () { swal("Error while adding the product to the basket", 
+                error,
+                "error");
+            }, 600);
+        break;
+    }
+}
+
+function errorAlertAddPayment(error) {
+    switch(error) {
+        default: 
+            setTimeout(function () { swal("Error while adding the payment method",
+                error,
+                "error");
+            }, 600);
+            break;
+    }
+}
