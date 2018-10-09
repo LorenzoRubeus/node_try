@@ -20,7 +20,7 @@ const paymentSchema = new mongoose.Schema({
     },
     cardNumber: {
         type: String,
-        min: 1,
+        min: 16,
         max: 16,
         required: true
     },
@@ -44,7 +44,7 @@ function validatePayment(payment) {
     const schema = {
         txtCardHolder: Joi.string().min(3).max(255).required().label("Card owner's name must be provided and must have at least 3 characters"),
         selCardCircuit: Joi.string().min(1).max(255).required().label("Card circuit must be provided"),
-        txtCardNumber: Joi.string().min(1).max(16).regex(/^[0-9]*$/).required().label("Card number must be provided and it has to have only numbers"),
+        txtCardNumber: Joi.string().min(16).max(16).regex(/^[0-9]*$/).required().label("Card number must be provided and it has to have only 16 numbers"),
         txtMonthExpired: Joi.number().min(1).max(12).required().label("Expiration month must be provided"),
         txtYearExpired: Joi.number().min(new Date().getFullYear()).max(2030).required().label(`Expiration year must be provided and it has to be between ${new Date().getFullYear()} and 2030`)
     }

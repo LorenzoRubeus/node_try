@@ -4,6 +4,7 @@ html
         meta(http-equiv="Content-Type", content="text/html;charset=UTF-8")
         script(src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.4/sweetalert2.min.js")
         script(src="/js/alerts.js")
+        script(src="/js/functions.js")
         link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.4/sweetalert2.min.css")
         link(rel="stylesheet", href="/css/styleOperations.css")
         title Manage Payment Methods
@@ -12,6 +13,7 @@ html
             script.
                 errorAlertDeletePayment("#{err}")
         - var count = 0
+        - var cardNumber = ""
         #divContainer
             div#divPayments
                 #divContainerTop
