@@ -62,6 +62,20 @@ router.post('/updatePayment/:token/:idPayment', async (req, res) => {
     const token = req.params.token;
     const decoded = jwt.verify(token, config.get('jwtPrivateKey'));
     const idPayment = req.params.idPayment;
+    let err = "";
+
+    if(!await Payment.findById(idPayment)) {
+        let payment = await Payment.find({ customer: decoded._id });
+        err = "Payment not found";
+        return res.render('editPayment', { err: err, token: token, payment: payment });
+    }
+
+    const { error } = validatePayment(req.body);
+    if(error) {
+        let payment = await Payment.findById(idPayment);
+        err = error.details[0].context.label;
+        return res.render('editPayment', { err: err, token: token, payment: payment });
+    }
 
     await Payment.findByIdAndUpdate(idPayment, {
         cardHolder: req.body.txtCardHolder,
@@ -80,7 +94,12 @@ router.post('/deletePayment/:token/:idPayment', async (req, res) => {
     const decoded = jwt.verify(token, config.get('jwtPrivateKey'));
     const idPayment = req.params.idPayment;
 
-    await Payment.findByIdAndRemove(idPayment);
+    if(!await Payment.findByIdAndRemove(idPayment)) {
+        let err = "Payment not found";
+        let pays = await Payment.find({ customer: decoded._id });
+        return res.render('managePayments', { token: token, err: err, payments: pays });
+    }
+    //await Payment.findByIdAndRemove(idPayment);
     const payments = await Payment.find({ customer: decoded._id });
 
     res.render('managePayments', { token: token, payments: payments });

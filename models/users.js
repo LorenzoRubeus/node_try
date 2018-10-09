@@ -9,13 +9,13 @@ const { addressSchema } = require('./addresses');
 const userSchema = new mongoose.Schema({
     firstName: {
         type: String,
-        minlength: 4,
+        minlength: 2,
         maxlength: 255,
         required: true
     },
     lastName: {
         type: String,
-        minlength: 4,
+        minlength: 2,
         maxlength: 255,
         required: true
     },
@@ -49,8 +49,8 @@ const User = mongoose.model('User', userSchema);
 
 function validateUser(user){
     const schema = {
-        txtFirstName: Joi.string().min(4).max(255).required().label("First name must be compiled and must have at least 4 characters"),
-        txtLastName: Joi.string().min(4).max(255).required().label("Last name must be compiled and must have at least 4 characters"),
+        txtFirstName: Joi.string().min(2).max(255).required().label("First name must be compiled and must have at least 2 characters"),
+        txtLastName: Joi.string().min(2).max(255).required().label("Last name must be compiled and must have at least 2 characters"),
         txtEmail: Joi.string().min(5).max(255).required().email().label("Email must be a valid email address and must have at least 5 characters"),
         txtPassword: Joi.string().min(5).max(255).required().label("Password must be compiled and must have at least 5 characters"),
         txtConfirmPassword: Joi.string().min(5).max(255).required().label("You need to confirm the password you want to use"),
@@ -63,7 +63,6 @@ function validateUserLogin(user){
         txtEmailLogin: Joi.string().min(4).max(255).required().label("Email must be a valid email address and must have at least 5 characters"),
         txtPasswordLogin: Joi.string().min(5).max(255).required().label("Password must be compiled and must have at least 5 characters")
     }
-
     return Joi.validate(user, schema);
 }
 

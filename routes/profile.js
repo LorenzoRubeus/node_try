@@ -83,6 +83,19 @@ router.get('/changeAddress/pick/:token/:id', async (req, res) => {
 router.post('/changeName/:token', async (req, res) => {
     const token = req.params.token;
     const decoded = jwt.verify(token, config.get('jwtPrivateKey'));
+    let err = "";
+
+    if(typeof req.body.txtFirstName !== "string" || req.body.txtFirstName.length < 2) {
+        err = "First name error";
+        let user = await User.findById(decoded._id).select({ isAdmin: 0, password: 0 });
+        return res.render('profileChangeName', { err: err, token: token, user: user });
+    }
+
+    if(typeof req.body.txtLastName !== "string" || req.body.txtLastName.length < 2) {
+        err = "Last name error";
+        let user = await User.findById(decoded._id).select({ isAdmin: 0, password: 0 });
+        return res.render('profileChangeName', { err: err, token: token, user: user });
+    }
 
     const user = await User.findOneAndUpdate({ _id: decoded._id }, { firstName: req.body.txtFirstName, lastName: req.body.txtLastName }, { new: true });
     
@@ -92,17 +105,26 @@ router.post('/changeName/:token', async (req, res) => {
 router.post('/changeEmail/:token', async (req, res) => {
     const token = req.params.token;
     const decoded = jwt.verify(token, config.get('jwtPrivateKey'));
-
-    if(req.body.txtNewEmail !== req.body.txtConfirmNewEmail) { 
-        return res.status(400).send('The two emails are not the same'); //TODO Da cambiare
-    }
+    let err = "";
 
     const user = await User.findById(decoded._id);
 
+    if(req.body.txtNewEmail !== req.body.txtConfirmNewEmail) { 
+        err = "Email no match";
+        return res.render('profileChangeEmail', { token: token, err: err, user: user })
+    }
+
+    if(typeof req.body.txtNewEmail !== "string" || req.body.txtNewEmail.length < 6) {
+        err = "Email few characters";
+        return res.render('profileChangeEmail', { token: token, err: err, user: user});
+    }
+
     const validPassword = await bcrypt.compare(req.body.txtPassword, user.password);
     if(!validPassword){
-        return res.status(400).send('Invalid password'); //TODO Da cambiare
+        err = "Email wrong password"
+        return res.render('profileChangeEmail', { token: token, err: err, user: user});
     }
+
     user.email = req.body.txtNewEmail;
     await user.save();
 
@@ -113,18 +135,23 @@ router.post('/changePassword/:token', async (req, res) => {
     const token = req.params.token;
     const decoded = jwt.verify(token, config.get('jwtPrivateKey'));
     const hash = await bcrypt.genSalt(10);
+    let err = "";
 
     if(req.body.txtPassword !== req.body.txtConfirmPassword) {
-        return res.status(400).send('The passwords do not correspond'); //TODO Da cambiare
+        err = "Password no match";
+        return res.render('profileChangePassword', { token: token, err: err });
+    }
+    if(req.body.txtPassword.length < 6) {
+        err = "Password too short";
+        return res.render('profileChangePassword', { token: token, err: err });
     }
 
     const user = await User.findById(decoded._id);    
-
     const validPassword = await bcrypt.compare(req.body.txtOldPassword, user.password);
     if(!validPassword) {
-        return res.status(400).send('Your current password is wrong'); //TODO Da cambiare
+        err = "Wrong current password";
+        return res.render('profileChangePassword', { token: token, err: err });
     }
-
     user.password = await bcrypt.hash(req.body.txtPassword, hash);
     await user.save();
 

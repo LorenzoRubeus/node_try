@@ -103,9 +103,10 @@ router.post('/search/:token', async (req, res) => {
     res.render('products', {user: models.user, basket: models.basket, categories: models.categories, products: products, token: req.params.token});
 });
 
+
+
 router.post('/', async(req, res) => {
     const category = await Category.findOne({ name: req.body.category }); //TODO IF ERROR
-    
     const user = await User.findOne({ _id: req.body.id }); //TODO IF ERROR E PRENDERE JWT TOKEN INFO
 
     const product = new Product({
@@ -127,6 +128,8 @@ router.post('/', async(req, res) => {
 
     res.send(product);
 });
+
+
 
 async function getProductsFilter(filter) {
     return await Product.find().select(
