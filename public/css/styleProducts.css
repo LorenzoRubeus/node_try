@@ -14,6 +14,7 @@ html, body {
     top: 0;
     background-color: transparent;
     left: 0;
+    min-width: 1080px;
 }
 
 #divNav {
@@ -48,7 +49,7 @@ html, body {
     width: 100%;
 }
 
-#listFilter, #divListProducts, #divListCategories {
+#listFilter, #divListProducts, #divListCategories, #divImg {
     display: inline-block;
 }
 
@@ -159,6 +160,19 @@ p.error {
 
 #divListProducts a:visited:hover {
     color: rgb(255, 153, 0);
+}
+
+#divImg {
+    width: 200px;
+    height: 150px;
+}
+
+.formProduct {
+    display: inline-block;
+    position: relative;
+    top: -3em;
+    left: 1em;
+    width: calc(90% - 200px);
 }
 
 .pDescriptionProduct {

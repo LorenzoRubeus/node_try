@@ -9,6 +9,8 @@ const profile = require('../routes/profile');
 const basket = require('../routes/basket');
 const payment = require('../routes/payment');
 const order = require('../routes/order');
+const picture = require('../routes/picture');
+
 const bodyParser = require('body-parser');
 
 module.exports = function(app) {
@@ -26,4 +28,6 @@ module.exports = function(app) {
     app.use('/api/payments', payment);
     app.use('/api/basket', basket);
     app.use('/api/orders', order);
+
+    app.use('/api/pictures', picture);
 }

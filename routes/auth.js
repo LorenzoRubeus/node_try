@@ -4,9 +4,11 @@ const { User, validateUser, validateUserLogin } = require('../models/users');
 const { Category } = require('../models/categories');
 const { Product } = require('../models/products');
 const { Basket } = require('../models/baskets');
+const { Picture } = require('../models/pictures');
 const _ = require('lodash');
 const bcrypt = require('bcrypt');
 const config = require('config');
+const btoa = require('btoa');
 
 router.post('/', async (req, res) => {
     let err = "";
@@ -32,10 +34,15 @@ router.post('/', async (req, res) => {
     const categories = await Category.find();
     const products = await Product.find();
     const basket = await Basket.findOne({ customer: user._id });
+    let pictures = [];
+
+    for(let i = 0; i < products.length; i++) {
+        pictures.push(btoa(products[i].img.data));
+    }
 
     const token = user.generateAuthToken();
 
-    res.header('x-auth-token', token).render('products', {err: err, user: user, basket: basket, categories: categories, products:products, token: token}); // TODO Da modificare il send con render o qualcosa
+    res.header('x-auth-token', token).render('products', {err: err, user: user, basket: basket, categories: categories, products:products, pictures: pictures, token: token}); // TODO Da modificare il send con render o qualcosa
 });
 
 exports.auth = router;

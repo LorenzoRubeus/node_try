@@ -33,6 +33,10 @@ const productSchema = new mongoose.Schema({
         minlength: 4,
         maxlength: 65536,
         required: true
+    },
+    img: {
+        data: Buffer,
+        contentType: String
     }
 });
 

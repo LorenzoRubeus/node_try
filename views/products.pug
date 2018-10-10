@@ -9,6 +9,7 @@ html
         link(rel="stylesheet", href="/css/styleProducts.css")
         link(rel="stylesheet", href="https://use.fontawesome.com/releases/v5.3.1/css/all.css")
     body 
+        - count = 0
         if err
             script.
                 errorAlertAddProductBasket("#{err}")
@@ -59,6 +60,8 @@ html
                         ul
                             each val in products
                                 li
+                                    #divImg
+                                        img(src=`data:image/png;base64, ${pictures[count]}`, alt=`Picture of ${val.name}`)
                                     form(action=`/api/basket/addBasket/${val._id}/${token}`, method="post", class="formProduct")
                                         div.divSingleProduct
                                             a(href=`'/api/products/showProductsByName/${val.seller._id}/${token}`)= val.name
@@ -71,6 +74,7 @@ html
                                         .divButtonsProduct
                                             input(type="submit", value="Add to the basket ") 
                                 hr
+                                - count++
             #divFooter
                 #divFooterLeft
                     a(href="#")
