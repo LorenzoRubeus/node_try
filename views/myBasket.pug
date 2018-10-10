@@ -6,6 +6,7 @@ html
         script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js")
         title= user.firstName + " " + user.lastName + "'s basket"
     body
+        - countPicture = 0
         #divContainer
             #divNav
                 #divHome
@@ -19,7 +20,9 @@ html
                     else
                         each val in basket.products
                             li
-                                form(action=`/api/basket/removeProductBasket/${val._id}/${token}/${count++}`, method="post")
+                                #divImg
+                                    img(src=`data:image/png;base64, ${picture[countPicture]}`, alt=`Picture of ${val.name}`)
+                                form(action=`/api/basket/removeProductBasket/${val._id}/${token}/${count++}`, method="post", class="formProduct")
                                     div.divSingleProduct
                                         a(href=`#`)= val.name
                                         label  by
@@ -31,6 +34,7 @@ html
                                     #divButtonsProduct
                                         input(type="submit", id="btnRemoveProductBasket", value="Remove from the basket")
                             hr
+                            - countPicture++
                 a(href=`/api/products/showProducts/${token}`) Go Back
             #divCheckout
                 #divNumberArticles

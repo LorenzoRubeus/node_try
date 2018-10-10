@@ -7,6 +7,7 @@ const { Basket } = require('../models/baskets');
 const { Order } = require('../models/orders');
 const { Category } = require('../models/categories');
 const { Product } = require('../models/products');
+const btoa = require('btoa');
 
 router.get('/:token', async (req, res) => {
     const token = req.params.token;
@@ -16,7 +17,9 @@ router.get('/:token', async (req, res) => {
     const user = await User.findById(decoded._id);
     const order = await Order.findOne({ customer: decoded._id });
 
-    res.render('myBasket', { user: user, basket: basket, count: 0, token: token });
+    const picture = getPictures(basket.products);    
+
+    res.render('myBasket', { user: user, basket: basket, picture: picture, count: 0, token: token });
 });
 
 router.post('/addBasket/:idProduct/:token', async (req, res) => {
@@ -42,8 +45,8 @@ router.post('/addBasket/:idProduct/:token', async (req, res) => {
     basket = await Basket.findOne({ customer: decoded._id }).populate('products', { name: 1, seller: 1, price: 1, description: 1 });
 
     products = await Product.find();
-
-    res.render('products', { user: user, products: products, categories: categories, token: token, basket: basket });
+    const pictures = getPictures(products);
+    res.render('products', { user: user, products: products, pictures: pictures, categories: categories, token: token, basket: basket });
 });
 
 router.post('/removeProductBasket/:idProduct/:token/:idProductRemove', async (req, res) => {
@@ -51,9 +54,7 @@ router.post('/removeProductBasket/:idProduct/:token/:idProductRemove', async (re
     const decoded = jwt.verify(token, config.get('jwtPrivateKey'));
     const idProduct = req.params.idProduct;
     const idProductRemove = req.params.idProductRemove;
-
     const user = await User.findById(decoded._id);
-
     let basket = await Basket.findOne({ customer: decoded._id }).populate('products', { name: 1, seller: 1, price: 1, description: 1 });
     basket.price = basket.price - basket.products[idProductRemove].price;
 
@@ -67,7 +68,18 @@ router.post('/removeProductBasket/:idProduct/:token/:idProductRemove', async (re
     basket.count--;
     basket = await basket.save();
 
-    res.render('myBasket', { user: user, count: 0, token: token, basket: basket });
+    const picture = getPictures(basket.products);
+
+    res.render('myBasket', { user: user, count: 0, token: token, picture: picture, basket: basket });
 }); 
+
+function getPictures(products) {
+    let pictures = [];
+    for(let i = 0; i < products.length; i++) {
+        pictures.push(btoa(products[i].img.data));
+    }
+    return pictures;
+}
+
 
 module.exports = router;

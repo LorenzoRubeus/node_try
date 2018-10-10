@@ -7,13 +7,22 @@ html, body {
     font-family: "Raleway";
 }
 
-#container {
+#divContainer {
     width: 100%;
     height: calc(100% - 60px);
     position: absolute;
     top: 0;
     background-color: transparent;
     left: 0;
+    min-width: 1080px;
+}
+
+.formProduct {
+    display: inline-block;
+    position: relative;
+    top: -3em;
+    left: 1em;
+    width: calc(90% - 200px);
 }
 
 #divNav {
@@ -91,6 +100,12 @@ html, body {
     color: rgb(255, 153, 0);
 }
 
+#divImg {
+    display: inline-block;
+    width: 200px;
+    height: 150px;
+}
+
 .pDescriptionProduct {
     margin-top: 10px;
     font-size: 15px;
@@ -100,7 +115,8 @@ html, body {
 .divPrice {
     display: inline-block;
     width: 10%;
-    margin-left: 5em;
+    margin-left: 3em;
+    margin-right: 2em;
 }
 
 .divPrice label {
