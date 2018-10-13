@@ -44,6 +44,23 @@ function errorAlertRegister(error) {
     }
 }
 
+function errorAlertAuthorized(error) {
+    switch(error) {
+        case "Invalid Jwt":
+            setTimeout(function () { swal("Something went wrong",
+                "Something went wrong, try to sign in again.",
+                "error");
+            }, 600);
+        break;
+        case "Unauthorized": 
+            setTimeout(function () { swal("Unauthorized",
+                "You need to be logged in to see that page",  
+                "error"); 
+        }, 600);
+        break;
+    }
+}
+
 function errorAlertAddress(error) {
     switch(error) {
         default: 

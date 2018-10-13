@@ -11,7 +11,10 @@
     </head>
     <body>
         if err
-            if redirect == "login"
+            if redirect == "Unauthorized"
+                script.
+                    errorAlertAuthorized("#{err}")
+            else if redirect == "login"
                 script.
                     errorAlertLogin("#{err}")
             else

@@ -2,6 +2,7 @@ const config = require('config');
 const jwt = require('jsonwebtoken');
 const express = require('express');
 const router = express.Router();
+const auth = require('../middleware/auth');
 const { User } = require('../models/users');
 const { Basket } = require('../models/baskets');
 const { Order } = require('../models/orders');
@@ -9,13 +10,17 @@ const { Category } = require('../models/categories');
 const { Product } = require('../models/products');
 const btoa = require('btoa');
 
-router.get('/:token', async (req, res) => {
+router.get('/:token', auth, async (req, res) => {
     const token = req.params.token;
     const decoded = jwt.verify(token, config.get('jwtPrivateKey'));
 
-    const basket = await Basket.findOne({ customer: decoded._id }).populate('products');
+    /*const basket = await Basket.findOne({ customer: decoded._id }).populate('products');
     const user = await User.findById(decoded._id);
-    const order = await Order.findOne({ customer: decoded._id });
+    const order = await Order.findOne({ customer: decoded._id });*/
+
+    const basket = await Basket.findOne({ customer: req.user._id }).populate('products');
+    const user = await User.findById(req.user._id);
+    const order = await Order.findOne({ customer: req.user._id });
 
     const picture = getPictures(basket.products);    
 

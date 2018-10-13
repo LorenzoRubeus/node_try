@@ -4,14 +4,16 @@ const { User, validateUser, validateUserLogin } = require('../models/users');
 const { Category } = require('../models/categories');
 const { Product } = require('../models/products');
 const { Basket } = require('../models/baskets');
-const { Picture } = require('../models/pictures');
 const _ = require('lodash');
 const bcrypt = require('bcrypt');
 const config = require('config');
 const btoa = require('btoa');
+const auth = require('../middleware/auth');
+const Cookies = require('cookies');
 
 router.post('/', async (req, res) => {
     let err = "";
+    var cookies = new Cookies(req, res);
 
     const { error } = validateUserLogin(req.body);
     if(error) { 
@@ -40,9 +42,10 @@ router.post('/', async (req, res) => {
         pictures.push(btoa(products[i].img.data));
     }
 
-    const token = user.generateAuthToken();
-
-    res.header('x-auth-token', token).render('products', {err: err, user: user, basket: basket, categories: categories, products:products, pictures: pictures, token: token}); // TODO Da modificare il send con render o qualcosa
+    token = user.generateAuthToken();
+    cookies.set('Token', token, { signed: false, maxAge: 14*24*60*60000 });  //Expires in 14 days calculated in ms
+    
+    res.render('products', {err: err, user: user, basket: basket, categories: categories, products:products, pictures: pictures, token: token}); // TODO Da modificare il send con render o qualcosa
 });
 
-exports.auth = router;
+module.exports = router;
