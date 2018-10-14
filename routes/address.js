@@ -1,19 +1,15 @@
 const config = require('config');
-const jwt = require('jsonwebtoken');
 const express = require('express');
 const router = express.Router();
 const { Address, validateAddress } = require('../models/addresses');
 const { User } = require('../models/users');
 const auth = require('../middleware/auth');
 
-router.get('/:token/:btnBack', auth, async (req, res) => {
-    const token = req.params.token;
-    const decoded = jwt.verify(token, config.get('jwtPrivateKey'));
-
+router.get('/:btnBack', auth, async (req, res) => {
     const btnBack = req.params.btnBack;
     const user = await User.findById(req.user._id).select({ password: 0, isAdmin: 0 });
     
-    res.render('profileAddAddress', { user: user, btnBack: btnBack, token: token });
+    res.render('profileAddAddress', { user: user, btnBack: btnBack });
 
 
 
@@ -21,22 +17,19 @@ router.get('/:token/:btnBack', auth, async (req, res) => {
     //res.render('index', { user: user, token: token, user: address.customer.firstName })
 });
 
-router.post('/:token', auth, async (req, res) => {
-    const token = req.params.token;
-    const decoded = jwt.verify(token, config.get('jwtPrivateKey'));
-
+router.post('/', auth, async (req, res) => {
     let err = "";
 
     const { error } = validateAddress(req.body);
     if(error) {
         err = error.details[0].context.label;
         //return res.status(400).send(error.details[0].message);
-        return res.render('profileAddAddress', { token: token, err: err });
+        return res.render('profileAddAddress', { err: err });
     }
 
     let address = new Address({
         customer: {
-            _id: decoded._id,
+            _id: req.user._id,
         },
         name: req.body.txtName,
         street: req.body.txtStreet,
@@ -52,20 +45,17 @@ router.post('/:token', auth, async (req, res) => {
 
     const addresses = await Address.find({ customer: req.user._id });
     
-    res.render('manageAddresses', { address: addresses, token: token })
+    res.render('manageAddresses', { address: addresses })
 });
 
 
-router.post('/deleteAddress/:token/:idProduct', auth, async (req, res) => {
-    const token = req.params.token;
-    const decoded = jwt.verify(token, config.get('jwtPrivateKey'));
+router.post('/deleteAddress/:idAddress', auth, async (req, res) => {
+    const idAddress = req.params.idAddress;
 
-    const idProduct = req.params.idProduct;
-
-    await Address.findByIdAndRemove(idProduct);
+    await Address.findByIdAndRemove(idAddress);
     const addresses = await Address.find({ customer: req.user._id });
 
-    res.render('manageAddresses', { address: addresses, token: token });
+    res.render('manageAddresses', { address: addresses });
 });
 
 

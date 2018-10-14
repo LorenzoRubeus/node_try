@@ -94,6 +94,13 @@ function errorAlertAddProductBasket(error) {
     }
 }
 
+function alertRegistered() {
+    setTimeout(function () { swal("User registered",
+        "You are now registered and now you can access all the website!",
+        "success");
+    }, 600);
+}
+
 function errorAlertAddPayment(error) {
     switch(error) {
         default: 

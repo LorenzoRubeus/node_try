@@ -11,33 +11,33 @@ html
                 h2 Your Account
                 div#divContainerTop
                     div#divTopLeft(class="divTop")
-                        a(href=`/api/myProfile/changeName/${token}`)
+                        a(href=`/api/myProfile/changeName`)
                             img(src="/img/profile.png" alt="Icon Name")
                             h3(class="headerLabelLink") Change name
                     div#divTopCenter(class="divTop")
-                        a(href=`/api/myProfile/changeEmail/${token}`)
+                        a(href=`/api/myProfile/changeEmail`)
                             img(src="/img/email.png" alt="Icon Email")
                             h3(class="headerLabelLink") Change email address
                     div#divTopRight(class="divTop")
-                        a(href=`/api/myProfile/changePassword/${token}`)
+                        a(href=`/api/myProfile/changePassword`)
                             img(src="/img/padlock.png" alt="Icon Password")
                             h3(class="headerLabelLink") Change password
                 div#divContainerBot
                     div#divBottomLeft(class="divBottom")
-                        a(href=`/api/orders/${token}`) 
+                        a(href=`/api/orders`) 
                             img(src="/img/order.png" alt="Icon Orders")
                             h3(class="headerLabelLink") Orders
                     div#divBottomCenter(class="divBottom")
-                        a(href=`/api/myProfile/changeAddress/${token}`)
+                        a(href=`/api/myProfile/changeAddress`)
                             img(src="/img/address.png" alt="Icon Address")
                             h3(class="headerLabelLink") Manage addresses
                     div#divBottomRight(class="divBottom")
-                        a(href=`/api/payments/managePayment/${token}`)
+                        a(href=`/api/payments/managePayment/`)
                             img(src="/img/cardsvg.png" alt="Icon Card")
                             h3(class="headerLabelLink") Manage payment methods
                     br
                 div#divBack
-                    a(href=`/api/products/showProducts/${token}`, id="btnBack") 
+                    a(href=`/api/products/showProducts`, id="btnBack") 
                         label Go back to the store
         #divFooter
                     #divFooterLeft
@@ -49,7 +49,3 @@ html
                     #divFooterRight
                         a(href="#")
                             h4 Contact Us
-            
-//- a(href=`/api/address/${token}/homeProfile`) 
-                            img(src="/img/address.png" alt="Icon Add Address")
-                            h3(class="headerLabelLink") Add an address

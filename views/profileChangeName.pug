@@ -13,9 +13,9 @@ html
                 errorAlertChangeName("#{err}")
         div#divContainer
             div#divForm
-                a(href=`/api/myProfile/${token}`)
+                a(href=`/api/myProfile`)
                     img(src="/img/back.png", class="btnCloseForm", alt="Go back")
-                form(action=`/api/myProfile/changeName/${token}`, method="post")
+                form(action=`/api/myProfile/changeName`, method="post")
                     div(class="divInput")
                         label First Name
                         input#txtFirstName(type="text", name="txtFirstName", class="txtChangeName", value=user.firstName)

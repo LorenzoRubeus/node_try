@@ -10,48 +10,52 @@ html
         link(rel="stylesheet", href="https://use.fontawesome.com/releases/v5.3.1/css/all.css")
     body 
         - count = 0
+        if reg
+            script. 
+                alertRegistered()
         if err
             script.
                 errorAlertAddProductBasket("#{err}")
         #container
-            #divSearchBar
-                form(action=`/api/products/search/${token}`, method="post")
-                    input#txtSearchBar(type="text", name="txtSearchBar", placeholder="Look for something")
-                    input(type="submit", value="Search")
             #divNav
+                #divSearchBar
+                    form(action=`/api/products/search`, method="post")
+                        center
+                            input#txtSearchBar(type="text", name="txtSearchBar", placeholder="Look for something")
+                            input(type="submit", value="Search")
                 #divBasket
-                    a(href=`/api/basket/${token}`)= basket.count + " Basket" 
+                    a(href=`/api/basket`)= basket.count + " Basket" 
                 #divProfile
-                    a(href=`/api/myProfile/${token}`) My Profile
+                    a(href=`/api/myProfile`) My Profile
             #divProducts
                 #listFilter
                     p Filters
-                    a(href=`/api/products/showProducts/${token}`, id="linkAllProducts") All Products
+                    a(href=`/api/products/showProducts`, id="linkAllProducts") All Products
                     label(id="typeFitler1") Name:
                     ul
                         li
-                            a(href=`/api/products/nameCrescente/${token}`, class="linkFilter") From A to Z
+                            a(href=`/api/products/nameCrescente`, class="linkFilter") From A to Z
                         li    
-                            a(href=`/api/products/nameDecrescente/${token}`, class="linkFilter") From Z to A
+                            a(href=`/api/products/nameDecrescente`, class="linkFilter") From Z to A
                     br
                     #divTypeFilter2
                         label Price:
                         ul
                             li
-                                a(href=`/api/products/priceCrescente/${token}`, class="linkFilter") Increasing
+                                a(href=`/api/products/priceCrescente`, class="linkFilter") Increasing
                             li
-                                a(href=`/api/products/priceDecrescente/${token}`, class="linkFilter") Decreasing
+                                a(href=`/api/products/priceDecrescente`, class="linkFilter") Decreasing
                     #divListCategoriesLeft
                         label Category:
                         ul(id='listCategory')
                             each val in categories
                                 li 
-                                    a(href=`/api/products/filterCategory/${val['_id']}/${token}`)= val['name']
+                                    a(href=`/api/products/filterCategory/${val['_id']}`)= val['name']
                 #divListCategories
                     ul(id='listCategory')
                         each val in categories
                             li 
-                                a(href=`/api/products/filterCategory/${val['_id']}/${token}`)= val['name']
+                                a(href=`/api/products/filterCategory/${val['_id']}`)= val['name']
                 #divListProducts
                     h2 Products
                     if products.length == 0
@@ -62,9 +66,9 @@ html
                                 li
                                     #divImg
                                         img(src=`data:image/png;base64, ${pictures[count]}`, alt=`Picture of ${val.name}`)
-                                    form(action=`/api/basket/addBasket/${val._id}/${token}`, method="post", class="formProduct")
+                                    form(action=`/api/basket/addBasket/${val._id}`, method="post", class="formProduct")
                                         div.divSingleProduct
-                                            a(href=`'/api/products/showProductsByName/${val.seller._id}/${token}`)= val.name
+                                            a(href=`'/api/products/showProductsByName/${val.seller._id}`)= val.name
                                             label  by
                                             a(href="", class="nameSeller")= " " + val.seller.firstName + " " + val.seller.lastName
                                             p(class="pDescriptionProduct")= val.description

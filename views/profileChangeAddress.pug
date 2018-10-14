@@ -13,9 +13,9 @@ html
                 errorAlertEditAddress("#{err}")
         div#divContainer
             div#divForm
-                a(href=`/api/myProfile/changeAddress/${token}`)
+                a(href=`/api/myProfile/changeAddress`)
                     img(src="/img/back.png", alt="Go Back", class="btnCloseForm")
-                form(action=`/api/myProfile/changeAddress/${token}/${address._id}`, method="post")
+                form(action=`/api/myProfile/changeAddress/${address._id}`, method="post")
                     div(class="divInput")
                         label Name
                         input#txtName(type="text", name="txtName", value=address.name)
@@ -38,5 +38,5 @@ html
                         input(type="submit", value="Change")
                         input(type="reset", value="Reset")
                 div(class="divInput")
-                    form(action=`/api/address/deleteAddress/${token}/${address._id}`, method="post")
+                    form(action=`/api/address/deleteAddress/${address._id}`, method="post")
                         input(type="submit", id="btnDelete", value="Delete")

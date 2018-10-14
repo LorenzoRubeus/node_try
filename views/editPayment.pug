@@ -13,9 +13,9 @@ html
                 errorAlertEditPayment("#{err}")
         #divContainer
             #divForm
-                a(href=`/api/payments/managePayment/${token}`)
+                a(href=`/api/payments/managePayment/`)
                     img(src="/img/back.png", id="btnGoBackEditPayment", alt="Go Back")
-                form(action=`/api/payments/updatePayment/${token}/${payment._id}`, method="post")
+                form(action=`/api/payments/updatePayment/${payment._id}`, method="post")
                     div(class="divInput")
                         label Card Owner
                         input#txtCardHolder(type="text", name="txtCardHolder", value=payment.cardHolder)
@@ -61,5 +61,5 @@ html
                         input(type="submit", id="btnChange", value="Confirm")
                         input(type="reset", id="btnReset", value="Reset")
                 div(class="divInput")
-                    form(action=`/api/payments/deletePayment/${token}/${payment._id}`, method="post")
+                    form(action=`/api/payments/deletePayment/${payment._id}`, method="post")
                         input(type="submit", id="btnDelete", value="Delete")

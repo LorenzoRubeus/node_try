@@ -30,6 +30,30 @@ html, body {
     padding-bottom: 0;
 }
 
+#divSearchBar {
+    display: inline-block;
+    width: 100%;
+}
+
+#divSearchBar input[type="text"] {
+    position: relative;
+    height: 35px;
+    width: 50%;
+    margin: 0 auto;
+}
+
+#divSearchBar input[type="submit"] {
+    background-color: rgb(49, 104, 221);
+    height: 68px;
+    position: relative;
+    top: -10px;
+    border: 1px solid white;
+    border-radius: 3px;
+    color: white;
+    cursor: pointer;
+    letter-spacing: 0.12em;
+}
+
 #divBasket {
     display: inline-block;
     position: relative;

@@ -6,7 +6,6 @@ const { User } = require('../models/users');
 const { Basket } = require('../models/baskets');
 const { Order } = require('../models/orders');
 const config = require('config');
-const jwt = require('jsonwebtoken');
 const btoa = require('btoa');
 const auth = require('../middleware/auth');
 
@@ -31,10 +30,7 @@ router.get('/showProducts/:token', async (req, res) => {
 });*/
 
 
-router.get('/filterCategory/:id/:token', auth, async (req, res) => {
-    const token = req.params.token;
-    const decoded = jwt.verify(token, config.get('jwtPrivateKey'));
-
+router.get('/filterCategory/:id', auth, async (req, res) => {
     const user = await User.findById(req.user._id).select({firstName: 1, lastName: 1});
     const basket = await Basket.findOne({ customer: req.user._id });
     const category = await Category.findById(req.params.id).select({ _id: 0 });
@@ -48,13 +44,10 @@ router.get('/filterCategory/:id/:token', auth, async (req, res) => {
             "seller.isAdmin": 0
         });
     const pictures = getPictures(products);
-    res.render('products', {user: user, basket: basket, pictures: pictures, products: products, categories: categories, token: token}); // TODO Da modificare il send con render o qualcosa
+    res.render('products', { user: user, basket: basket, pictures: pictures, products: products, categories: categories }); // TODO Da modificare il send con render o qualcosa
 });
 
-router.get('/showProducts/:token', auth, async (req, res) => {
-    const token = req.params.token;
-    const decoded = jwt.verify(token, config.get('jwtPrivateKey'));
-
+router.get('/showProducts', auth, async (req, res) => {
     const categories = await Category.find();
     const user = await User.findById(req.user._id);
     const basket = await Basket.findOne({ customer: req.user._id });
@@ -62,59 +55,53 @@ router.get('/showProducts/:token', auth, async (req, res) => {
     //const models = getModels(req.params.token);
     const products = await Product.find();
     const pictures = getPictures(products);
-    res.render('products', {user: user, basket: basket, pictures: pictures, categories: categories, products:products, token: token}); // TODO Da modificare il send con render o qualcosa
+    res.render('products', { user: user, basket: basket, pictures: pictures, categories: categories, products: products }); // TODO Da modificare il send con render o qualcosa
     //res.render('products', {user: models.user, basket: models.basket, categories: models.categories, products: products, token: req.params.token}); // TODO Da modificare il send con render o qualcosa
 });
 
-router.get('/nameCrescente/:token', auth, async (req, res) => {
+router.get('/nameCrescente', auth, async (req, res) => {
     const products = await getProductsFilter({ name: 1 });
-    //const models = await getModels(req.params.token);
     const models = await getModels(req.user);
     const pictures = getPictures(products);
-    res.render('products', {user: models.user, basket: models.basket, pictures: pictures, categories: models.categories, products: products, token: req.params.token});
+    res.render('products', { user: models.user, basket: models.basket, pictures: pictures, categories: models.categories, products: products });
 });
 
-router.get('/nameDecrescente/:token', auth, async (req, res) => {
+router.get('/nameDecrescente', auth, async (req, res) => {
     const products = await getProductsFilter({ name: -1 });
-    //const models = await getModels(req.params.token);
     const models = await getModels(req.user);
     const pictures = getPictures(products);
-    res.render('products', {user: models.user, basket: models.basket, pictures: pictures, categories: models.categories, products: products, token: req.params.token});
+    res.render('products', { user: models.user, basket: models.basket, pictures: pictures, categories: models.categories, products: products });
 });
 
-router.get('/priceCrescente/:token', auth, async (req, res) => {
+router.get('/priceCrescente', auth, async (req, res) => {
     const products = await getProductsFilter({ price: 1 });
-    //const models = await getModels(req.params.token);
     const models = await getModels(req.user);
     const pictures = getPictures(products);
-    res.render('products', {user: models.user, basket: models.basket, pictures: pictures, categories: models.categories, products: products, token: req.params.token});
+    res.render('products', { user: models.user, basket: models.basket, pictures: pictures, categories: models.categories, products: products });
 });
 
-router.get('/priceDecrescente/:token', auth, async (req, res) => {
+router.get('/priceDecrescente', auth, async (req, res) => {
     const products = await getProductsFilter({ price: -1 });
-    //const models = await getModels(req.params.token);
     const models = await getModels(req.user);
     const pictures = getPictures(products);
-    res.render('products', {user: models.user, basket: models.basket, pictures: pictures, categories: models.categories, products: products, token: req.params.token});
+    res.render('products', { user: models.user, basket: models.basket, pictures: pictures, categories: models.categories, products: products });
 });
 
-router.get('/showProductsByName/:sellerID/:token', auth, async (req, res) => {
+router.get('/showProductsByName/:sellerID', auth, async (req, res) => {
     const sellerID = req.params.sellerID;
     const products = await Product.find({ "seller._id": sellerID });
-    //const models = await getModels(req.params.token);
     const models = await getModels(req.user);
     const pictures = getPictures(products);
-    res.render('products', {user: models.user, basket: models.basket, pictures: pictures, categories: models.categories, products: products, token: req.params.token});
+    res.render('products', { user: models.user, basket: models.basket, pictures: pictures, categories: models.categories, products: products });
 });
 
 
-router.post('/search/:token', auth, async (req, res) => {
+router.post('/search', auth, async (req, res) => {
     const searchWord = req.body.txtSearchBar;
-    //const models = await getModels(req.params.token);
     const models = await getModels(req.user);
     const products = await Product.find({ $text: { $search: searchWord } });
     const pictures = getPictures(products);
-    res.render('products', {user: models.user, basket: models.basket, pictures: pictures, categories: models.categories, products: products, token: req.params.token});
+    res.render('products', { user: models.user, basket: models.basket, pictures: pictures, categories: models.categories, products: products });
 });
 
 

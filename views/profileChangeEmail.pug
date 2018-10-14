@@ -13,9 +13,9 @@ html
                 errorAlertChangeEmail("#{err}")
         #divContainer
             div#divForm
-                a(href=`/api/myProfile/${token}`) 
+                a(href=`/api/myProfile`) 
                     img(src="/img/back.png", alt="Go Back", class="btnCloseForm")
-                form(action=`/api/myProfile/changeEmail/${token}`, method="post")
+                form(action=`/api/myProfile/changeEmail`, method="post")
                     div(class="divInput")
                         label Old Email
                         input#txtOldEmail(type="email", name="txtOldEmail", value=user.email, disabled)

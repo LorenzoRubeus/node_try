@@ -12,11 +12,11 @@ html
                     while count < 3
                         div(class="divLinkTop")
                             if address.length > count 
-                                a(href=`/api/myProfile/changeAddress/pick/${token}/${address[count]._id}`)
+                                a(href=`/api/myProfile/changeAddress/pick/${address[count]._id}`)
                                     h5(class="headerLabelLink")= address[count].name
                                     h5(class="headerLabelLink")= address[count].street
                             else
-                                a(href=`/api/address/${token}/address`)
+                                a(href=`/api/address/address`)
                                     img(src="/img/add.png" alt="Icon add address")
                                     p(class="headerLabelLink") Add an address
                         - count++  
@@ -24,14 +24,14 @@ html
                     while count < 6
                         div(class="divLinkBottom")
                             if address.length > count 
-                                a(href=`/api/myProfile/changeAddress/pick/${token}/${address[count]._id}`)
+                                a(href=`/api/myProfile/changeAddress/pick/${address[count]._id}`)
                                     p(id="p1Bottom")= address[count].name
                                     p(id="p2Bottom")= address[count].street
                             else
-                                a(href=`/api/address/${token}/address`)
+                                a(href=`/api/address/address`)
                                     img(src="/img/add.png" alt="Icon add address")
                                     p(class="headerLabelLink") Add an address
                         - count++
                 div#divBack
-                    a(href=`/api/myProfile/${token}`, id="btnBack") 
+                    a(href=`/api/myProfile`, id="btnBack") 
                         label Go back to your profile

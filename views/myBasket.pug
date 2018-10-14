@@ -10,9 +10,9 @@ html
         #divContainer
             #divNav
                 #divHome
-                    a(href=`/api/myProfile/${token}`) Home
+                    a(href=`/api/products/showProducts/`) Home
                 #divProfile
-                    a(href=`/api/myProfile/${token}`) My Profile
+                    a(href=`/api/myProfile`) My Profile
             #divProducts
                 ul
                     if basket.products.length == 0
@@ -22,7 +22,7 @@ html
                             li
                                 #divImg
                                     img(src=`data:image/png;base64, ${picture[countPicture]}`, alt=`Picture of ${val.name}`)
-                                form(action=`/api/basket/removeProductBasket/${val._id}/${token}/${count++}`, method="post", class="formProduct")
+                                form(action=`/api/basket/removeProductBasket/${val._id}/${count++}`, method="post", class="formProduct")
                                     div.divSingleProduct
                                         a(href=`#`)= val.name
                                         label  by
@@ -35,13 +35,13 @@ html
                                         input(type="submit", id="btnRemoveProductBasket", value="Remove from the basket")
                             hr
                             - countPicture++
-                a(href=`/api/products/showProducts/${token}`) Go Back
+                a(href=`/api/products/showProducts/`) Go Back
             #divCheckout
                 #divNumberArticles
                     p= "Current number of articles: " 
                     label= basket.count
                 #divButtonBuy
-                    form(action=`/api/payments/pay/${token}`, method="post")
+                    form(action=`/api/payments/pay`, method="post")
                         p= "Price: EUR " + basket.price 
                         input(type="submit" value="Checkout") 
         #divFooter

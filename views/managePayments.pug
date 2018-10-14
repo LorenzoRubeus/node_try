@@ -20,7 +20,7 @@ html
                     while count < 3
                         div(class="divLinkTop")
                             if payments.length > count
-                                a(href=`/api/payments/editPayment/${token}/${payments[count]._id}`)
+                                a(href=`/api/payments/editPayment/${payments[count]._id}`)
                                     case payments[count].cardCircuit
                                         when "Visa"
                                             img(src="/img/visa.png" alt="Icon Visa")
@@ -34,7 +34,7 @@ html
                                             img(src="/img/cardsvg.png" alt="Icon card")
                                     h5(class="headerLabelLink")= payments[count].cardNumber
                             else
-                                a(href=`/api/payments/addPayment/${token}`)
+                                a(href=`/api/payments/addPayment`)
                                     img(src="/img/add.png", alt="Icon add payment")
                                     h5(class="headerLabelLink") Add payment
                         - count++
@@ -42,7 +42,7 @@ html
                     while count < 6
                         div(class="divLinkBottom")
                             if payments.length > count
-                                a(href=`/api/payments/editPayment/${token}/${payments[count]._id}`)
+                                a(href=`/api/payments/editPayment/${payments[count]._id}`)
                                     case payments[count].cardCircuit
                                         when "Visa"
                                             img(src="/img/visa.png" alt="Icon Visa")
@@ -56,10 +56,10 @@ html
                                             img(src="/img/cardsvg.png" alt="Icon card")
                                     h5(class="headerLabelLink")= payments[count].cardNumber
                             else
-                                a(href=`/api/payments/addPayment/${token}`)
+                                a(href=`/api/payments/addPayment`)
                                     img(src="/img/add.png", alt="Icon add payment")
                                     p(class="headerLabelLink") Add payment
                         - count++
                 div#divBack
-                    a(href=`/api/myProfile/${token}`, id="btnBack") 
+                    a(href=`/api/myProfile`, id="btnBack") 
                         label Go back to your profile

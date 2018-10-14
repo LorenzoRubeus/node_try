@@ -3,8 +3,12 @@ const router = express.Router();
 const { User, validateUser } = require('../models/users');
 const { Order } = require('../models/orders');
 const { Basket } = require('../models/baskets');
+const { Category } = require('../models/categories');
+const { Product } = require('../models/products');
 const _ = require('lodash');
 const bcrypt = require('bcrypt');
+const Cookies = require('cookies');
+const btoa = require('btoa');
 
 router.post('/', async (req, res) => {
     /*const user = new User(
@@ -57,8 +61,19 @@ router.post('/', async (req, res) => {
     await basket.save();
     basket = await Basket.findOne({ _id: basket._id }).populate('customer', { firstName: 1, lastName: 1, email: 1 });
 
+    const categories = await Category.find();
+    const products = await Product.find();
+    let pictures = [];
+    for(let i = 0; i < products.length; i++) {
+        pictures.push(btoa(products[i].img.data));
+    }
+
     const token = user.generateAuthToken();
-    res.header('x-auth-token', token).send('User Registered and logged'); // TODO Da modificare il send con render o qualcosa
+    const cookies = new Cookies(req, res);
+    cookies.set('Token', token, { signed: false, maxAge: 14*24*60*60000 });  //Expires in 14 days calculated in ms
+
+    res.render('products', { reg: "User Registered" , user: user, basket: basket, categories: categories, products: products, pictures: pictures }); // TODO Da modificare il send con render o qualcosa
+
 });
 
 

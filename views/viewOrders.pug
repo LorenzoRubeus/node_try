@@ -11,16 +11,17 @@ html
                 #divContainerTop
                     while count < 3
                         div(class="divLinkTop")
-                            a(href=`/api/myProfile/changeAddress/pick/${token}/${orders[count]._id}`)
+                            a(href=`/api/myProfile/changeAddress/pick/${orders[count]._id}`)
                                 h5(class="")= "Price EUR " + orders[count].price
-                                h5(class="")= orders[count].dateEstimated[0]                        - count++  
+                                h5(class="")= orders[count].dateEstimated[0] 
+                        - count++  
                 #divContainerBottom
                     while count < 6
                         div(class="divLinkBottom")
-                            a(href=`/api/myProfile/changeAddress/pick/${token}/${orders[count]._id}`)
+                            a(href=`/api/myProfile/changeAddress/pick/${orders[count]._id}`)
                                 p(id="p1Bottom")= orders[count].price
                                 p(id="p2Bottom")= orders[count].dateEstimated
                         - count++
                 div#divBack
-                    a(href=`/api/myProfile/${token}`, id="btnBack") 
+                    a(href=`/api/myProfile`, id="btnBack") 
                         label Go back to your profile

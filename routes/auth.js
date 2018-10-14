@@ -42,10 +42,10 @@ router.post('/', async (req, res) => {
         pictures.push(btoa(products[i].img.data));
     }
 
-    token = user.generateAuthToken();
+    let token = user.generateAuthToken();
     cookies.set('Token', token, { signed: false, maxAge: 14*24*60*60000 });  //Expires in 14 days calculated in ms
     
-    res.render('products', {err: err, user: user, basket: basket, categories: categories, products:products, pictures: pictures, token: token}); // TODO Da modificare il send con render o qualcosa
+    res.render('products', {err: err, user: user, basket: basket, categories: categories, products:products, pictures: pictures }); // TODO Da modificare il send con render o qualcosa
 });
 
 module.exports = router;

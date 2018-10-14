@@ -13,9 +13,9 @@ html
                 errorAlertAddPayment("#{err}")
         #divContainer
             #divForm
-                a(href=`/api/payments/managePayment/${token}`)
+                a(href=`/api/payments/managePayment`)
                     img(src="/img/back.png", id="btnGoBackEditPayment", alt="Go Back")
-                form(action=`/api/payments/addPayment/${token}`, method="post")       
+                form(action=`/api/payments/addPayment`, method="post")       
                     div(class="divInput")
                         label Card Owner
                         input#txtCardHolder(type="text", name="txtCardHolder")

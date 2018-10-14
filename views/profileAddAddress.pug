@@ -14,12 +14,12 @@ html
         #divContainer
             div#divForm
                 if btnBack == 'address'
-                    a(href=`/api/myProfile/changeAddress/${token}`)
+                    a(href=`/api/myProfile/changeAddress`)
                         img(src="/img/back.png", alt="Go Back", class="btnCloseForm")
                 else
-                    a(href=`/api/myProfile/${token}`)
+                    a(href=`/api/myProfile`)
                         img(src="/img/back.png", alt="Go Back", class="btnCloseForm")
-                form(action=`/api/address/${token}`, method="post")
+                form(action=`/api/address`, method="post")
                     div(class="divInput")
                         label Name
                         input#txtName(type="text", name="txtName", placeholder="Name and Surname")
