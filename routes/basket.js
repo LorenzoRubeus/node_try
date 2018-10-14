@@ -27,27 +27,28 @@ router.get('/:token', auth, async (req, res) => {
     res.render('myBasket', { user: user, basket: basket, picture: picture, count: 0, token: token });
 });
 
-router.post('/addBasket/:idProduct/:token', async (req, res) => {
+router.post('/addBasket/:idProduct/:token', auth, async (req, res) => {
     const token = req.params.token;
     const decoded = jwt.verify(token, config.get('jwtPrivateKey'));
+
     const idProduct = req.params.idProduct;
 
-    const user = await User.findById(decoded._id);
-    let basket = await Basket.findOne({ customer: decoded._id });
+    const user = await User.findById(req.user._id );
+    let basket = await Basket.findOne({ customer: req.user._id });
     const categories = await Category.find();
     let products = await Product.findById(idProduct);
     if(!products) {
         let err = "Product not available";
-        basket = await Basket.findOne({ customer: decoded._id }).populate('products', { name: 1, seller: 1, price: 1, description: 1 });
+        basket = await Basket.findOne({ customer: req.user._id }).populate('products', { name: 1, seller: 1, price: 1, description: 1 });
         products = await Product.find();
-        return res.render('products', { token: token, err: err, basket: basket, products: products, categories: categories,})
+        return res.render('products', { token: token, err: err, basket: basket, products: products, categories: categories })
     }
 
     basket.count++;
     basket.price += products.price;
     basket.products.push(idProduct);
     basket = await basket.save();   
-    basket = await Basket.findOne({ customer: decoded._id }).populate('products', { name: 1, seller: 1, price: 1, description: 1 });
+    basket = await Basket.findOne({ customer: req.user._id }).populate('products', { name: 1, seller: 1, price: 1, description: 1 });
 
     products = await Product.find();
     const pictures = getPictures(products);
@@ -57,6 +58,7 @@ router.post('/addBasket/:idProduct/:token', async (req, res) => {
 router.post('/removeProductBasket/:idProduct/:token/:idProductRemove', async (req, res) => {
     const token = req.params.token;
     const decoded = jwt.verify(token, config.get('jwtPrivateKey'));
+    
     const idProduct = req.params.idProduct;
     const idProductRemove = req.params.idProductRemove;
     const user = await User.findById(decoded._id);

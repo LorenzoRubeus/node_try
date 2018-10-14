@@ -7,38 +7,38 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const auth = require('../middleware/auth');
 
-router.get('/:token', async (req, res) => {
+router.get('/:token', auth, async (req, res) => {
     const token = req.params.token;
     const decoded = jwt.verify(token, config.get('jwtPrivateKey')); 
 
-    const user = await User.findById(decoded._id).select({ password: 0, isAdmin: 0});
+    const user = await User.findById(req.user._id).select({ password: 0, isAdmin: 0});
 
     res.render('profile', { user: user, token: token });
 });
 
-router.get('/changeName/:token', async (req, res) => {
+router.get('/changeName/:token', auth, async (req, res) => {
     const token = req.params.token;
     const decoded = jwt.verify(token, config.get('jwtPrivateKey'));
 
-    const user = await User.findById(decoded._id).select({ isAdmin: 0, password: 0 });
+    const user = await User.findById(req.user._id).select({ isAdmin: 0, password: 0 });
 
     res.render('profileChangeName', { user: user, token: token });
 });
 
-router.get('/changeEmail/:token', async (req, res) => {
+router.get('/changeEmail/:token', auth, async (req, res) => {
     const token = req.params.token;
     const decoded = jwt.verify(token, config.get('jwtPrivateKey'));
 
-    const user = await User.findById(decoded._id).select({ isAdmin: 0, password: 0})
+    const user = await User.findById(req.user._id).select({ isAdmin: 0, password: 0})
 
     res.render('profileChangeEmail', { user: user, token: token });
 });
 
-router.get('/changePassword/:token', async (req, res) => {
+router.get('/changePassword/:token', auth, async (req, res) => {
     const token = req.params.token;
     const decoded = jwt.verify(token, config.get('jwtPrivateKey'));
 
-    const user = await User.findById(decoded._id).select({ isAdmin: 0, password: 0});
+    const user = await User.findById(req.user._id).select({ isAdmin: 0, password: 0});
     res.render('profileChangePassword', { user: user, token: token });
 });
 
@@ -56,11 +56,11 @@ router.get('/changePassword/:token', async (req, res) => {
 });*/
 
 
-router.get('/changeAddress/:token', async (req, res) => {
+router.get('/changeAddress/:token', auth, async (req, res) => {
     const token = req.params.token;
     const decoded = jwt.verify(token, config.get('jwtPrivateKey'));
 
-    const address = await Address.find({ customer: decoded._id });
+    const address = await Address.find({ customer: req.user._id });
     //const address = await Address.findOne({ customer: decoded._id });
     const user = await User.findOne({ _id: address.customer }).select({ password: 0, isAdmin: 0});
 
@@ -69,7 +69,7 @@ router.get('/changeAddress/:token', async (req, res) => {
     res.render('manageAddresses', { address: address, user: user, token: token });
 });
 
-router.get('/changeAddress/pick/:token/:id', async (req, res) => {
+router.get('/changeAddress/pick/:token/:id', auth, async (req, res) => {
     const token = req.params.token;
     const id = req.params.id;
 
@@ -80,34 +80,36 @@ router.get('/changeAddress/pick/:token/:id', async (req, res) => {
 });
 
 
-router.post('/changeName/:token', async (req, res) => {
+router.post('/changeName/:token', auth, async (req, res) => {
     const token = req.params.token;
     const decoded = jwt.verify(token, config.get('jwtPrivateKey'));
+
     let err = "";
 
     if(typeof req.body.txtFirstName !== "string" || req.body.txtFirstName.length < 2) {
         err = "First name error";
-        let user = await User.findById(decoded._id).select({ isAdmin: 0, password: 0 });
+        let user = await User.findById(req.user._id).select({ isAdmin: 0, password: 0 });
         return res.render('profileChangeName', { err: err, token: token, user: user });
     }
 
     if(typeof req.body.txtLastName !== "string" || req.body.txtLastName.length < 2) {
         err = "Last name error";
-        let user = await User.findById(decoded._id).select({ isAdmin: 0, password: 0 });
+        let user = await User.findById(req.user._id).select({ isAdmin: 0, password: 0 });
         return res.render('profileChangeName', { err: err, token: token, user: user });
     }
 
-    const user = await User.findOneAndUpdate({ _id: decoded._id }, { firstName: req.body.txtFirstName, lastName: req.body.txtLastName }, { new: true });
+    const user = await User.findOneAndUpdate({ _id: req.user._id }, { firstName: req.body.txtFirstName, lastName: req.body.txtLastName }, { new: true });
     
     res.render('profile', { user: user, token: token });
 });
 
-router.post('/changeEmail/:token', async (req, res) => {
+router.post('/changeEmail/:token', auth, async (req, res) => {
     const token = req.params.token;
     const decoded = jwt.verify(token, config.get('jwtPrivateKey'));
+
     let err = "";
 
-    const user = await User.findById(decoded._id);
+    let user = await User.findById(req.user._id);
 
     if(req.body.txtNewEmail !== req.body.txtConfirmNewEmail) { 
         err = "Email no match";
@@ -131,9 +133,10 @@ router.post('/changeEmail/:token', async (req, res) => {
     res.render('profile', { user: user, token: token });
 });
 
-router.post('/changePassword/:token', async (req, res) => {
+router.post('/changePassword/:token', auth, async (req, res) => {
     const token = req.params.token;
     const decoded = jwt.verify(token, config.get('jwtPrivateKey'));
+
     const hash = await bcrypt.genSalt(10);
     let err = "";
 
@@ -146,7 +149,7 @@ router.post('/changePassword/:token', async (req, res) => {
         return res.render('profileChangePassword', { token: token, err: err });
     }
 
-    const user = await User.findById(decoded._id);    
+    let user = await User.findById(req.user._id);    
     const validPassword = await bcrypt.compare(req.body.txtOldPassword, user.password);
     if(!validPassword) {
         err = "Wrong current password";
@@ -158,9 +161,10 @@ router.post('/changePassword/:token', async (req, res) => {
     res.render('profile', { user: user, token: token});
 });
 
-router.post('/changeAddress/:token/:id', async (req, res) => {
+router.post('/changeAddress/:token/:id', auth, async (req, res) => {
     const token = req.params.token;
     const id = req.params.id;
+
     const decoded = jwt.verify(token, config.get('jwtPrivateKey'));
     let err = "";
 
@@ -171,7 +175,7 @@ router.post('/changeAddress/:token/:id', async (req, res) => {
         return res.render("profileChangeAddress", { token: token, err: err, address: address });
     }
 
-    let address = await Address.findOneAndUpdate({ customer: decoded._id, _id: id }, {
+    let address = await Address.findOneAndUpdate({ customer: req.user._id, _id: id }, {
         name: req.body.txtName,
         street: req.body.txtStreet,
         city: req.body.txtCity,
@@ -181,7 +185,7 @@ router.post('/changeAddress/:token/:id', async (req, res) => {
     
     //const user = await User.findById(address.customer);
     //res.render('profile', { user: user, token: token });
-    address = await Address.find({ customer: decoded._id });
+    address = await Address.find({ customer: req.user._id });
 
     res.render('manageAddresses', { address: address, token: token });
 });

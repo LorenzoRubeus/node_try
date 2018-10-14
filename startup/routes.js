@@ -11,12 +11,16 @@ const basket = require('../routes/basket');
 const payment = require('../routes/payment');
 const order = require('../routes/order');
 const picture = require('../routes/picture');
+const Cookies = require('cookies');
 
 const bodyParser = require('body-parser');
 
 module.exports = function(app) {
     /*app.use(function(req, res, next) {
-        res.header('x-auth-token', token);
+        let cookies = new Cookies(req, res);
+        if(cookies.get('Token', { signed: false })) {
+            res.render()
+        }
         next();
     });*/
     app.set('view engine', 'pug');

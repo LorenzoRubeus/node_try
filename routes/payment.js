@@ -5,17 +5,18 @@ const { Basket } = require('../models/baskets');
 const { Address } = require('../models/addresses');
 const { Product } = require('../models/products');
 const { Category } = require('../models/categories');
+const auth = require('../middleware/auth');
 const config = require('config');
 const moment = require('moment');
 const jwt = require('jsonwebtoken');
 const express = require('express');
 const router = express.Router();
 
-router.get('/managePayment/:token', async (req, res) => {
+router.get('/managePayment/:token', auth, async (req, res) => {
     const token = req.params.token;
     const decoded = jwt.verify(token, config.get('jwtPrivateKey'));
 
-    const payments = await Payment.find({ customer: decoded._id });
+    const payments = await Payment.find({ customer: req.user._id });
 
     res.render('managePayments', { token: token, payments: payments, count: 0 });
 });
