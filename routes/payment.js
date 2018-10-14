@@ -12,6 +12,7 @@ const jwt = require('jsonwebtoken');
 const express = require('express');
 const router = express.Router();
 
+
 router.get('/managePayment/:token', auth, async (req, res) => {
     const token = req.params.token;
     const decoded = jwt.verify(token, config.get('jwtPrivateKey'));
@@ -21,21 +22,22 @@ router.get('/managePayment/:token', auth, async (req, res) => {
     res.render('managePayments', { token: token, payments: payments, count: 0 });
 });
 
-router.get('/addPayment/:token', async (req, res) => {
-    const token = req.params.token;
-    
-    res.render('profileAddPayment', { token: token });
+router.get('/addPayment/:token', auth, async (req, res) => {
+    //const token = req.params.token;
+    //res.render('profileAddPayment', { token: token });
+    res.render('profileAddPayment');
 });
 
-router.get('/editPayment/:token/:id', async (req, res) => {
+router.get('/editPayment/:token/:id', auth, async (req, res) => {
     const token = req.params.token;
+
     const idPayment = req.params.id;
 
     const payment = await Payment.findById(idPayment);
     res.render('editPayment', { token: token, payment: payment });
 });
 
-router.post('/addPayment/:token', async (req, res) => {
+router.post('/addPayment/:token', auth, async (req, res) => {
     const token = req.params.token;
     const decoded = jwt.verify(token, config.get('jwtPrivateKey'));
 
@@ -46,7 +48,7 @@ router.post('/addPayment/:token', async (req, res) => {
     }
 
     let payment = new Payment({
-        customer: decoded._id,
+        customer: req.user._id,
         cardHolder: req.body.txtCardHolder,
         cardCircuit: req.body.selCardCircuit,
         cardNumber: req.body.txtCardNumber,
@@ -55,18 +57,19 @@ router.post('/addPayment/:token', async (req, res) => {
     });
     await payment.save();
 
-    const payments = await Payment.find({ customer: decoded._id });
+    const payments = await Payment.find({ customer: req.user._id });
     res.render('managePayments', { token: token, payments: payments });
 });
 
-router.post('/updatePayment/:token/:idPayment', async (req, res) => {
+router.post('/updatePayment/:token/:idPayment', auth, async (req, res) => {
     const token = req.params.token;
     const decoded = jwt.verify(token, config.get('jwtPrivateKey'));
+
     const idPayment = req.params.idPayment;
     let err = "";
 
     if(!await Payment.findById(idPayment)) {
-        let payment = await Payment.find({ customer: decoded._id });
+        let payment = await Payment.find({ customer: req.user._id });
         err = "Payment not found";
         return res.render('editPayment', { err: err, token: token, payment: payment });
     }
@@ -85,39 +88,40 @@ router.post('/updatePayment/:token/:idPayment', async (req, res) => {
         monthExpired: req.body.txtMonthExpired,
         yearExpired: req.body.txtYearExpired,
     }, { new: true });
-    const payments = await Payment.find({ customer: decoded._id }); 
+    const payments = await Payment.find({ customer: req.user._id }); 
 
     res.render('managePayments', { token: token, payments: payments });
 });
 
-router.post('/deletePayment/:token/:idPayment', async (req, res) => {
+router.post('/deletePayment/:token/:idPayment', auth, async (req, res) => {
     const token = req.params.token;
     const decoded = jwt.verify(token, config.get('jwtPrivateKey'));
+
     const idPayment = req.params.idPayment;
 
     if(!await Payment.findByIdAndRemove(idPayment)) {
         let err = "Payment not found";
-        let pays = await Payment.find({ customer: decoded._id });
+        let pays = await Payment.find({ customer: req.user._id });
         return res.render('managePayments', { token: token, err: err, payments: pays });
     }
     //await Payment.findByIdAndRemove(idPayment);
-    const payments = await Payment.find({ customer: decoded._id });
+    const payments = await Payment.find({ customer: req.user._id });
 
     res.render('managePayments', { token: token, payments: payments });
 });
 
-router.post('/confirmPayment/:token', async (req, res) => {
+router.post('/confirmPayment/:token', auth, async (req, res) => {
     const token = req.params.token;
     const decoded = jwt.verify(token, config.get('jwtPrivateKey'));
 
     const products = await Product.find();
     const categories = await Category.find();
 
-    let basket = await Basket.findOne({ customer: decoded._id }).populate('products');
-    const user = await User.findById(decoded._id);
+    let basket = await Basket.findOne({ customer: req.user._id }).populate('products');
+    const user = await User.findById(req.user._id);
 
     let order = new Order({
-        customer: decoded._id,
+        customer: req.user._id,
         address: req.body.rdbAddress,
         payment: req.body.rdbPayment,
         price: basket.price,
@@ -135,13 +139,13 @@ router.post('/confirmPayment/:token', async (req, res) => {
     res.render('products', { token: token, user: user, categories: categories, products: products, basket: basket, count: 0 })
 });
 
-router.post('/pay/:token', async (req, res) => {
+router.post('/pay/:token', auth, async (req, res) => {
     const token = req.params.token;
     const decoded = jwt.verify(token, config.get('jwtPrivateKey'));
 
-    const basket = await Basket.findOne({ customer: decoded._id }).populate('products');
-    const addresses = await Address.find({ customer: decoded._id });
-    const payments = await Payment.find({ customer: decoded._id });
+    const basket = await Basket.findOne({ customer: req.user._id }).populate('products');
+    const addresses = await Address.find({ customer: req.user._id });
+    const payments = await Payment.find({ customer: req.user._id });
 
 
     res.render('pay', {token: token, basket: basket, addresses: addresses, payments: payments});

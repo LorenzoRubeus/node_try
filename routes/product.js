@@ -8,6 +8,7 @@ const { Order } = require('../models/orders');
 const config = require('config');
 const jwt = require('jsonwebtoken');
 const btoa = require('btoa');
+const auth = require('../middleware/auth');
 
 /*router.get('/', async (req, res) => {
     const product = await Product.find().select(
@@ -30,12 +31,12 @@ router.get('/showProducts/:token', async (req, res) => {
 });*/
 
 
-router.get('/filterCategory/:id/:token', async (req, res) => {
+router.get('/filterCategory/:id/:token', auth, async (req, res) => {
     const token = req.params.token;
     const decoded = jwt.verify(token, config.get('jwtPrivateKey'));
 
-    const user = await User.findById(decoded._id).select({firstName: 1, lastName: 1});
-    const basket = await Basket.findOne({ customer: decoded._id });
+    const user = await User.findById(req.user._id).select({firstName: 1, lastName: 1});
+    const basket = await Basket.findOne({ customer: req.user._id });
     const category = await Category.findById(req.params.id).select({ _id: 0 });
     const categories = await Category.find();
     if(!category) { return res.status(404).send('Category not found.'); }
@@ -50,13 +51,13 @@ router.get('/filterCategory/:id/:token', async (req, res) => {
     res.render('products', {user: user, basket: basket, pictures: pictures, products: products, categories: categories, token: token}); // TODO Da modificare il send con render o qualcosa
 });
 
-router.get('/showProducts/:token', async (req, res) => {
+router.get('/showProducts/:token', auth, async (req, res) => {
     const token = req.params.token;
     const decoded = jwt.verify(token, config.get('jwtPrivateKey'));
 
     const categories = await Category.find();
-    const user = await User.findById(decoded._id);
-    const basket = await Basket.findOne({ customer: user._id });
+    const user = await User.findById(req.user._id);
+    const basket = await Basket.findOne({ customer: req.user._id });
 
     //const models = getModels(req.params.token);
     const products = await Product.find();
@@ -65,46 +66,52 @@ router.get('/showProducts/:token', async (req, res) => {
     //res.render('products', {user: models.user, basket: models.basket, categories: models.categories, products: products, token: req.params.token}); // TODO Da modificare il send con render o qualcosa
 });
 
-router.get('/nameCrescente/:token', async (req, res) => {
+router.get('/nameCrescente/:token', auth, async (req, res) => {
     const products = await getProductsFilter({ name: 1 });
-    const models = await getModels(req.params.token);
+    //const models = await getModels(req.params.token);
+    const models = await getModels(req.user);
     const pictures = getPictures(products);
     res.render('products', {user: models.user, basket: models.basket, pictures: pictures, categories: models.categories, products: products, token: req.params.token});
 });
 
-router.get('/nameDecrescente/:token', async (req, res) => {
+router.get('/nameDecrescente/:token', auth, async (req, res) => {
     const products = await getProductsFilter({ name: -1 });
-    const models = await getModels(req.params.token);
+    //const models = await getModels(req.params.token);
+    const models = await getModels(req.user);
     const pictures = getPictures(products);
     res.render('products', {user: models.user, basket: models.basket, pictures: pictures, categories: models.categories, products: products, token: req.params.token});
 });
 
-router.get('/priceCrescente/:token', async (req, res) => {
+router.get('/priceCrescente/:token', auth, async (req, res) => {
     const products = await getProductsFilter({ price: 1 });
-    const models = await getModels(req.params.token);
+    //const models = await getModels(req.params.token);
+    const models = await getModels(req.user);
     const pictures = getPictures(products);
     res.render('products', {user: models.user, basket: models.basket, pictures: pictures, categories: models.categories, products: products, token: req.params.token});
 });
 
-router.get('/priceDecrescente/:token', async (req, res) => {
+router.get('/priceDecrescente/:token', auth, async (req, res) => {
     const products = await getProductsFilter({ price: -1 });
-    const models = await getModels(req.params.token);
+    //const models = await getModels(req.params.token);
+    const models = await getModels(req.user);
     const pictures = getPictures(products);
     res.render('products', {user: models.user, basket: models.basket, pictures: pictures, categories: models.categories, products: products, token: req.params.token});
 });
 
-router.get('/showProductsByName/:sellerID/:token', async (req, res) => {
+router.get('/showProductsByName/:sellerID/:token', auth, async (req, res) => {
     const sellerID = req.params.sellerID;
     const products = await Product.find({ "seller._id": sellerID });
-    const models = await getModels(req.params.token);
+    //const models = await getModels(req.params.token);
+    const models = await getModels(req.user);
     const pictures = getPictures(products);
     res.render('products', {user: models.user, basket: models.basket, pictures: pictures, categories: models.categories, products: products, token: req.params.token});
 });
 
 
-router.post('/search/:token', async (req, res) => {
+router.post('/search/:token', auth, async (req, res) => {
     const searchWord = req.body.txtSearchBar;
-    const models = await getModels(req.params.token);
+    //const models = await getModels(req.params.token);
+    const models = await getModels(req.user);
     const products = await Product.find({ $text: { $search: searchWord } });
     const pictures = getPictures(products);
     res.render('products', {user: models.user, basket: models.basket, pictures: pictures, categories: models.categories, products: products, token: req.params.token});
@@ -147,10 +154,23 @@ async function getProductsFilter(filter) {
         }).sort(filter);
 }  
 
-async function getModels(token) {
+/*async function getModels(token) {
     const decoded = jwt.verify(token, config.get('jwtPrivateKey'));
     const user = await User.findById(decoded._id).select({firstName: 1, lastName: 1});
     const basket = await Basket.findOne({customer: decoded._id});
+    const categories = await Category.find();
+    
+    var obj = {
+        user: user,
+        basket: basket,
+        categories: categories
+    }
+    return obj;
+}*/
+
+async function getModels(userp) {
+    const user = userp;
+    const basket = await Basket.findOne({customer: user._id});
     const categories = await Category.find();
     
     var obj = {
