@@ -21,12 +21,16 @@ html
                 #divSearchBar
                     form(action=`/api/products/search`, method="post")
                         center
+                            button(id="btnCategoriesSearch")
+                                label Categories
                             input#txtSearchBar(type="text", name="txtSearchBar", placeholder="Look for something")
-                            input(type="submit", value="Search")
+                            button(type="submit")
+                                i(class="fas fa-search")
                 #divBasket
                     a(href=`/api/basket`)= basket.count + " Basket" 
                 #divProfile
-                    a(href=`/api/myProfile`) My Profile
+                    a(href=`/api/myProfile`) 
+                        label My Profile
             #divProducts
                 #listFilter
                     p Filters
