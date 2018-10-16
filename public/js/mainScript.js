@@ -34,7 +34,7 @@ $(document).ready(function() {
                 contentType: 'application/json',
                 url: 'http://localhost:3000/api/myProfile/deleteAccount',						
                 success: function() {
-                    console.log('success');
+                    window.location.replace('http://localhost/:3000/');
                 }
             });
           });
