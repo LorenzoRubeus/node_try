@@ -47,16 +47,17 @@ html, body {
 
 #divSearchBar {
     display: inline-block;
-    width: 100%;
+    width: 70%;
     position: relative;
     top: 50%;
-    transform: translateY(-50%);
+    left: 50%;
+    transform: translateY(-50%) translateX(-50%);
 }
 
 #divSearchBar input[type="text"] {
     position: relative;
     height: 35px;
-    width: 50%;
+    width: 60%;
     margin: 0 auto;
     padding-left: 2em;
     border: 1px solid white;
@@ -93,6 +94,8 @@ html, body {
     border: 1px solid white;
     width: 100px;
     padding-bottom: 0;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 #divProfile {
@@ -103,6 +106,8 @@ html, body {
     height: 40px;
     display: inline-block;  
     float: right;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 #divProfile a {

@@ -13,19 +13,24 @@ const order = require('../routes/order');
 const picture = require('../routes/picture');
 const Cookies = require('cookies');
 
+
+const { User } = require('../models/users');
+const { Category } = require('../models/categories');
+const { Product } = require('../models/products');
+const { Basket } = require('../models/baskets');
+const jwt = require('jsonwebtoken');
+const config = require('config');
+const btoa = require('btoa');
+
+
+
 const bodyParser = require('body-parser');
 
 module.exports = function(app) {
-    /*app.use(function(req, res, next) {
-        let cookies = new Cookies(req, res);
-        if(cookies.get('Token', { signed: false })) {
-            res.render()
-        }
-        next();
-    });*/
     app.set('view engine', 'pug');
     app.use(express.static('public'));
     app.use(bodyParser.urlencoded({ extended: true }));
+    app.use(bodyParser.json())
     app.use(express.json());
     app.use(passport.initialize());
     app.use('/', home);

@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { User, validateUser, validateUserLogin } = require('../models/users');
+const { User, validateUserLogin } = require('../models/users');
 const { Category } = require('../models/categories');
 const { Product } = require('../models/products');
 const { Basket } = require('../models/baskets');
@@ -8,7 +8,6 @@ const _ = require('lodash');
 const bcrypt = require('bcrypt');
 const config = require('config');
 const btoa = require('btoa');
-const auth = require('../middleware/auth');
 const Cookies = require('cookies');
 
 router.post('/', async (req, res) => {
@@ -37,7 +36,6 @@ router.post('/', async (req, res) => {
     const products = await Product.find();
     const basket = await Basket.findOne({ customer: user._id });
     let pictures = [];
-
     for(let i = 0; i < products.length; i++) {
         pictures.push(btoa(products[i].img.data));
     }

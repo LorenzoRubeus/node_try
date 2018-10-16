@@ -2,9 +2,13 @@ const express = require('express');
 const router = express.Router();
 const { User } = require('../models/users');
 const { Address, validateAddress } = require('../models/addresses');
+const { Order } = require('../models/orders');
+const { Basket } = require('../models/baskets');
 const config = require('config');
 const bcrypt = require('bcrypt');
 const auth = require('../middleware/auth');
+const Cookies = require('cookies');
+const jwt = require('jsonwebtoken');
 
 router.get('/', auth, async (req, res) => {
     const user = await User.findById(req.user._id).select({ password: 0, isAdmin: 0});
@@ -159,5 +163,13 @@ router.post('/changeAddress/:id', auth, async (req, res) => {
     res.render('manageAddresses', { address: address });
 });
 
+router.post('/deleteAccount', auth, async (req, res) => {
+    let cookies = new Cookies(req, res);
+    const token = cookies.get('Token', { signed: false });
+    const decoded = jwt.verify(token, config.get('jwtPrivateKey'));
+
+    cookies.set('Token');
+
+});
 
 module.exports = router;

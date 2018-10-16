@@ -27,7 +27,9 @@ html
                             button(type="submit")
                                 i(class="fas fa-search")
                 #divBasket
-                    a(href=`/api/basket`)= basket.count + " Basket" 
+                    a(href=`/api/basket`)
+                        label= basket.count 
+                        i(class="fas fa-shopping-basket")
                 #divProfile
                     a(href=`/api/myProfile`) 
                         label My Profile
