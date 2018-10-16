@@ -33,6 +33,9 @@ html
                                         default 
                                             img(src="/img/cardsvg.png" alt="Icon card")
                                     h5(class="headerLabelLink")= payments[count].cardNumber
+                                form(class="formImgDeleteTop", method="post", action=`/api/payments/deletePayment/${payments[count]._id}`)
+                                    button(type="submit", id="btnDelete")
+                                        img(src="/img/deletePaymentAddress.png", alt="Delete Payment")
                             else
                                 a(href=`/api/payments/addPayment`)
                                     img(src="/img/add.png", alt="Icon add payment")
@@ -55,6 +58,9 @@ html
                                         default 
                                             img(src="/img/cardsvg.png" alt="Icon card")
                                     h5(class="headerLabelLink")= payments[count].cardNumber
+                                form(class="formImgDeleteBottom", method="post", action=`/api/payments/deletePayment/${payments[count]._id}`)
+                                    button(type="submit", id="btnDelete")
+                                        img(src="/img/deletePaymentAddress.png", alt="Delete Payment")
                             else
                                 a(href=`/api/payments/addPayment`)
                                     img(src="/img/add.png", alt="Icon add payment")

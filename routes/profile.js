@@ -169,7 +169,10 @@ router.post('/deleteAccount', auth, async (req, res) => {
     const decoded = jwt.verify(token, config.get('jwtPrivateKey'));
 
     cookies.set('Token');
-
+    await Basket.findOneAndRemove({ customer: decoded._id });
+    await Order.findOneAndRemove({ customer: decoded._id });
+    await User.findByIdAndRemove(decoded._id);
+    res.send('Success');
 });
 
 module.exports = router;

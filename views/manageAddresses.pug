@@ -15,6 +15,9 @@ html
                                 a(href=`/api/myProfile/changeAddress/pick/${address[count]._id}`)
                                     h5(class="headerLabelLink")= address[count].name
                                     h5(class="headerLabelLink")= address[count].street
+                                form(class="formImgDeleteTop", method="post", action=`/api/address/deleteAddress/${address[count]._id}`)
+                                    button(type="submit", id="btnDelete")
+                                        img(src="/img/deletePaymentAddress.png", alt="Delete Address")
                             else
                                 a(href=`/api/address/address`)
                                     img(src="/img/add.png" alt="Icon add address")
@@ -27,6 +30,9 @@ html
                                 a(href=`/api/myProfile/changeAddress/pick/${address[count]._id}`)
                                     p(id="p1Bottom")= address[count].name
                                     p(id="p2Bottom")= address[count].street
+                                form(class="formImgDeleteBottom", method="post", action=`/api/address/deleteAddress/${address[count]._id}`)
+                                    button(type="submit", id="btnDelete")
+                                        img(src="/img/deletePaymentAddress.png", alt="Delete Address")
                             else
                                 a(href=`/api/address/address`)
                                     img(src="/img/add.png" alt="Icon add address")

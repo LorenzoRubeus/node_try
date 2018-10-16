@@ -189,6 +189,33 @@ input[type="submit"]:hover, #btnChange:hover, input[type="submit"]:focus, #btnCh
     cursor: pointer;
 }
 
+.formImgDeleteTop, .formImgDeleteBottom {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: 75px;
+    margin-left: -28px;
+}
+
+.formImgDeleteBottom {
+    top: 240px !important;
+}
+
+.formImgDeleteTop img, .formImgDeleteBottom img {
+    margin-top: 0 !important;
+    margin-left: -4px !important;
+}
+
+.formImgDeleteTop button[type="submit"], .formImgDeleteBottom button[type="submit"] {
+    width: 20px !important;
+    height: 20px !important;
+    position: relative;
+    top: 10px;
+    border: none !important;
+}
+
+
 #divAddresses .divLinkTop:nth-child(2), #divAddresses .divLinkTop:nth-child(3) {
     margin-left: 3em;
 }

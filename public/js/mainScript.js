@@ -32,9 +32,9 @@ $(document).ready(function() {
             $.ajax({
                 type: 'POST',
                 contentType: 'application/json',
-                url: 'http://localhost:3000/api/myProfile/deleteAccount',						
+                url: 'http://localhost:3000/api/myProfile/deleteAccount',	//TODO Change URL					
                 success: function() {
-                    console.log('success');
+                    window.location.replace("http://localhost:3000");   //TODO Change URL
                 }
             });
           });
