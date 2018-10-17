@@ -61,6 +61,13 @@ function errorAlertAuthorized(error) {
     }
 }
 
+function alertLogout() {
+    setTimeout(function () { swal("Logged out",
+        "You are now logged out! Sign in if you want to use the website again",
+        "success")
+    }, 600);
+}
+
 function errorAlertAddress(error) {
     switch(error) {
         default: 
@@ -201,3 +208,4 @@ function errorAlertChangePassword(error) {
             }, 600);
     }
 }
+

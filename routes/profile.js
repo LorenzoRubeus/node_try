@@ -64,6 +64,13 @@ router.get('/changeAddress/pick/:id', auth, async (req, res) => {
     res.render('profileChangeAddress', { address: address });
 });
 
+router.get('/logout', auth, async (req, res) => {
+    const cookies = new Cookies(req, res);
+    cookies.set('Token');
+    res.render('index', { redirect: "logout", err: "logout" });
+    //res.send("Logged Out");
+});
+
 
 router.post('/changeName', auth, async (req, res) => {
     let err = "";
@@ -163,7 +170,7 @@ router.post('/changeAddress/:id', auth, async (req, res) => {
     res.render('manageAddresses', { address: address });
 });
 
-router.post('/deleteAccount', auth, async (req, res) => {
+/*router.post('/deleteAccount', auth, async (req, res) => {
     let cookies = new Cookies(req, res);
     const token = cookies.get('Token', { signed: false });
     const decoded = jwt.verify(token, config.get('jwtPrivateKey'));
@@ -173,6 +180,7 @@ router.post('/deleteAccount', auth, async (req, res) => {
     await Order.findOneAndRemove({ customer: decoded._id });
     await User.findByIdAndRemove(decoded._id);
     res.send('Success');
-});
+});*/
+
 
 module.exports = router;

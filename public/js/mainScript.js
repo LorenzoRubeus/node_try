@@ -39,4 +39,19 @@ $(document).ready(function() {
             });
           });
     });
+
+    /*$("#btnLogout").click( () => {
+        $.ajax({
+            type: 'POST',
+            contentType: 'application/json',
+            url: 'http://localhost:3000/api/myProfile/logout',
+            success: function() {
+                window.location.replace("http://localhost:3000");
+                setTimeout(function () { swal("Logged out",
+                    "You are now logged out! Sign in if you want to use the website again",
+                    "success")
+                }, 600);
+            }
+        })
+    });*/
 });

@@ -15,6 +15,9 @@
             if redirect == "Unauthorized"
                 script.
                     errorAlertAuthorized("#{err}")
+            else if redirect == "logout"
+                script. 
+                    alertLogout()
             else if redirect == "login"
                 script.
                     errorAlertLogin("#{err}")
