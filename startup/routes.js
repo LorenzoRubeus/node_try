@@ -11,18 +11,6 @@ const basket = require('../routes/basket');
 const payment = require('../routes/payment');
 const order = require('../routes/order');
 const picture = require('../routes/picture');
-const Cookies = require('cookies');
-
-
-const { User } = require('../models/users');
-const { Category } = require('../models/categories');
-const { Product } = require('../models/products');
-const { Basket } = require('../models/baskets');
-const jwt = require('jsonwebtoken');
-const config = require('config');
-const btoa = require('btoa');
-
-
 
 const bodyParser = require('body-parser');
 

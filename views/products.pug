@@ -74,9 +74,9 @@ html
                                         img(src=`data:image/png;base64, ${pictures[count]}`, alt=`Picture of ${val.name}`)
                                     form(action=`/api/basket/addBasket/${val._id}`, method="post", class="formProduct")
                                         div.divSingleProduct
-                                            a(href=`'/api/products/showProductsByName/${val.seller._id}`)= val.name
+                                            a(href="#")= val.name
                                             label  by
-                                            a(href="", class="nameSeller")= " " + val.seller.firstName + " " + val.seller.lastName
+                                            a(href=`/api/products/showProductsByName/${val.seller._id}`, class="nameSeller")= " " + val.seller.firstName + " " + val.seller.lastName
                                             p(class="pDescriptionProduct")= val.description
                                         div.divPrice
                                             label= "Price"

@@ -67,7 +67,12 @@ router.get('/changeAddress/pick/:id', auth, async (req, res) => {
 router.get('/logout', auth, async (req, res) => {
     const cookies = new Cookies(req, res);
     cookies.set('Token');
-    res.render('index', { redirect: "logout", err: "logout" });
+    req.session.localVar = {
+        redirect: "logout",
+        err: "logout"
+    }
+    res.redirect('/');
+    //res.render('index', { redirect: "logout", err: "logout" });
     //res.send("Logged Out");
 });
 
