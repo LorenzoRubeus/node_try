@@ -11,6 +11,7 @@ const basket = require('../routes/basket');
 const payment = require('../routes/payment');
 const order = require('../routes/order');
 const picture = require('../routes/picture');
+const session = require('express-session');
 
 const bodyParser = require('body-parser');
 
@@ -21,6 +22,7 @@ module.exports = function(app) {
     app.use(bodyParser.json())
     app.use(express.json());
     app.use(passport.initialize());
+    app.use(session({secret: 'SECRET'}));
     app.use('/', home);
     app.use('/api/registerUser', register);
     app.use('/api/loginUser', auth);

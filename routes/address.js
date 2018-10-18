@@ -51,11 +51,14 @@ router.post('/', auth, async (req, res) => {
 
 router.post('/deleteAddress/:idAddress', auth, async (req, res) => {
     const idAddress = req.params.idAddress;
-
     await Address.findByIdAndRemove(idAddress);
     const addresses = await Address.find({ customer: req.user._id });
+    req.session.localVar = {
+        address: addresses
+    }
 
-    res.render('manageAddresses', { address: addresses });
+    res.redirect('/api/myProfile/changeAddress');
+    //res.render('manageAddresses', { address: addresses });
 });
 
 

@@ -10,14 +10,15 @@ const { Product } = require('../models/products');
 const btoa = require('btoa');
 
 router.get('/', auth, async (req, res) => {
-    /*const basket = await Basket.findOne({ customer: decoded._id }).populate('products');
-    const user = await User.findById(decoded._id);
-    const order = await Order.findOne({ customer: decoded._id });*/
+    if(req.session.localVar) {
+        let localVar = req.session.localVar;
+        req.session.destroy();
+        return res.render('myBasket', { user: localVar.user, basket: localVar.basket, picture: localVar.picture, count: localVar.count});
+    }
 
     const basket = await Basket.findOne({ customer: req.user._id }).populate('products');
     const user = await User.findById(req.user._id);
     const order = await Order.findOne({ customer: req.user._id });
-
     const picture = getPictures(basket.products);    
 
     res.render('myBasket', { user: user, basket: basket, picture: picture, count: 0 });
@@ -45,14 +46,23 @@ router.post('/addBasket/:idProduct', auth, async (req, res) => {
 
     products = await Product.find();
     const pictures = getPictures(products);
-    res.render('products', { user: user, products: products, pictures: pictures, categories: categories, basket: basket });
+
+    req.session.localVar = {
+        user: user,
+        basket: basket,
+        pictures: pictures,
+        categories: categories,
+        basket: basket,
+        products: products
+    }
+    res.redirect('/api/products/showProducts');
 });
 
 router.post('/removeProductBasket/:idProduct/:idProductRemove', auth, async (req, res) => {
     const idProduct = req.params.idProduct;
     const idProductRemove = req.params.idProductRemove;
     const user = await User.findById(req.user._id);
-    let basket = await Basket.findOne({ customer: req.user._id }).populate('products', { name: 1, seller: 1, price: 1, description: 1 });
+    let basket = await Basket.findOne({ customer: req.user._id }).populate('products', { name: 1, seller: 1, price: 1, description: 1, img: 1 });
     basket.price = basket.price - basket.products[idProductRemove].price;
 
     if(basket.products.length == 1) { 
@@ -64,10 +74,15 @@ router.post('/removeProductBasket/:idProduct/:idProductRemove', auth, async (req
 
     basket.count--;
     basket = await basket.save();
-
     const picture = getPictures(basket.products);
+    req.session.localVar = {
+        user: user,
+        picture: picture,
+        basket: basket,
+        count: 0
+    }
 
-    res.render('myBasket', { user: user, count: 0, picture: picture, basket: basket });
+    res.redirect('/api/basket');
 }); 
 
 function getPictures(products) {
@@ -77,6 +92,5 @@ function getPictures(products) {
     }
     return pictures;
 }
-
 
 module.exports = router;

@@ -11,11 +11,17 @@ const jwt = require('jsonwebtoken');
 const config = require('config');
 const btoa = require('btoa');
 
+
 router.get('/', async (req, res) => {
     let cookies = new Cookies(req, res);
     if(cookies.get('Token', { signed: false })) {
         const obj = await getModels(cookies);
-        res.render('products', { user: obj.user, basket: obj.basket, categories: obj.categories, products: obj.products, pictures: obj.pictures });
+        return res.render('products', { user: obj.user, basket: obj.basket, categories: obj.categories, products: obj.products, pictures: obj.pictures });
+    }
+    if(req.session.localVar) {
+        let localVar = req.session.localVar;
+        req.session.destroy();
+        return res.render('index', { redirect: localVar.redirect, err: localVar.err });
     }
     res.render('index');
 });

@@ -48,14 +48,19 @@ router.get('/filterCategory/:id', auth, async (req, res) => {
 });
 
 router.get('/showProducts', auth, async (req, res) => {
+    if(req.session.localVar) {
+        let localVar = req.session.localVar;
+        req.session.destroy();
+        return res.render('products', { user: localVar.user, basket: localVar.basket, pictures: localVar.pictures, categories: localVar.categories, products: localVar.products }); // TODO Da modificare il send con render o qualcosa
+    }
+
     const categories = await Category.find();
     const user = await User.findById(req.user._id);
     const basket = await Basket.findOne({ customer: req.user._id });
-
-    //const models = getModels(req.params.token);
     const products = await Product.find();
     const pictures = getPictures(products);
     res.render('products', { user: user, basket: basket, pictures: pictures, categories: categories, products: products }); // TODO Da modificare il send con render o qualcosa
+    //const models = getModels(req.params.token);
     //res.render('products', {user: models.user, basket: models.basket, categories: models.categories, products: products, token: req.params.token}); // TODO Da modificare il send con render o qualcosa
 });
 

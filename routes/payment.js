@@ -13,12 +13,17 @@ const router = express.Router();
 
 
 router.get('/managePayment', auth, async (req, res) => {
-    const payments = await Payment.find({ customer: req.user._id });
+    if(req.session.localVar) {
+        let localVar = req.session.localVar;
+        req.session.destroy();
+        return res.render('managePayments', { payments: localVar.payments, count: 0 });
+    }
 
+    const payments = await Payment.find({ customer: req.user._id });
     res.render('managePayments', { payments: payments, count: 0 });
 });
 
-router.get('/addPayment/', auth, async (req, res) => {
+router.get('/addPayment', auth, async (req, res) => {
     res.render('profileAddPayment');
 });
 
@@ -28,6 +33,7 @@ router.get('/editPayment/:id', auth, async (req, res) => {
     const payment = await Payment.findById(idPayment);
     res.render('editPayment', {payment: payment });
 });
+
 
 router.post('/addPayment', auth, async (req, res) => {
     const { error } = validatePayment(req.body);
@@ -75,8 +81,11 @@ router.post('/updatePayment/:idPayment', auth, async (req, res) => {
         yearExpired: req.body.txtYearExpired,
     }, { new: true });
     const payments = await Payment.find({ customer: req.user._id }); 
+    req.session.localVar = {
+        payments: payments
+    }
 
-    res.render('managePayments', { payments: payments });
+    res.redirect('/api/payments/managePayment');
 });
 
 router.post('/deletePayment/:idPayment', auth, async (req, res) => {
@@ -87,13 +96,15 @@ router.post('/deletePayment/:idPayment', auth, async (req, res) => {
         let pays = await Payment.find({ customer: req.user._id });
         return res.render('managePayments', { err: err, payments: pays });
     }
-    //await Payment.findByIdAndRemove(idPayment);
     const payments = await Payment.find({ customer: req.user._id });
-
-    res.render('managePayments', { payments: payments });
+    req.session.localVar = {
+        payments: payments
+    }
+    
+    res.redirect('/api/payments/managePayment');
 });
 
-router.post('/confirmPayment/', auth, async (req, res) => {
+router.post('/confirmPayment', auth, async (req, res) => {
     const products = await Product.find();
     const categories = await Category.find();
 
