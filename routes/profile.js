@@ -17,20 +17,18 @@ router.get('/', auth, async (req, res) => {
         req.session.destroy();
         return res.render('profile', { user: localVar.user });
     }
-
     const user = await User.findById(req.user._id).select({ password: 0, isAdmin: 0});
+    
     res.render('profile', { user: user });
 });
 
 router.get('/changeName', auth, async (req, res) => {
     const user = await User.findById(req.user._id).select({ isAdmin: 0, password: 0 });
-
     res.render('profileChangeName', { user: user });
 });
 
 router.get('/changeEmail', auth, async (req, res) => {
     const user = await User.findById(req.user._id).select({ isAdmin: 0, password: 0})
-
     res.render('profileChangeEmail', { user: user });
 });
 

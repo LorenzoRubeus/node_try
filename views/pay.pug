@@ -3,25 +3,43 @@ html
     head
         meta(http-equiv="Content-Type", content="text/html;charset=UTF-8")
         link(rel="stylesheet", href="/css/styleCheckout.css")
+        link(rel="stylesheet", href="https://use.fontawesome.com/releases/v5.3.1/css/all.css")
         title Pay Now!
     body
+        - var countAddress=0
+        - var countPayment=0
         div#divContainer
             div#divForm
                 form(action=`/api/payments/confirmPayment`, method="post")
                     div#divAddresses
                         label(class="headerLabel") Choose your address
+                        ul
                             each val in addresses
-                                ul
-                                    li
-                                        input#rdbAddress(type="radio", name="rdbAddress", value=val._id)
-                                        label= " " + val.street
+                                li
+                                    input#rdbAddress(type="radio", name="rdbAddress", value=val._id)
+                                    label= " " + val.street
+                                - countAddress++
+                            while countAddress < 6
+                                li
+                                    a(href="/api/address/checkout" class="addAddressPay")
+                                        i(class="fas fa-plus")
+                                        label Add an address
+                                - countAddress++
+                            
                     div#divPayments
                         label(class="headerLabel") Choose your credit card
-                        each val in payments
-                            ul
+                        ul
+                            each val in payments
                                 li
                                     input#rdbPayment(type="radio", name="rdbPayment", value=val._id)
                                     label= " " + val.cardNumber
+                                - countPayment++
+                            while countPayment < 6 
+                                li
+                                    a(href="/api/payments/addPayment/checkout" class="addPaymentPay")
+                                        i(class="fas fa-plus")
+                                        label Add a payment method
+                                - countPayment++
                     #divPrice
                         label(class="headerLabel") Price
                         p= "EUR " + basket.price

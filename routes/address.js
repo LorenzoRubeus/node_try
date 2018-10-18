@@ -10,20 +10,14 @@ router.get('/:btnBack', auth, async (req, res) => {
     const user = await User.findById(req.user._id).select({ password: 0, isAdmin: 0 });
     
     res.render('profileAddAddress', { user: user, btnBack: btnBack });
-
-
-
-    //const address = await Address.findOne({ customer: decoded._id });
-    //res.render('index', { user: user, token: token, user: address.customer.firstName })
 });
 
-router.post('/', auth, async (req, res) => {
+router.post('/:redirect', auth, async (req, res) => {
     let err = "";
 
     const { error } = validateAddress(req.body);
     if(error) {
         err = error.details[0].context.label;
-        //return res.status(400).send(error.details[0].message);
         return res.render('profileAddAddress', { err: err });
     }
 
@@ -42,10 +36,12 @@ router.post('/', auth, async (req, res) => {
 
     //address = await Address.findOne({ _id: address._id }).populate('customer', {firstName: 1, lastName: 1, email: 1});
     //const user = await User.findById(address.customer);
-
     const addresses = await Address.find({ customer: req.user._id });
     
-    res.render('manageAddresses', { address: addresses })
+    if(req.params.redirect == "checkout") {
+        return res.redirect("/api/payments/pay");
+    }
+    res.render('manageAddresses', { address: addresses });
 });
 
 

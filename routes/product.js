@@ -38,11 +38,8 @@ router.get('/filterCategory/:id', auth, async (req, res) => {
     if(!category) { return res.status(404).send('Category not found.'); }
 
     const products = await Product.find({ 'category.name': category.name }).select(
-        {   _id: 0, 
-            "category._id": 0, 
-            "seller._id": 0, 
-            "seller.isAdmin": 0
-        });
+        '_id name category._id seller._id seller.firstName seller.lastName price description img'
+    );
     const pictures = getPictures(products);
     res.render('products', { user: user, basket: basket, pictures: pictures, products: products, categories: categories }); // TODO Da modificare il send con render o qualcosa
 });
@@ -60,7 +57,6 @@ router.get('/showProducts', auth, async (req, res) => {
     const products = await Product.find();
     const pictures = getPictures(products);
     res.render('products', { user: user, basket: basket, pictures: pictures, categories: categories, products: products }); // TODO Da modificare il send con render o qualcosa
-    //const models = getModels(req.params.token);
     //res.render('products', {user: models.user, basket: models.basket, categories: models.categories, products: products, token: req.params.token}); // TODO Da modificare il send con render o qualcosa
 });
 
@@ -139,26 +135,14 @@ router.post('/', async(req, res) => {
 
 async function getProductsFilter(filter) {
     return await Product.find().select(
-        {   _id: 0, 
+        '_id name category._id seller._id seller.firstName seller.lastName price description img'
+    );
+        /*{   _id: 0, 
             "category._id": 0, 
             "seller._id": 0, 
             "seller.isAdmin": 0
-        }).sort(filter);
+        }).sort(filter);*/
 }  
-
-/*async function getModels(token) {
-    const decoded = jwt.verify(token, config.get('jwtPrivateKey'));
-    const user = await User.findById(decoded._id).select({firstName: 1, lastName: 1});
-    const basket = await Basket.findOne({customer: decoded._id});
-    const categories = await Category.find();
-    
-    var obj = {
-        user: user,
-        basket: basket,
-        categories: categories
-    }
-    return obj;
-}*/
 
 async function getModels(userp) {
     const user = userp;

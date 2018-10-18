@@ -10,7 +10,7 @@ const config = require('config');
 const moment = require('moment');
 const express = require('express');
 const router = express.Router();
-
+const btoa = require('btoa');
 
 router.get('/managePayment', auth, async (req, res) => {
     if(req.session.localVar) {
@@ -23,8 +23,8 @@ router.get('/managePayment', auth, async (req, res) => {
     res.render('managePayments', { payments: payments, count: 0 });
 });
 
-router.get('/addPayment', auth, async (req, res) => {
-    res.render('profileAddPayment');
+router.get('/addPayment/:redirect', auth, async (req, res) => {
+    res.render('profileAddPayment', { redirect: req.params.redirect });
 });
 
 router.get('/editPayment/:id', auth, async (req, res) => {
@@ -35,7 +35,7 @@ router.get('/editPayment/:id', auth, async (req, res) => {
 });
 
 
-router.post('/addPayment', auth, async (req, res) => {
+router.post('/addPayment/:redirect', auth, async (req, res) => {
     const { error } = validatePayment(req.body);
     if(error) {
         let err = error.details[0].context.label;
@@ -51,8 +51,11 @@ router.post('/addPayment', auth, async (req, res) => {
         yearExpired: req.body.txtYearExpired
     });
     await payment.save();
-
     const payments = await Payment.find({ customer: req.user._id });
+
+    if(req.params.redirect == "checkout") {
+        return res.redirect('/api/payments/pay');
+    }
     res.render('managePayments', { payments: payments });
 });
 
@@ -127,15 +130,33 @@ router.post('/confirmPayment', auth, async (req, res) => {
     basket.count = 0;
     await basket.save();
 
-    res.render('products', { user: user, categories: categories, products: products, basket: basket, count: 0 })
+    let pictures = getPictures(products);
+    req.session.localVar = {
+        user: user,
+        categories: categories,
+        products: products,
+        basket: basket,
+        pictures: pictures
+    };
+
+    res.redirect('/api/products/showProducts');
+    //res.render('products', { user: user, categories: categories, products: products, basket: basket, count: 0 })
 });
 
-router.post('/pay', auth, async (req, res) => {
+router.get('/pay', auth, async (req, res) => {
     const basket = await Basket.findOne({ customer: req.user._id }).populate('products');
     const addresses = await Address.find({ customer: req.user._id });
     const payments = await Payment.find({ customer: req.user._id });
 
     res.render('pay', { basket: basket, addresses: addresses, payments: payments });
-})
+});
+
+function getPictures(products) {
+    let pictures = [];
+    for(let i = 0; i < products.length; i++) {
+        pictures.push(btoa(products[i].img.data));
+    }
+    return pictures;
+}
 
 module.exports = router;

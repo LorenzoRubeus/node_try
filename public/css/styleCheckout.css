@@ -40,6 +40,27 @@ html, body {
     margin-top: 20px;
 }
 
+li {
+    margin-top: 5px;
+}
+
+.addAddressPay, .addPaymentPay {
+    text-decoration: none;
+    color: white;
+    padding-left: 4px;
+    font-size: 13px;
+}
+
+.addAddressPay:hover, .addPaymentPay:hover, .addAddressPay label:hover, .addPaymentPay label:hover {
+    cursor: pointer;
+    border-bottom: 1px solid white;
+}
+
+.addAddressPay i, .addPaymentPay i {
+    font-size: 17px;
+    padding-right: 8px;
+}
+
 #divPrice {
     padding-left: 8em;
     margin-top: 30px;

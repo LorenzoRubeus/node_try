@@ -41,7 +41,7 @@ html
                     p= "Current number of articles: " 
                     label= basket.count
                 #divButtonBuy
-                    form(action=`/api/payments/pay`, method="post")
+                    form(action=`/api/payments/pay`, method="get")
                         p= "Price: EUR " + basket.price 
                         input(type="submit" value="Checkout") 
         #divFooter
