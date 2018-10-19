@@ -107,7 +107,7 @@ html, body {
     width: 100%;
 }
 
-#listFilter, #divListProducts, #divListCategories, #divImg {
+#listFilter, #divListCategories, #divImg {
     display: inline-block;
 }
 
@@ -148,4 +148,80 @@ p.error {
     padding-left: 1em;
     font-style: italic;
     font-size: 15px;
+}
+
+#divImg {
+    width: 173px;
+    height: 130px;
+}
+
+#divImg img{
+    display: inline-block;
+    width: 173px;
+    height: 130px;
+}
+
+#listFilter a:hover {
+    color: rgb(255, 153, 0);
+}
+
+#listFilter a:visited {
+    text-decoration: none;
+    color: blue;
+}
+
+#listFilter a:visited:hover {
+    color: rgb(255, 153, 0);
+}
+
+.divSingleProduct {
+    width: 70%;
+    display: inline-block;
+}
+
+#divListOrders a {
+    text-decoration: none;
+}
+
+#divListOrders a:hover {
+    color: rgb(255, 153, 0);
+}
+
+#divListOrders a:visited {
+    text-decoration: none;
+    color:blue; 
+}
+
+#divListOrders a:visited:hover {
+    color: rgb(255, 153, 0);
+}
+
+#divFooter {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 60px;
+    background-color: rgb(35, 47, 62);
+}
+
+#divFooterLeft, #divFooterCenter, #divFooterRight {
+    font-size: 15px;
+    float: left;
+    margin-left: 20%;
+}
+
+#divFooterLeft a, #divFooterCenter a, #divFooterRight a {
+    color: white;
+    text-decoration: none;
+}
+
+#divFooterLeft h4, #divFooterCenter h4, #divFooterRight h4 {
+    color: white;
+    text-decoration: none;
+}
+
+#divFooterLeft h4:hover, #divFooterCenter h4:hover, #divFooterRight h4:hover {
+    color: orange;
+    text-decoration: none;
 }

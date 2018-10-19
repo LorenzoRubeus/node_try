@@ -9,6 +9,8 @@ html
         link(rel="stylesheet", href="/css/styleOrders.css")
         link(rel="stylesheet", href="https://use.fontawesome.com/releases/v5.3.1/css/all.css")
     body 
+        - countOrder = 0
+        - countPicture = 0
         #container
             #divNav
                 #divSearchBar
@@ -50,18 +52,25 @@ html
                             a(href="#") November
                         li
                             a(href="#") December
-                #divListProducts
+                #divListOrders
                     h2 Orders
                     if orders.length == 0
                         p(class="error") 0 orders to be shown.
                     else
                         each val in orders
                             p= val.dateEstimated
-                            p= "Total Price: " +ush val.price
+                            p= "Total Price: " + val.price
                             each products in val.products
-                                a(href="#")= products.name
-                                p= products.price
+                                div#divImg
+                                    img(src=`data:image/png;base64, ${pictures[countOrder][countPicture]}`, alt=`Picture of ${products.name}`)
+                                div.divSingleProduct
+                                    a(href="#")= products.name
+                                    p= products.price
+                                    - countPicture++
+                                br
                             hr
+                            - countOrder++
+                            - countPicture = 0
             #divFooter
                 #divFooterLeft
                     a(href="#")
