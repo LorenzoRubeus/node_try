@@ -57,20 +57,22 @@ html
                     if orders.length == 0
                         p(class="error") 0 orders to be shown.
                     else
-                        each val in orders
-                            p= val.dateEstimated
-                            p= "Total Price: " + val.price
-                            each products in val.products
-                                div#divImg
-                                    img(src=`data:image/png;base64, ${pictures[countOrder][countPicture]}`, alt=`Picture of ${products.name}`)
-                                div.divSingleProduct
-                                    a(href="#")= products.name
-                                    p= products.price
-                                    - countPicture++
-                                br
-                            hr
-                            - countOrder++
-                            - countPicture = 0
+                        ul
+                            each val in orders
+                                li
+                                    p= val.dateEstimated
+                                    p= "Total Price: " + val.price
+                                    each products in val.products
+                                        div#divImg
+                                            img(src=`data:image/png;base64, ${pictures[countOrder][countPicture]}`, alt=`Picture of ${products.name}`)
+                                        div.divSingleProduct
+                                            a(href="#")= products.name
+                                            p= products.price
+                                            - countPicture++
+                                        br
+                                    hr
+                                    - countOrder++
+                                    - countPicture = 0
             #divFooter
                 #divFooterLeft
                     a(href="#")

@@ -175,9 +175,16 @@ p.error {
 }
 
 .divSingleProduct {
-    width: 70%;
     display: inline-block;
+    position: relative;
+    width: 50%;
+    top: -35px;
+    margin-left: 20px;
 }
+
+#divImg, .divSingleProduct {
+    margin-top: -20px;
+} 
 
 #divListOrders a {
     text-decoration: none;
