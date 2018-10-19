@@ -11,6 +11,7 @@ html
     body 
         - countOrder = 0
         - countPicture = 0
+        - countMonth = 0
         #container
             #divNav
                 #divSearchBar
@@ -24,53 +25,44 @@ html
                 #divProfile
                     a(href=`/api/myProfile`) 
                         label My Profile
-            #divProducts
+            #divOrders
                 #listFilter
-                    p Filters  
+                    p Filter by month  
                     ul(id='listCategory')
                         li 
-                            a(href="#") January
-                        li
-                            a(href="#") February
-                        li
-                            a(href="#") March
-                        li
-                            a(href="#") April
-                        li
-                            a(href="#") May
-                        li
-                            a(href="#") June
-                        li
-                            a(href="#") July
-                        li
-                            a(href="#") August
-                        li
-                            a(href="#") September
-                        li
-                            a(href="#") October
-                        li
-                            a(href="#") November
-                        li
-                            a(href="#") December
+                            a(href=`/api/orders`) All
+                        each val in months
+                            li 
+                                a(href=`/api/orders/filterByMonth/${countMonth}`)= val
+                            - countMonth++
                 #divListOrders
-                    h2 Orders
+                    h2 Your Orders
                     if orders.length == 0
                         p(class="error") 0 orders to be shown.
                     else
                         ul
                             each val in orders
                                 li
-                                    p= val.dateEstimated
-                                    p= "Total Price: " + val.price
+                                    p(class="pDateOrder")= "Ordered on:"
+                                        label= " " + dateOrder[countOrder].day + "/" + dateOrder[countOrder].month + "/" + dateOrder[countOrder].year
+                                    p(class="pDateEstimated")= "Estimated delivery date:"
+                                        label= " " + dateEstimated[countOrder].day + "/" + dateEstimated[countOrder].month + "/" + dateEstimated[countOrder].year                                
+                                    p(class="pTotalPrice")= "Total Price:"
+                                        label= " " + val.price + "€"
                                     each products in val.products
                                         div#divImg
                                             img(src=`data:image/png;base64, ${pictures[countOrder][countPicture]}`, alt=`Picture of ${products.name}`)
                                         div.divSingleProduct
                                             a(href="#")= products.name
-                                            p= products.price
+                                            label(class="labelBy")= " by"
+                                            a(href=`/api/products/showProductsByName/${products.seller._id}`, class="nameSeller")= " " + products.seller.firstName + " " + products.seller.lastName
+                                            p(class="pDescriptionProduct")= products.description
+                                        div.divPrice
+                                            label= "Price"
+                                            p(class="pPriceProduct")= products.price + "€"
                                             - countPicture++
                                         br
-                                    hr
+                                    hr(style="margin-left: -15px")
                                     - countOrder++
                                     - countPicture = 0
             #divFooter

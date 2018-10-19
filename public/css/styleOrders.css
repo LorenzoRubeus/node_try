@@ -102,9 +102,18 @@ html, body {
     height: 100%;   
 }
 
-#divProducts {
+#divOrders {
     height: 100%;
     width: 100%;
+}
+
+#divListOrders {
+    width: calc(100% - 205px - 1em);
+    display: inline-block;
+}
+
+#divListOrders h2 {
+    padding-left: 0.9em;
 }
 
 #listFilter, #divListCategories, #divImg {
@@ -153,6 +162,7 @@ p.error {
 #divImg {
     width: 173px;
     height: 130px;
+    margin-left: 1em;
 }
 
 #divImg img{
@@ -182,9 +192,52 @@ p.error {
     margin-left: 20px;
 }
 
+.pDescriptionProduct {
+    margin-top: 10px;
+    font-size: 15px;
+    font-style: italic;
+}
+
+.divPrice {
+    position: relative;
+    top: -35px;
+    display: inline-block;
+    width: 10%;
+}
+
+.divPrice label {
+    letter-spacing: 0.075em;
+    font-weight: 700;
+    font-size: 14px !important;
+}
+
+.pPriceProduct {
+    margin-top: 5px;
+    color: rgb(255, 26, 26);
+    font-weight: bold;
+}
+
 #divImg, .divSingleProduct {
     margin-top: -20px;
 } 
+
+.labelBy{
+    font-size: 13px;
+}
+
+.nameSeller {
+    color: black !important;
+    font-size: 12px;
+}
+
+.nameSeller:hover {
+    color: rgb(255, 26, 26) !important;
+    cursor: pointer;
+}
+
+#divListOrders ul {
+    list-style: none;
+}
 
 #divListOrders a {
     text-decoration: none;
@@ -201,6 +254,30 @@ p.error {
 
 #divListOrders a:visited:hover {
     color: rgb(255, 153, 0);
+}
+
+.pDateOrder, .pDateEstimated, .pTotalPrice {
+    color: black;
+    font-weight: 700;
+}
+
+.pDateEstimated label, .pDateOrder label {
+    color: green;
+}
+
+.pTotalPrice label {
+    color: red;
+    font-weight: bold;
+}
+
+.priceProduct {
+    margin-top: 8px;
+    color: black;
+    display: inline-block;
+}
+
+.priceProduct label {
+    color: red;
 }
 
 #divFooter {
