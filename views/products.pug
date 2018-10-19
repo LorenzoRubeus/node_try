@@ -75,7 +75,7 @@ html
                                     form(action=`/api/basket/addBasket/${val._id}`, method="post", class="formProduct")
                                         div.divSingleProduct
                                             a(href="#")= val.name
-                                            label  by
+                                            label(class="labelBy")  by
                                             a(href=`/api/products/showProductsByName/${val.seller._id}`, class="nameSeller")= " " + val.seller.firstName + " " + val.seller.lastName
                                             p(class="pDescriptionProduct")= val.description
                                         div.divPrice

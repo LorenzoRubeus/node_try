@@ -17,10 +17,10 @@ const ordersSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Payment'
     },
-    products: {
-        type: [mongoose.Schema.Types.ObjectId],
+    products: [{
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'Product'
-    },
+    }],
     customer: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'

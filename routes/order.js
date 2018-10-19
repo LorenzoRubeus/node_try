@@ -6,7 +6,8 @@ const express = require('express');
 const router = express.Router();
 
 router.get('/', auth, async (req, res) => {
-    const orders = await Order.find({ customer: req.user._id });
+    const orders = await Order.find({ customer: req.user._id }).populate('products');
+    //res.send(orders[1].products);
     res.render('viewOrders', { orders: orders });
 });
 

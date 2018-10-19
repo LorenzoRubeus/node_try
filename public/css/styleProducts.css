@@ -198,7 +198,7 @@ p.error {
 }
 
 #divListProducts h2 {
-    padding-left: 0.6em;
+    padding-left: 0.9em;
 }
 
 #divListProducts a {
@@ -208,6 +208,10 @@ p.error {
 .divSingleProduct {
     width: 70%;
     display: inline-block;
+}
+
+.labelBy{
+    font-size: 13px;
 }
 
 .nameSeller {
@@ -258,6 +262,8 @@ p.error {
 }
 
 .divPrice label {
+    letter-spacing: 0.075em;
+    font-weight: 700;
     font-size: 14px !important;
 }
 

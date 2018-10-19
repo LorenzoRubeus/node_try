@@ -120,6 +120,8 @@ html, body {
 }
 
 .divPrice label {
+    letter-spacing: 0.075em;
+    font-weight: 700;
     font-size: 14px !important;
 }
 

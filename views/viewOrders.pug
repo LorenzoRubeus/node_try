@@ -1,6 +1,88 @@
 doctype html
 html
     head
+        title Store App
+        meta(http-equiv="Content-Type", content="text/html;charset=UTF-8")
+        script(src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.4/sweetalert2.min.js")
+        link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.4/sweetalert2.min.css")
+        script(src="/js/alerts.js")
+        link(rel="stylesheet", href="/css/styleOrders.css")
+        link(rel="stylesheet", href="https://use.fontawesome.com/releases/v5.3.1/css/all.css")
+    body 
+        #container
+            #divNav
+                #divSearchBar
+                    form(action=`/api/products/search`, method="post")
+                        center
+                            button(id="btnCategoriesSearch")
+                                label Categories
+                            input#txtSearchBar(type="text", name="txtSearchBar", placeholder="Look for a product")
+                            button(type="submit")
+                                i(class="fas fa-search")
+                #divProfile
+                    a(href=`/api/myProfile`) 
+                        label My Profile
+            #divProducts
+                #listFilter
+                    p Filters  
+                    ul(id='listCategory')
+                        li 
+                            a(href="#") January
+                        li
+                            a(href="#") February
+                        li
+                            a(href="#") March
+                        li
+                            a(href="#") April
+                        li
+                            a(href="#") May
+                        li
+                            a(href="#") June
+                        li
+                            a(href="#") July
+                        li
+                            a(href="#") August
+                        li
+                            a(href="#") September
+                        li
+                            a(href="#") October
+                        li
+                            a(href="#") November
+                        li
+                            a(href="#") December
+                #divListProducts
+                    h2 Orders
+                    if orders.length == 0
+                        p(class="error") 0 orders to be shown.
+                    else
+                        each val in orders
+                            p= val.dateEstimated
+                            p= "Total Price: " +ush val.price
+                            each products in val.products
+                                a(href="#")= products.name
+                                p= products.price
+                            hr
+            #divFooter
+                #divFooterLeft
+                    a(href="#")
+                        h4 About Us
+                #divFooterCenter
+                    a(href="#")
+                        h4 General Information
+                #divFooterRight
+                    a(href="#")
+                        h4 Contact Us
+
+
+
+
+
+
+
+
+//doctype html
+//html
+    head
         meta(http-equiv="Content-Type", content="text/html;charset=UTF-8")
         link(rel="stylesheet", href="/css/styleOperations.css")
         title Your Orders
