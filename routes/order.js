@@ -7,7 +7,7 @@ const router = express.Router();
 const btoa = require('btoa');
 
 router.get('/', auth, async (req, res) => {
-    const orders = await Order.find({ customer: req.user._id }).populate('products');
+    const orders = await Order.find({ customer: req.user._id }).populate('products address');
     let dateEstimated = [];
     let dateOrder = [];
     let pictures = [];
@@ -26,14 +26,14 @@ router.get('/', auth, async (req, res) => {
     if( req.session.localVar ) {
         let localVar = req.session.localVar;
         req.session.destroy();
-        return res.render('viewOrders', { orders: localVar.orders, pictures: localVar.pictures, months: localVar.months, dateOrder: localVar.dateOrder, dateEstimated: localVar.dateEstimated });
+        return res.render('viewOrders', { orders: localVar.orders, pictures: localVar.pictures, filteredMonth: localVar.filteredMonth, months: localVar.months, dateOrder: localVar.dateOrder, dateEstimated: localVar.dateEstimated });
     }
     res.render('viewOrders', { orders: orders, pictures: pictures, months: months, dateOrder: dateOrder, dateEstimated: dateEstimated });
 });
 
 router.get('/filterByMonth/:month', auth, async (req, res) => {
     const monthFilter = req.params.month;
-    const orders = await Order.find({ customer: req.user._id }).populate('products');
+    const orders = await Order.find({ customer: req.user._id }).populate('products address');
     let ordersFiltered = [];
     let pictures = [];
     let dateEstimated = [];
@@ -61,7 +61,8 @@ router.get('/filterByMonth/:month', auth, async (req, res) => {
         pictures: pictures,
         months: months,
         dateOrder: dateOrder,
-        dateEstimated: dateEstimated
+        dateEstimated: dateEstimated,
+        filteredMonth: months[monthFilter]
     }
 
     res.redirect('/api/orders');

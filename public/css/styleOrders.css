@@ -154,7 +154,7 @@ html, body {
 }
 
 p.error {
-    padding-left: 1em;
+    padding-left: 1.5em;
     font-style: italic;
     font-size: 15px;
 }
@@ -256,12 +256,12 @@ p.error {
     color: rgb(255, 153, 0);
 }
 
-.pDateOrder, .pDateEstimated, .pTotalPrice {
-    color: black;
+.pAddress, .pDateOrder, .pDateEstimated, .pTotalPrice, .labelPhoneNumber {
+    color: black !important;
     font-weight: 700;
 }
 
-.pDateEstimated label, .pDateOrder label {
+.pAddress label, .pDateEstimated label, .pDateOrder label {
     color: green;
 }
 
@@ -292,7 +292,7 @@ p.error {
 #divFooterLeft, #divFooterCenter, #divFooterRight {
     font-size: 15px;
     float: left;
-    margin-left: 20%;
+    margin-left: 23%;
 }
 
 #divFooterLeft a, #divFooterCenter a, #divFooterRight a {

@@ -64,6 +64,8 @@ html
                                 a(href=`/api/products/filterCategory/${val['_id']}`)= val['name']
                 #divListProducts
                     h2 Products
+                    if filteredBy
+                        h4= "Filtered by: " + filteredBy  
                     if products.length == 0
                         p(class="error") 0 products to be shown.
                     else
@@ -90,8 +92,8 @@ html
                     a(href="#")
                         h4 About Us
                 #divFooterCenter
-                    a(href="#")
-                        h4 General Information
+                    a(href="/api/myProfile/logout")
+                        h4 Logout
                 #divFooterRight
                     a(href="#")
                         h4 Contact Us

@@ -201,6 +201,10 @@ p.error {
     padding-left: 0.9em;
 }
 
+#divListProducts h4 {
+    padding-left: 1.4em;
+}
+
 #divListProducts a {
     text-decoration: none;
 }

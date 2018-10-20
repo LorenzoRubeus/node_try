@@ -17,7 +17,7 @@ html
                             each val in addresses
                                 li
                                     input#rdbAddress(type="radio", name="rdbAddress", value=val._id)
-                                    label= " " + val.street
+                                    label= " " + val.street + ", " + val.city + ", " + val.country + ", " + val.phoneNumber
                                 - countAddress++
                             while countAddress < 6
                                 li

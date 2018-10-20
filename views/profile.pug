@@ -44,18 +44,19 @@ html
                         label Go back to the store
                 br
                 #divDelete
-                    a(href="#", id="btnDelete")
-                        label Delete account
-                #divDelete
-                    a(href='/api/myProfile/logout', id="btnLogout")
+                    a(href="/api/myProfile/logout", id="btnLogout")
                         label Logout
+                br
+                #divLogout
+                    a(href='#', id="btnDelete")
+                        label Delete account
         #divFooter
                     #divFooterLeft
                         a(href="#")
                             h4 About Us
                     #divFooterCenter
-                        a(href="#")
-                            h4 General Information
+                        a(href="/api/myProfile/logout")
+                            h4 Logout
                     #divFooterRight
                         a(href="#")
                             h4 Contact Us

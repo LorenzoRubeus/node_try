@@ -30,12 +30,14 @@ html
                     p Filter by month  
                     ul(id='listCategory')
                         li 
-                            a(href=`/api/orders`) All
+                            a(href=`/api/orders`, style="font-weight: bold") All
                         each val in months
                             li 
                                 a(href=`/api/orders/filterByMonth/${countMonth}`)= val
                             - countMonth++
                 #divListOrders
+                    if filteredMonth 
+                        h2= "Your Orders - Ordered in: " + filteredMonth 
                     h2 Your Orders
                     if orders.length == 0
                         p(class="error") 0 orders to be shown.
@@ -43,6 +45,10 @@ html
                         ul
                             each val in orders
                                 li
+                                    p(class="pAddress")= "Sent to:"
+                                        label= " " + val.address.name + ", " + val.address.street + ", " + val.address.city + ", " + val.address.country
+                                        label(class="labelPhoneNumber")= ". Phone number:"
+                                            label= " " + val.address.phoneNumber
                                     p(class="pDateOrder")= "Ordered on:"
                                         label= " " + dateOrder[countOrder].day + "/" + dateOrder[countOrder].month + "/" + dateOrder[countOrder].year
                                     p(class="pDateEstimated")= "Estimated delivery date:"
@@ -70,8 +76,8 @@ html
                     a(href="#")
                         h4 About Us
                 #divFooterCenter
-                    a(href="#")
-                        h4 General Information
+                    a(href="/api/myProfile/logout")
+                        h4 Logout
                 #divFooterRight
                     a(href="#")
                         h4 Contact Us

@@ -9,40 +9,6 @@ const config = require('config');
 const btoa = require('btoa');
 const auth = require('../middleware/auth');
 
-/*router.get('/', async (req, res) => {
-    const product = await Product.find().select(
-        { _id: 0, "category._id": 0, 
-        "seller._id": 0, 
-        "seller.isAdmin": 0
-        });
-    res.send(product);
-});
-
-router.get('/showProducts/:token', async (req, res) => {
-    const token = req.params.token;
-    const decoded = jwt.verify(token, config.get('jwtPrivateKey'));
-
-    const products = await Product.find();
-    const basket = await Basket.findOne({ customer: decoded._id });
-    const categories = await Category.find();
-
-    res.render('products', { products: products, token: token, basket: basket, categories: categories})
-});*/
-
-
-router.get('/filterCategory/:id', auth, async (req, res) => {
-    const user = await User.findById(req.user._id).select({firstName: 1, lastName: 1});
-    const basket = await Basket.findOne({ customer: req.user._id });
-    const category = await Category.findById(req.params.id).select({ _id: 0 });
-    const categories = await Category.find();
-    if(!category) { return res.status(404).send('Category not found.'); }
-
-    const products = await Product.find({ 'category.name': category.name }).select(
-        '_id name category._id seller._id seller.firstName seller.lastName price description img'
-    );
-    const pictures = getPictures(products);
-    res.render('products', { user: user, basket: basket, pictures: pictures, products: products, categories: categories }); // TODO Da modificare il send con render o qualcosa
-});
 
 router.get('/showProducts', auth, async (req, res) => {
     if(req.session.localVar) {
@@ -60,32 +26,46 @@ router.get('/showProducts', auth, async (req, res) => {
     //res.render('products', {user: models.user, basket: models.basket, categories: models.categories, products: products, token: req.params.token}); // TODO Da modificare il send con render o qualcosa
 });
 
+router.get('/filterCategory/:id', auth, async (req, res) => {
+    const user = await User.findById(req.user._id).select({firstName: 1, lastName: 1});
+    const basket = await Basket.findOne({ customer: req.user._id });
+    const category = await Category.findById(req.params.id).select({ _id: 0 });
+    const categories = await Category.find();
+    if(!category) { return res.status(404).send('Category not found.'); }
+
+    const products = await Product.find({ 'category.name': category.name }).select(
+        '_id name category._id seller._id seller.firstName seller.lastName price description img'
+    );
+    const pictures = getPictures(products);
+    res.render('products', { user: user, basket: basket, filteredBy: category.name, pictures: pictures, products: products, categories: categories }); // TODO Da modificare il send con render o qualcosa
+});
+
 router.get('/nameCrescente', auth, async (req, res) => {
     const products = await getProductsFilter({ name: 1 });
     const models = await getModels(req.user);
     const pictures = getPictures(products);
-    res.render('products', { user: models.user, basket: models.basket, pictures: pictures, categories: models.categories, products: products });
+    res.render('products', { user: models.user, basket: models.basket, filteredBy: 'A to Z', pictures: pictures, categories: models.categories, products: products });
 });
 
 router.get('/nameDecrescente', auth, async (req, res) => {
     const products = await getProductsFilter({ name: -1 });
     const models = await getModels(req.user);
     const pictures = getPictures(products);
-    res.render('products', { user: models.user, basket: models.basket, pictures: pictures, categories: models.categories, products: products });
+    res.render('products', { user: models.user, basket: models.basket, filteredBy: 'Z to A', pictures: pictures, categories: models.categories, products: products });
 });
 
 router.get('/priceCrescente', auth, async (req, res) => {
     const products = await getProductsFilter({ price: 1 });
     const models = await getModels(req.user);
     const pictures = getPictures(products);
-    res.render('products', { user: models.user, basket: models.basket, pictures: pictures, categories: models.categories, products: products });
+    res.render('products', { user: models.user, basket: models.basket, filteredBy: 'Increasing Price', pictures: pictures, categories: models.categories, products: products });
 });
 
 router.get('/priceDecrescente', auth, async (req, res) => {
     const products = await getProductsFilter({ price: -1 });
     const models = await getModels(req.user);
     const pictures = getPictures(products);
-    res.render('products', { user: models.user, basket: models.basket, pictures: pictures, categories: models.categories, products: products });
+    res.render('products', { user: models.user, basket: models.basket, filteredBy: 'Decreasing Price', pictures: pictures, categories: models.categories, products: products });
 });
 
 router.get('/showProductsByName/:sellerID', auth, async (req, res) => {
@@ -93,7 +73,7 @@ router.get('/showProductsByName/:sellerID', auth, async (req, res) => {
     const products = await Product.find({ "seller._id": sellerID });
     const models = await getModels(req.user);
     const pictures = getPictures(products);
-    res.render('products', { user: models.user, basket: models.basket, pictures: pictures, categories: models.categories, products: products });
+    res.render('products', { user: models.user, basket: models.basket, filteredBy: `Products by ${products[0].seller.firstName} ${products[0].seller.lastName}`, pictures: pictures, categories: models.categories, products: products });
 });
 
 
@@ -136,7 +116,7 @@ router.post('/', async(req, res) => {
 async function getProductsFilter(filter) {
     return await Product.find().select(
         '_id name category._id seller._id seller.firstName seller.lastName price description img'
-    );
+    ).sort(filter);
         /*{   _id: 0, 
             "category._id": 0, 
             "seller._id": 0, 
