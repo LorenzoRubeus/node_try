@@ -18,7 +18,7 @@ html
                         img(src="/img/back.png", id="btnGoBackEditPayment", alt="Go Back")
                     form(action=`/api/payments/addPayment/checkout`, method="post")       
                         div(class="divInput")
-                            label Card Owner
+                            label(for="txtCardHolder") Card Owner
                             input#txtCardHolder(type="text", name="txtCardHolder")
                         div(class="divInput")
                             label Card Circuit
@@ -28,7 +28,7 @@ html
                                 option(value="American Express") American Express
                                 option(value="Maestro") Maestro
                         div(class="divInput")
-                            label Card Number
+                            label(for="txtCardNumber") Card Number
                             input#txtCardNumber(type="text", name="txtCardNumber")
                         div(class="divInput", id="inputDate")
                             label Expired Date
@@ -45,7 +45,7 @@ html
                         img(src="/img/back.png", id="btnGoBackEditPayment", alt="Go Back")
                     form(action=`/api/payments/addPayment/manage`, method="post")       
                         div(class="divInput")
-                            label Card Owner
+                            label(for="txtCardHolder") Card Owner
                             input#txtCardHolder(type="text", name="txtCardHolder")
                         div(class="divInput")
                             label Card Circuit
@@ -55,7 +55,7 @@ html
                                 option(value="American Express") American Express
                                 option(value="Maestro") Maestro
                         div(class="divInput")
-                            label Card Number
+                            label(for="txtCardNumber") Card Number
                             input#txtCardNumber(type="text", name="txtCardNumber")
                         div(class="divInput", id="inputDate")
                             label Expired Date

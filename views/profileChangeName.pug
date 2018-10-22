@@ -17,10 +17,10 @@ html
                     img(src="/img/back.png", class="btnCloseForm", alt="Go back")
                 form(action=`/api/myProfile/changeName`, method="post")
                     div(class="divInput")
-                        label First Name
+                        label(for="txtFirstName") First Name
                         input#txtFirstName(type="text", name="txtFirstName", class="txtChangeName", value=user.firstName)
                     div(class="divInput")
-                        label Last Name
+                        label(for="txtLastName") Last Name
                         input#txtLastName(type="text", name="txtLastName", class="txtChangeName", value=user.lastName)
                     div(class="divInput")
                         input(type="submit", value="Change")

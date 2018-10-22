@@ -17,25 +17,25 @@ html
                     img(src="/img/back.png", alt="Go Back", class="btnCloseForm")
                 form(action=`/api/myProfile/changeAddress/${address._id}`, method="post")
                     div(class="divInput")
-                        label Name
+                        label(for="txtName") Name
                         input#txtName(type="text", name="txtName", value=address.name)
                     div(class="divInput")
-                        label Street
+                        label(for="txtStreet") Street
                         input#txtStreet(type="text", name="txtStreet", value=address.street)
                     div(class="divInput")
-                        label Town
+                        label(for="txtTown") Town
                         input#txtTown(type="text", name="txtTown", value=address.town)
                     div(class="divInput")
-                        label City
+                        label(for="txtCity") City
                         input#txtCity(type="text", name="txtCity", value=address.city)
                     div(class="divInput")
-                        label Country
+                        label(for="txtCountry") Country
                         input#txtCountry(type="text", name="txtCountry", value=address.country)
                     div(class="divInput")
-                        label ZIP Code
+                        label(for="txtZipCode") ZIP Code
                         input#txtZipCode(type="text", name="txtZipCode", value=address.zipCode)
                     div(class="divInput")
-                        label Phone Number
+                        label(for="txtPhoneNumber") Phone Number
                         input#txtPhoneNumber(type="text", name="txtPhoneNumber", value=address.phoneNumber)
                     div(class="divInput")
                         input(type="submit", value="Change")

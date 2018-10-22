@@ -33,7 +33,7 @@ html
                         label(class="headerLabel") Choose your credit card
                         ul(id="listPayments")
                             each val in payments
-                                li(class="paymentItem")
+                                li(for="labelradioButton" class="paymentItem")
                                     label(id="labelradioButton", class="labelPayment")= " " + val.cardNumber
                                         case val.cardCircuit
                                             when "MasterCard"

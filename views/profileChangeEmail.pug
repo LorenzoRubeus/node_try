@@ -17,16 +17,16 @@ html
                     img(src="/img/back.png", alt="Go Back", class="btnCloseForm")
                 form(action=`/api/myProfile/changeEmail`, method="post")
                     div(class="divInput")
-                        label Old Email
+                        label(for="txtOldEmail") Old Email
                         input#txtOldEmail(type="email", name="txtOldEmail", value=user.email, disabled)
                     div(class="divInput")
-                        label New Email
+                        label(for="txtNewEmail") New Email
                         input#txtNewEmail(type="email", name="txtNewEmail", placeholder="New Email Address")
                     div(class="divInput")
-                        label Confirm New Email
+                        label(for="txtConfirmNewEmail") Confirm New Email
                         input#txtConfirmNewEmail(type="email", name="txtConfirmNewEmail", placeholder="Confirm Email Address")
                     div(class="divInput")
-                        label Password
+                        label(for="txtPassword") Password
                         input#txtPassword(type="password", name="txtPassword", placeholder="Password")
                     div(class="divInput")
                         input(type="submit", value="Change")

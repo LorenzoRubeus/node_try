@@ -28,25 +28,25 @@ html
                 if btnBack == "checkout"
                     form(action=`/api/address/checkout`, method="post")
                         div(class="divInput")
-                            label Name
+                            label(for="txtName") Name
                             input#txtName(type="text", name="txtName", placeholder="Name and Surname")
                         div(class="divInput")
-                            label Street
+                            label(for="txtStreet") Street
                             input#txtStreet(type="text", name="txtStreet", placeholder="Street")
                         div(class="divInput")
-                            label Town
+                            label(for="txtTown") Town
                             input#txtTown(type="text", name="txtTown", placeholder="Town")
                         div(class="divInput")
-                            label City
+                            label(for="txtCity") City
                             input#txtCity(type="text", name="txtCity", placeholder="City")
                         div(class="divInput")
-                            label Country
+                            label(for="txtCountry") Country
                             input#txtCountry(type="text", name="txtCountry", placeholder="Country")
                         div(class="divInput")
-                            label ZIP code
+                            label(for="txtZipCode") ZIP code
                             input#txtZipCode(type="text", name="txtZipCode", placeholder="Zip Code")
                         div(class="divInput")
-                            label Phone Number
+                            label(for="txtPhoneNumber") Phone Number
                             input#txtPhoneNumber(type="text", name="txtPhoneNumber", placeholder="Phone Number")
                         div(class="divInput")
                             input(type="submit", value="Add")
@@ -55,25 +55,25 @@ html
                 else
                     form(action=`/api/address/manage`, method="post")
                         div(class="divInput")
-                            label Name
+                            label(for="txtName") Name
                             input#txtName(type="text", name="txtName", placeholder="Name and Surname")
                         div(class="divInput")
-                            label Street
+                            label(for="txtStreet") Street
                             input#txtStreet(type="text", name="txtStreet", placeholder="Street")
                         div(class="divInput")
-                            label Town
+                            label(for="txtTown") Town
                             input#txtTown(type="text", name="txtTown", placeholder="Town")
                         div(class="divInput")
-                            label City
+                            label(for="txtCity") City
                             input#txtCity(type="text", name="txtCity", placeholder="City")
                         div(class="divInput")
-                            label Country
+                            label(for="txtCountry") Country
                             input#txtCountry(type="text", name="txtCountry", placeholder="Country")
                         div(class="divInput")
-                            label ZIP code
+                            label(for="txtZipCode") ZIP code
                             input#txtZipCode(type="text", name="txtZipCode", placeholder="Zip Code")
                         div(class="divInput")
-                            label Phone Number
+                            label(for="txtPhoneNumber") Phone Number
                             input#txtPhoneNumber(type="text", name="txtPhoneNumber", placeholder="Phone Number")
                         div(class="divInput")
                             input(type="submit", value="Add")
