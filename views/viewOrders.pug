@@ -45,10 +45,33 @@ html
                             li 
                                 a(href=`/api/orders/filterByMonth/${countMonth}`)= val
                             - countMonth++
+                    p Other filters
+                    ul(id='listCategory')
+                        li
+                            a(href=`/api/orders`, style="font-weight: bold") All
+                        li 
+                            a(href="/api/orders/filteredByNewest") By latest
+                        li 
+                            a(href="/api/orders/filteredByOldest") By oldest
+                        li 
+                            a(href="/api/orders/filteredBySent") Sent
+                        li
+                            a(href="/api/orders/filteredByNotSent") To be sent
                 #divListOrders
                     if filteredMonth 
                         h2= "Your Orders - Ordered in: " + filteredMonth 
-                    h2 Your Orders
+                    if filtered
+                        case filtered
+                            when "ByNewest"
+                                h2= "Your Orders - Filtered by latest order"
+                            when "ByOldest"
+                                h2= "Your Orders - Filtered by oldest order"
+                            when "Sent"
+                                h2= "Your Orders - Sent"
+                            when "Not Sent"
+                                h2= "Your Orders - To be sent"
+                    else
+                        h2 Your Orders
                     if orders.length == 0
                         p(class="error") 0 orders to be shown.
                     else

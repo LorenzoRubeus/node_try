@@ -21,7 +21,7 @@ html
                         input#txtCardHolder(type="text", name="txtCardHolder", value=payment.cardHolder)
                     div(class="divInput")
                         label Card Circuit
-                        select(name="selCardCircuit")
+                        select(name="selCardCircuit", style="width: 225px; height: 38px;")
                             case payment.cardCircuit
                                 when "Visa"
                                     option(value="Visa" selected) Visa
@@ -58,8 +58,8 @@ html
                         label / 
                         input#txtYearExpired(type="number", name="txtYearExpired", min=2018, max=2030, value=payment.yearExpired)
                     div(class="divInput")
+                        input(type="reset", style="margin-left: 4px", id="btnReset", value="Reset")
                         input(type="submit", id="btnChange", value="Confirm")
-                        input(type="reset", id="btnReset", value="Reset")
                 div(class="divInput")
                     form(action=`/api/payments/deletePayment/${payment._id}`, method="post")
-                        input(type="submit", id="btnDelete", value="Delete")
+                        input(type="submit", style="margin-left: 8px", id="btnDelete", value="Delete")

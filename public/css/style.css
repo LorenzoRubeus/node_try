@@ -69,7 +69,7 @@ html, body {
 }
 
 #formRegister .divInput, #formLogin .divInputLogin {
-    width: 60%;
+    width: 62%;
     margin-left: 3rem;
     padding-top: 17px;
 }
@@ -79,7 +79,7 @@ html, body {
     width: 46%;
     height: 3rem;
     margin-top: 1.5rem;
-    margin-left: 4px;
+    margin-left: 5.1px;
     border: 1px solid white;
     border-radius: 3px;
     color: white;

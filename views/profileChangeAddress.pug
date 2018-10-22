@@ -38,8 +38,8 @@ html
                         label(for="txtPhoneNumber") Phone Number
                         input#txtPhoneNumber(type="text", name="txtPhoneNumber", value=address.phoneNumber)
                     div(class="divInput")
-                        input(type="submit", value="Change")
                         input(type="reset", value="Reset")
+                        input(type="submit", value="Change")
                 div(class="divInput")
                     form(action=`/api/address/deleteAddress/${address._id}`, method="post")
-                        input(type="submit", id="btnDelete", value="Delete")
+                        input(type="submit", style="margin-left: 8px", id="btnDelete", value="Delete")

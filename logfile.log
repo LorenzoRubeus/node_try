@@ -20,3 +20,79 @@
 {"level":"info","message":"Connected to mongodb://localhost/storeApp...","timestamp":"2018-10-22T17:30:59.845Z"}
 {"level":"info","message":"Listening on port 3000...","timestamp":"2018-10-22T18:48:35.864Z"}
 {"level":"info","message":"Connected to mongodb://localhost/storeApp...","timestamp":"2018-10-22T18:48:36.951Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2018-10-22T19:48:53.137Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2018-10-22T19:48:55.552Z"}
+{"level":"info","message":"Connected to mongodb://localhost/storeApp...","timestamp":"2018-10-22T19:48:56.621Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2018-10-22T19:49:03.237Z"}
+{"level":"info","message":"Connected to mongodb://localhost/storeApp...","timestamp":"2018-10-22T19:49:04.300Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2018-10-22T19:56:27.737Z"}
+{"level":"info","message":"Connected to mongodb://localhost/storeApp...","timestamp":"2018-10-22T19:56:28.857Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2018-10-22T20:01:20.568Z"}
+{"level":"info","message":"Connected to mongodb://localhost/storeApp...","timestamp":"2018-10-22T20:01:21.708Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2018-10-22T20:19:50.520Z"}
+{"level":"info","message":"Connected to mongodb://localhost/storeApp...","timestamp":"2018-10-22T20:19:51.601Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2018-10-22T20:21:28.834Z"}
+{"level":"info","message":"Connected to mongodb://localhost/storeApp...","timestamp":"2018-10-22T20:21:29.899Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2018-10-22T20:21:53.628Z"}
+{"level":"info","message":"Connected to mongodb://localhost/storeApp...","timestamp":"2018-10-22T20:21:54.696Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2018-10-22T20:22:13.937Z"}
+{"level":"info","message":"Connected to mongodb://localhost/storeApp...","timestamp":"2018-10-22T20:22:14.980Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2018-10-22T20:22:36.507Z"}
+{"level":"info","message":"Connected to mongodb://localhost/storeApp...","timestamp":"2018-10-22T20:22:37.581Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2018-10-22T20:25:37.702Z"}
+{"level":"info","message":"Connected to mongodb://localhost/storeApp...","timestamp":"2018-10-22T20:25:38.787Z"}
+{"message":"req is not defined","stack":"ReferenceError: req is not defined\n    at filterOrders (C:\\xampp\\htdocs\\Portfolio\\NodeProject\\node_try\\routes\\order.js:134:49)\n    at router.get (C:\\xampp\\htdocs\\Portfolio\\NodeProject\\node_try\\routes\\order.js:78:26)\n    at newFn (C:\\xampp\\htdocs\\Portfolio\\NodeProject\\node_try\\node_modules\\express-async-errors\\index.js:16:20)\n    at Layer.handle [as handle_request] (C:\\xampp\\htdocs\\Portfolio\\NodeProject\\node_try\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at next (C:\\xampp\\htdocs\\Portfolio\\NodeProject\\node_try\\node_modules\\express\\lib\\router\\route.js:137:13)\n    at module.exports (C:\\xampp\\htdocs\\Portfolio\\NodeProject\\node_try\\middleware\\auth.js:18:9)\n    at newFn (C:\\xampp\\htdocs\\Portfolio\\NodeProject\\node_try\\node_modules\\express-async-errors\\index.js:16:20)\n    at Layer.handle [as handle_request] (C:\\xampp\\htdocs\\Portfolio\\NodeProject\\node_try\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at next (C:\\xampp\\htdocs\\Portfolio\\NodeProject\\node_try\\node_modules\\express\\lib\\router\\route.js:137:13)\n    at Route.dispatch (C:\\xampp\\htdocs\\Portfolio\\NodeProject\\node_try\\node_modules\\express\\lib\\router\\route.js:112:3)\n    at newFn (C:\\xampp\\htdocs\\Portfolio\\NodeProject\\node_try\\node_modules\\express-async-errors\\index.js:16:20)\n    at Layer.handle [as handle_request] (C:\\xampp\\htdocs\\Portfolio\\NodeProject\\node_try\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at C:\\xampp\\htdocs\\Portfolio\\NodeProject\\node_try\\node_modules\\express\\lib\\router\\index.js:281:22\n    at Function.process_params (C:\\xampp\\htdocs\\Portfolio\\NodeProject\\node_try\\node_modules\\express\\lib\\router\\index.js:335:12)\n    at next (C:\\xampp\\htdocs\\Portfolio\\NodeProject\\node_try\\node_modules\\express\\lib\\router\\index.js:275:10)\n    at Function.handle (C:\\xampp\\htdocs\\Portfolio\\NodeProject\\node_try\\node_modules\\express\\lib\\router\\index.js:174:3)","level":"error","timestamp":"2018-10-22T20:25:49.809Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2018-10-22T20:28:02.896Z"}
+{"level":"info","message":"Connected to mongodb://localhost/storeApp...","timestamp":"2018-10-22T20:28:03.979Z"}
+{"message":"monthFilter is not defined","stack":"ReferenceError: monthFilter is not defined\n    at router.get (C:\\xampp\\htdocs\\Portfolio\\NodeProject\\node_try\\routes\\order.js:84:27)\n    at <anonymous>\n    at process._tickCallback (internal/process/next_tick.js:188:7)","level":"error","timestamp":"2018-10-22T20:28:07.714Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2018-10-22T20:30:25.486Z"}
+{"level":"info","message":"Connected to mongodb://localhost/storeApp...","timestamp":"2018-10-22T20:30:26.576Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2018-10-22T20:30:30.015Z"}
+{"level":"info","message":"Connected to mongodb://localhost/storeApp...","timestamp":"2018-10-22T20:30:31.106Z"}
+{"message":"monthFilter is not defined","stack":"ReferenceError: monthFilter is not defined\n    at router.get (C:\\xampp\\htdocs\\Portfolio\\NodeProject\\node_try\\routes\\order.js:84:27)\n    at <anonymous>\n    at process._tickCallback (internal/process/next_tick.js:188:7)","level":"error","timestamp":"2018-10-22T20:30:36.158Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2018-10-22T20:30:53.504Z"}
+{"level":"info","message":"Connected to mongodb://localhost/storeApp...","timestamp":"2018-10-22T20:30:54.601Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2018-10-22T20:31:42.431Z"}
+{"level":"info","message":"Connected to mongodb://localhost/storeApp...","timestamp":"2018-10-22T20:31:43.506Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2018-10-22T20:31:59.213Z"}
+{"level":"info","message":"Connected to mongodb://localhost/storeApp...","timestamp":"2018-10-22T20:32:00.277Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2018-10-22T20:32:22.382Z"}
+{"level":"info","message":"Connected to mongodb://localhost/storeApp...","timestamp":"2018-10-22T20:32:23.455Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2018-10-22T20:33:25.648Z"}
+{"level":"info","message":"Connected to mongodb://localhost/storeApp...","timestamp":"2018-10-22T20:33:26.712Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2018-10-22T20:33:38.459Z"}
+{"level":"info","message":"Connected to mongodb://localhost/storeApp...","timestamp":"2018-10-22T20:33:39.535Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2018-10-22T20:38:03.227Z"}
+{"level":"info","message":"Connected to mongodb://localhost/storeApp...","timestamp":"2018-10-22T20:38:04.303Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2018-10-22T20:38:11.166Z"}
+{"level":"info","message":"Connected to mongodb://localhost/storeApp...","timestamp":"2018-10-22T20:38:12.256Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2018-10-22T20:38:15.166Z"}
+{"level":"info","message":"Connected to mongodb://localhost/storeApp...","timestamp":"2018-10-22T20:38:16.274Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2018-10-22T20:38:52.464Z"}
+{"level":"info","message":"Connected to mongodb://localhost/storeApp...","timestamp":"2018-10-22T20:38:53.538Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2018-10-22T20:40:33.688Z"}
+{"level":"info","message":"Connected to mongodb://localhost/storeApp...","timestamp":"2018-10-22T20:40:34.763Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2018-10-22T20:40:49.000Z"}
+{"level":"info","message":"Connected to mongodb://localhost/storeApp...","timestamp":"2018-10-22T20:40:50.072Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2018-10-22T20:41:33.465Z"}
+{"level":"info","message":"Connected to mongodb://localhost/storeApp...","timestamp":"2018-10-22T20:41:34.549Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2018-10-22T20:42:11.002Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2018-10-22T20:42:13.583Z"}
+{"level":"info","message":"Connected to mongodb://localhost/storeApp...","timestamp":"2018-10-22T20:42:14.650Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2018-10-22T20:42:59.092Z"}
+{"level":"info","message":"Connected to mongodb://localhost/storeApp...","timestamp":"2018-10-22T20:43:00.180Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2018-10-22T20:43:24.736Z"}
+{"level":"info","message":"Connected to mongodb://localhost/storeApp...","timestamp":"2018-10-22T20:43:25.814Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2018-10-22T20:44:16.893Z"}
+{"level":"info","message":"Connected to mongodb://localhost/storeApp...","timestamp":"2018-10-22T20:44:17.972Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2018-10-22T20:56:54.205Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2018-10-22T20:56:57.440Z"}
+{"level":"info","message":"Connected to mongodb://localhost/storeApp...","timestamp":"2018-10-22T20:56:58.571Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2018-10-22T20:59:29.624Z"}
+{"level":"info","message":"Connected to mongodb://localhost/storeApp...","timestamp":"2018-10-22T20:59:30.731Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2018-10-22T21:01:45.598Z"}
+{"level":"info","message":"Connected to mongodb://localhost/storeApp...","timestamp":"2018-10-22T21:01:46.690Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2018-10-22T21:06:14.237Z"}
+{"level":"info","message":"Connected to mongodb://localhost/storeApp...","timestamp":"2018-10-22T21:06:15.312Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2018-10-22T21:06:24.974Z"}
+{"level":"info","message":"Connected to mongodb://localhost/storeApp...","timestamp":"2018-10-22T21:06:26.079Z"}
