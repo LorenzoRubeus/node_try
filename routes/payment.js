@@ -16,7 +16,7 @@ router.get('/managePayment', auth, async (req, res) => {
     if(req.session.localVar) {
         let localVar = req.session.localVar;
         req.session.destroy();
-        return res.render('managePayments', { payments: localVar.payments, count: 0 });
+        return res.render('managePayments', { changedPayment: localVar.changedPayment, payments: localVar.payments, count: 0 });
     }
 
     const payments = await Payment.find({ customer: req.user._id });
@@ -56,7 +56,12 @@ router.post('/addPayment/:redirect', auth, async (req, res) => {
     if(req.params.redirect == "checkout") {
         return res.redirect('/api/payments/pay');
     }
-    res.render('managePayments', { payments: payments });
+    req.session.localVar = {
+        payments: payments,
+        changedPayment: "added"
+    }
+    
+    res.redirect('/api/payments/managePayment');
 });
 
 router.post('/updatePayment/:idPayment', auth, async (req, res) => {
@@ -85,7 +90,8 @@ router.post('/updatePayment/:idPayment', auth, async (req, res) => {
     }, { new: true });
     const payments = await Payment.find({ customer: req.user._id }); 
     req.session.localVar = {
-        payments: payments
+        payments: payments,
+        changedPayment: "edited"
     }
 
     res.redirect('/api/payments/managePayment');
@@ -101,7 +107,8 @@ router.post('/deletePayment/:idPayment', auth, async (req, res) => {
     }
     const payments = await Payment.find({ customer: req.user._id });
     req.session.localVar = {
-        payments: payments
+        payments: payments,
+        changedPayment: "deleted"
     }
     
     res.redirect('/api/payments/managePayment');
@@ -136,11 +143,11 @@ router.post('/confirmPayment', auth, async (req, res) => {
         categories: categories,
         products: products,
         basket: basket,
-        pictures: pictures
+        pictures: pictures,
+        orderCompleted: true
     };
 
     res.redirect('/api/products/showProducts');
-    //res.render('products', { user: user, categories: categories, products: products, basket: basket, count: 0 })
 });
 
 router.get('/pay', auth, async (req, res) => {

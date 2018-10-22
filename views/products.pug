@@ -7,6 +7,7 @@ html
         link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.4/sweetalert2.min.css")
         script(src="/js/alerts.js")
         link(rel="stylesheet", href="/css/styleProducts.css")
+        link(rel="stylesheet", href="/css/animate.css")
         link(rel="stylesheet", href="https://use.fontawesome.com/releases/v5.3.1/css/all.css")
     body 
         - count = 0
@@ -16,23 +17,35 @@ html
         if err
             script.
                 errorAlertAddProductBasket("#{err}")
+        if addBasket 
+            script.
+                alertAddedBasket()
+        if orderCompleted
+            script.
+                alertOrderCompleted()
         #container
             #divNav
                 #divSearchBar
                     form(action=`/api/products/search`, method="post")
                         center
-                            button(id="btnCategoriesSearch")
+                            //button(id="btnCategoriesSearch")
                                 label Categories
                             input#txtSearchBar(type="text", name="txtSearchBar", placeholder="Look for something")
                             button(type="submit")
                                 i(class="fas fa-search")
+                #divLogo
+                    a(href="/api/products/showProducts")
+                        img(src="/img/logo.png")
+                #divNome
+                    a(href="/api/myProfile")
+                        label My Profile
+                #divOrders
+                    a(href='/api/orders')
+                        label Orders
                 #divBasket
                     a(href=`/api/basket`)
-                        label= basket.count 
                         i(class="fas fa-shopping-basket")
-                #divProfile
-                    a(href=`/api/myProfile`) 
-                        label My Profile
+                            label(id="labelBasketCount")= basket.count 
             #divProducts
                 #listFilter
                     p Filters
@@ -73,7 +86,8 @@ html
                             each val in products
                                 li
                                     #divImg
-                                        img(src=`data:image/png;base64, ${pictures[count]}`, alt=`Picture of ${val.name}`)
+                                        a(href="#")
+                                            img(src=`data:image/png;base64, ${pictures[count]}`, alt=`Picture of ${val.name}`)
                                     form(action=`/api/basket/addBasket/${val._id}`, method="post", class="formProduct")
                                         div.divSingleProduct
                                             a(href="#")= val.name

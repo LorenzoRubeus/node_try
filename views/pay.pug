@@ -13,11 +13,14 @@ html
                 form(action=`/api/payments/confirmPayment`, method="post")
                     div#divAddresses
                         label(class="headerLabel") Choose your address
-                        ul
+                        ul(id="listAddress")
                             each val in addresses
-                                li
-                                    input#rdbAddress(type="radio", name="rdbAddress", value=val._id)
-                                    label= " " + val.street + ", " + val.city + ", " + val.country + ", " + val.phoneNumber
+                                li(class="AddressItem")
+                                    label(id="labelradioButton" class="labelAddress")= val.street + ", " + val.town + ", " + val.city + ", " + val.country
+                                        input#rdbAddress(type="radio", name="rdbAddress", value=val._id)
+                                        span(class="spanRadioButton")
+                                        br
+                                        label(id="rdbLabelAddress" class="labelPhoneNumber")= "Phone number: " + val.phoneNumber
                                 - countAddress++
                             while countAddress < 6
                                 li
@@ -28,11 +31,21 @@ html
                             
                     div#divPayments
                         label(class="headerLabel") Choose your credit card
-                        ul
+                        ul(id="listPayments")
                             each val in payments
-                                li
-                                    input#rdbPayment(type="radio", name="rdbPayment", value=val._id)
-                                    label= " " + val.cardNumber
+                                li(class="paymentItem")
+                                    label(id="labelradioButton", class="labelPayment")= " " + val.cardNumber
+                                        case val.cardCircuit
+                                            when "MasterCard"
+                                                img(id="imgPaymentMethod", alt="MasterCard", src="/img/mastercard.png")
+                                            when "Visa"
+                                                img(id="imgPaymentMethod", alt="Visa", src="/img/visa.png")
+                                            when "Maestro"
+                                                img(id="imgPaymentMethod", alt="Maestro", src="/img/maestro.png")
+                                            when "American Express"
+                                                img(id="imgPaymentMethod", alt="American Express", src="/img/americanex.png")
+                                        input#rdbPayment(type="radio", name="rdbPayment", value=val._id)
+                                        span(class="spanRadioButton", style="margin-top: 8px")
                                 - countPayment++
                             while countPayment < 6 
                                 li

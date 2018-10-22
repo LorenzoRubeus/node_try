@@ -7,11 +7,22 @@ html
         script(src="/js/functions.js")
         link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.4/sweetalert2.min.css")
         link(rel="stylesheet", href="/css/styleOperations.css")
+        link(rel="stylesheet", href="/css/animateProfile.css")
         title Manage Payment Methods
     body
         if err 
             script.
                 errorAlertDeletePayment("#{err}")
+        case changedPayment
+            when "added"
+                script.
+                    paymentAdded()
+            when "edited"
+                script.
+                    paymentEdited()
+            when "deleted"
+                script.
+                    paymentRemoved()
         - var count = 0
         - var cardNumber = ""
         #divContainer

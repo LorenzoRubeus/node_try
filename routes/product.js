@@ -14,7 +14,7 @@ router.get('/showProducts', auth, async (req, res) => {
     if(req.session.localVar) {
         let localVar = req.session.localVar;
         req.session.destroy();
-        return res.render('products', { user: localVar.user, basket: localVar.basket, pictures: localVar.pictures, categories: localVar.categories, products: localVar.products }); // TODO Da modificare il send con render o qualcosa
+        return res.render('products', { orderCompleted: localVar.orderCompleted, addBasket: localVar.addBasket, user: localVar.user, basket: localVar.basket, pictures: localVar.pictures, categories: localVar.categories, products: localVar.products }); // TODO Da modificare il send con render o qualcosa
     }
 
     const categories = await Category.find();

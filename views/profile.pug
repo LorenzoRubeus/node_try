@@ -6,9 +6,21 @@ html
         link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.4/sweetalert2.min.css")
         script(src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.4/sweetalert2.min.js")
         script(src="/js/mainScript.js")
+        script(src="/js/alerts.js")
         link(rel="stylesheet", href="/css/styleProfile.css")
+        link(rel="stylesheet", href="/css/animateProfile.css")
         title= user.firstName + " " + user.lastName + "'s profile"
     body
+        case changedProfileData 
+            when "name"
+                script.
+                    nameChanged()
+            when "email"
+                script.
+                    emailChanged()
+            when "password"
+                script.
+                    passwordChanged()
         #divContainer
             div#profileOperations
                 h2 Your Account
@@ -43,11 +55,11 @@ html
                     a(href=`/api/products/showProducts`, id="btnBack") 
                         label Go back to the store
                 br
-                #divDelete
+                #divLogout
                     a(href="/api/myProfile/logout", id="btnLogout")
                         label Logout
                 br
-                #divLogout
+                #divDelete
                     a(href='#', id="btnDelete")
                         label Delete account
         #divFooter

@@ -15,7 +15,7 @@ router.get('/', auth, async (req, res) => {
     if(req.session.localVar) {
         let localVar = req.session.localVar;
         req.session.destroy();
-        return res.render('profile', { user: localVar.user });
+        return res.render('profile', { changedProfileData: localVar.changedProfileData, user: localVar.user });
     }
     const user = await User.findById(req.user._id).select({ password: 0, isAdmin: 0});
     
@@ -55,7 +55,7 @@ router.get('/changeAddress', auth, async (req, res) => {
     if(req.session.localVar) {
         let localVar = req.session.localVar;
         req.session.destroy();
-        return res.render('manageAddresses', { address: localVar.address, user: localVar.user });
+        return res.render('manageAddresses', { changedAddress: localVar.changedAddress, address: localVar.address, user: localVar.user });
     }
 
     const address = await Address.find({ customer: req.user._id });
@@ -99,7 +99,8 @@ router.post('/changeName', auth, async (req, res) => {
 
     const user = await User.findOneAndUpdate({ _id: req.user._id }, { firstName: req.body.txtFirstName, lastName: req.body.txtLastName }, { new: true });
     req.session.localVar = {
-        user: user
+        user: user,
+        changedProfileData: "name"
     };
 
     res.redirect('/api/myProfile');
@@ -127,7 +128,8 @@ router.post('/changeEmail', auth, async (req, res) => {
     user.email = req.body.txtNewEmail;
     await user.save();
     req.session.localVar = {
-        user: user
+        user: user,
+        changedProfileData: "email"
     }
 
     res.redirect('/api/myProfile');
@@ -155,7 +157,8 @@ router.post('/changePassword', auth, async (req, res) => {
     user.password = await bcrypt.hash(req.body.txtPassword, hash);
     await user.save();
     req.session.localVar = {
-        user: user
+        user: user,
+        changedProfileData: "password"
     }
 
     res.redirect('/api/myProfile');
@@ -175,6 +178,7 @@ router.post('/changeAddress/:id', auth, async (req, res) => {
     let address = await Address.findOneAndUpdate({ customer: req.user._id, _id: id }, {
         name: req.body.txtName,
         street: req.body.txtStreet,
+        town: req.body.txtTown,
         city: req.body.txtCity,
         ZipCode: req.body.txtZipCode,
         PhoneNumber: req.body.txtPhoneNumber
@@ -183,7 +187,8 @@ router.post('/changeAddress/:id', auth, async (req, res) => {
     const user = await User.findById(address.customer);
     req.session.localVar = {
         user: user,
-        address: address
+        address: address,
+        changedAddress: "edited"
     }
 
     res.redirect('/api/myProfile/changeAddress');

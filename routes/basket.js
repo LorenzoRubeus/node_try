@@ -13,7 +13,7 @@ router.get('/', auth, async (req, res) => {
     if(req.session.localVar) {
         let localVar = req.session.localVar;
         req.session.destroy();
-        return res.render('myBasket', { user: localVar.user, basket: localVar.basket, picture: localVar.picture, count: localVar.count});
+        return res.render('myBasket', { removeBasket: localVar.removeBasket, user: localVar.user, basket: localVar.basket, picture: localVar.picture, count: localVar.count});
     }
 
     const basket = await Basket.findOne({ customer: req.user._id }).populate('products');
@@ -53,7 +53,8 @@ router.post('/addBasket/:idProduct', auth, async (req, res) => {
         pictures: pictures,
         categories: categories,
         basket: basket,
-        products: products
+        products: products,
+        addBasket: true
     }
     res.redirect('/api/products/showProducts');
 });
@@ -79,6 +80,7 @@ router.post('/removeProductBasket/:idProduct/:idProductRemove', auth, async (req
         user: user,
         picture: picture,
         basket: basket,
+        removeBasket: true,
         count: 0
     }
 

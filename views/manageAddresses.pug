@@ -2,10 +2,25 @@ doctype html
 html
     head
         meta(http-equiv="Content-Type", content="text/html;charset=UTF-8")
+        link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.4/sweetalert2.min.css")
+        script(src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.4/sweetalert2.min.js")
+        script(src="/js/mainScript.js")
+        script(src="/js/alerts.js")
         link(rel="stylesheet", href="/css/styleOperations.css")
+        link(rel="stylesheet", href="/css/animateProfile.css")
         title Change Address
     body
         - var count = 0 
+        case changedAddress
+            when "deleted"
+                script.
+                    addressDeleted()
+            when "added"
+                script.
+                    addressAdded()
+            when "edited"
+                script.
+                    addressEdited()
         #divContainer
             div#divAddresses
                 #divContainerTop

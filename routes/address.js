@@ -27,6 +27,7 @@ router.post('/:redirect', auth, async (req, res) => {
         },
         name: req.body.txtName,
         street: req.body.txtStreet,
+        town: req.body.txtTown,
         city: req.body.txtCity,
         country: req.body.txtCountry,
         zipCode: req.body.txtZipCode,
@@ -41,7 +42,12 @@ router.post('/:redirect', auth, async (req, res) => {
     if(req.params.redirect == "checkout") {
         return res.redirect("/api/payments/pay");
     }
-    res.render('manageAddresses', { address: addresses });
+    req.session.localVar = {
+        address: addresses,
+        changedAddress: "added"
+    }
+    
+    res.redirect('/api/myProfile/changeAddress');
 });
 
 
@@ -50,7 +56,8 @@ router.post('/deleteAddress/:idAddress', auth, async (req, res) => {
     await Address.findByIdAndRemove(idAddress);
     const addresses = await Address.find({ customer: req.user._id });
     req.session.localVar = {
-        address: addresses
+        address: addresses,
+        changedAddress: "deleted"
     }
 
     res.redirect('/api/myProfile/changeAddress');

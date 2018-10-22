@@ -129,12 +129,12 @@ html, body {
 
 #divDelete {
     position: relative;
-    top: 1em;
+    top: 65px;
 }
 
 #divLogout {
     position: relative;
-    top: 2em;
+    top: 50px;
 }
 
 #btnDelete, #btnLogout {
@@ -188,11 +188,11 @@ html, body {
 #divFooterLeft, #divFooterCenter, #divFooterRight {
     font-size: 15px;
     float: left;
-    margin-left: 21%;
+    margin-left: 23%;
 }
 
 #divFooterCenter {
-    margin-left: 21%;
+    margin-left: 22%;
 }
 
 #divFooterLeft a, #divFooterCenter a, #divFooterRight a {

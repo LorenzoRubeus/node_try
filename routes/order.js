@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const config = require('config');
 const { Order } = require('../models/orders');
+const { Basket } = require('../models/baskets');
 const auth = require('../middleware/auth');
 const express = require('express');
 const router = express.Router();
@@ -8,6 +9,7 @@ const btoa = require('btoa');
 
 router.get('/', auth, async (req, res) => {
     const orders = await Order.find({ customer: req.user._id }).populate('products address');
+    const basket = await Basket.findOne({ customer: req.user._id});
     let dateEstimated = [];
     let dateOrder = [];
     let pictures = [];
@@ -26,9 +28,9 @@ router.get('/', auth, async (req, res) => {
     if( req.session.localVar ) {
         let localVar = req.session.localVar;
         req.session.destroy();
-        return res.render('viewOrders', { orders: localVar.orders, pictures: localVar.pictures, filteredMonth: localVar.filteredMonth, months: localVar.months, dateOrder: localVar.dateOrder, dateEstimated: localVar.dateEstimated });
+        return res.render('viewOrders', { basket: basket, orders: localVar.orders, pictures: localVar.pictures, filteredMonth: localVar.filteredMonth, months: localVar.months, dateOrder: localVar.dateOrder, dateEstimated: localVar.dateEstimated });
     }
-    res.render('viewOrders', { orders: orders, pictures: pictures, months: months, dateOrder: dateOrder, dateEstimated: dateEstimated });
+    res.render('viewOrders', { orders: orders, basket: basket, pictures: pictures, months: months, dateOrder: dateOrder, dateEstimated: dateEstimated });
 });
 
 router.get('/filterByMonth/:month', auth, async (req, res) => {

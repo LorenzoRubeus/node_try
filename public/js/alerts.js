@@ -101,6 +101,200 @@ function errorAlertAddProductBasket(error) {
     }
 }
 
+// ===== Beginning of animated Alerts =====
+function alertAddedBasket() {
+    setTimeout(function () { 
+        swal({ 
+            position: 'top',
+            type: 'success',
+            title: 'Product added',
+            showConfirmButton: false,
+            background: "transparent",
+            animation: false,
+            customClass: 'animated slideInDown',
+            backdrop: false,
+            timer: 1400
+        }); 
+    }, 500);
+}
+
+function alertOrderCompleted() {
+    setTimeout(function () {
+        swal({
+            position: 'top',
+            type: 'success',
+            title: 'Order Sent',
+            showConfirmButton: false,
+            background: 'transparent',
+            animation: false,
+            customClass: 'animated slideInDown',
+            backdrop: false,
+            timer: 1200
+        });
+    }, 500);
+}
+
+function alertRemoveBasket() {
+    setTimeout(function () {
+        swal({
+            position: 'top',
+            type: 'error',
+            title: 'Product removed',
+            showConfirmButton: false,
+            background: 'transparent',
+            animation: false,
+            customClass: 'animated slideInDown',
+            backdrop: false,
+            timer: 1200
+        });
+    }, 500);
+}
+
+function nameChanged() {
+    setTimeout(function () {
+        swal({
+            position: 'top',
+            type: 'success',
+            title: '<span style="color:#FFFFFF">Name Changed</span>',
+            showConfirmButton: false,
+            background: 'transparent',
+            animation: false,
+            customClass: 'animated slideInDown',
+            backdrop: false,
+            timer: 1200
+        });
+    }, 500);
+}
+
+function emailChanged() {
+    setTimeout(function () {
+        swal({
+            position: 'top',
+            type: 'success',
+            title: '<span style="color:#FFFFFF">Email Changed</span>',
+            showConfirmButton: false,
+            background: 'transparent',
+            animation: false,
+            customClass: 'animated slideInDown',
+            backdrop: false,
+            timer: 1200
+        });
+    }, 500);
+}
+
+function passwordChanged() {
+    setTimeout(function () {
+        swal({
+            position: 'top',
+            type: 'success',
+            title: '<span style="color:#FFFFFF">Password Changed</span>',
+            showConfirmButton: false,
+            background: 'transparent',
+            animation: false,
+            customClass: 'animated slideInDown',
+            backdrop: false,
+            timer: 1200
+        });
+    }, 500);
+}
+
+function addressAdded() {
+    setTimeout(function () {
+        swal({
+            position: 'top',
+            type: 'success',
+            title: '<span style="color:#FFFFFF">Address Added</span>',
+            showConfirmButton: false,
+            background: 'transparent',
+            animation: false,
+            customClass: 'animated slideInDown',
+            backdrop: false,
+            timer: 1200
+        });
+    }, 500);
+}
+
+function addressEdited() {
+    setTimeout(function () {
+        swal({
+            position: 'top',
+            type: 'success',
+            title: '<span style="color:#FFFFFF">Address Edited</span>',
+            showConfirmButton: false,
+            background: 'transparent',
+            animation: false,
+            customClass: 'animated slideInDown',
+            backdrop: false,
+            timer: 1200
+        });
+    }, 500);
+}
+
+function addressDeleted() {
+    setTimeout(function () {
+        swal({
+            position: 'top',
+            type: 'success',
+            title: '<span style="color:#FFFFFF">Address Deleted</span>',
+            showConfirmButton: false,
+            background: 'transparent',
+            animation: false,
+            customClass: 'animated slideInDown',
+            backdrop: false,
+            timer: 1200
+        });
+    }, 500);
+}
+
+function paymentAdded() {
+    setTimeout(function () {
+        swal({
+            position: 'top',
+            type: 'success',
+            title: '<span style="color:#FFFFFF">Payment Added</span>',
+            showConfirmButton: false,
+            background: 'transparent',
+            animation: false,
+            customClass: 'animated slideInDown',
+            backdrop: false,
+            timer: 1200
+        });
+    }, 500);
+}
+
+function paymentEdited() {
+    setTimeout(function () {
+        swal({
+            position: 'top',
+            type: 'success',
+            title: '<span style="color:#FFFFFF">Payment Edited</span>',
+            showConfirmButton: false,
+            background: 'transparent',
+            animation: false,
+            customClass: 'animated slideInDown',
+            backdrop: false,
+            timer: 1200
+        });
+    }, 500);
+}
+
+function paymentRemoved() {
+    setTimeout(function () {
+        swal({
+            position: 'top',
+            type: 'success',
+            title: '<span style="color:#FFFFFF">Payment Removed</span>',
+            showConfirmButton: false,
+            background: 'transparent',
+            animation: false,
+            customClass: 'animated slideInDown',
+            backdrop: false,
+            timer: 1200
+        });
+    }, 500);
+}
+// ===== End of animated Alerts =====
+
 function alertRegistered() {
     setTimeout(function () { swal("User registered",
         "You are now registered and now you can access all the website!",

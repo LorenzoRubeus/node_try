@@ -44,6 +44,18 @@ li {
     margin-top: 5px;
 }
 
+.labelAddress {
+    padding-left: 1em !important;
+}
+
+.labelAddress:hover, .labelPayment:hover, .labelPhoneNumber:hover {
+    text-decoration: underline;
+}
+
+.labelPhoneNumber {
+    padding-left: 2.5em !important;
+}
+
 .addAddressPay, .addPaymentPay {
     text-decoration: none;
     color: white;
@@ -86,6 +98,14 @@ li {
 
 #divForm ul {
     list-style: none;
+}
+
+#listPayments li, #listAddress li {
+    padding-top: 7px !important;
+}
+
+#listPayments .paymentItem {
+    padding-left: 0.5em;
 }
 
 input[type="submit"] {
@@ -138,4 +158,39 @@ input[type="submit"]:hover {
     display: inline-block;
     text-decoration: none;
     color: white;
+}
+
+
+#labelradioButton input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.spanRadioButton {
+    position: absolute;
+    left: 4em;
+    height: 17px;
+    width: 17px;
+    background-color: transparent;
+    border: 1px solid white;
+    border-radius: 50%;
+}
+
+#labelradioButton:hover input ~ .spanRadioButton { 
+    background-color: #ccc;
+}
+
+#labelradioButton input:checked ~ .spanRadioButton {
+    background-color: white;
+}
+
+
+#imgPaymentMethod {
+    display: inline-block;
+    position: relative;
+    width: 35px;
+    height: 20px;
+    top: 5px;
+    left: 16px;
 }

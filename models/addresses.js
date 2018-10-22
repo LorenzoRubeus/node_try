@@ -18,6 +18,12 @@ const addressSchema = new mongoose.Schema({
         maxlength: 355,
         required: true
     },
+    town: {
+        type: String,
+        minlength: 2,
+        maxlength: 355,
+        require: true
+    },
     city: {
         type: String, 
         minlength: 2,
@@ -50,6 +56,7 @@ function validateAddress(address){
     const schema = {
         txtName: Joi.string().min(2).max(355).required().label("Name must be compiled and must have at least 2 characters"),
         txtStreet: Joi.string().min(2).max(355).required().label("Street name must be compiled and must have at least 2 characters"),
+        txtTown: Joi.string().min(2).max(355).required().label('Town name must be compiled and must have at least 2 characters'),
         txtCity: Joi.string().min(2).max(255).required().label("City name must be compiled and must have at least 2 characters"),
         txtCountry: Joi.string().min(2).max(255).required().label("Country name must be compiled and must have at least 2 characters"),
         txtZipCode: Joi.string().min(5).max(5).regex(/^([0-9])/).required().label("Zipcode must be provided and it has to have 5 numbers only"),

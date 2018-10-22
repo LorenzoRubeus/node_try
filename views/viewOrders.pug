@@ -17,14 +17,24 @@ html
                 #divSearchBar
                     form(action=`/api/products/search`, method="post")
                         center
-                            button(id="btnCategoriesSearch")
+                            //button(id="btnCategoriesSearch")
                                 label Categories
                             input#txtSearchBar(type="text", name="txtSearchBar", placeholder="Look for a product")
                             button(type="submit")
                                 i(class="fas fa-search")
-                #divProfile
+                #divLogo
+                    a(href="/api/products/showProducts")
+                        img(src="/img/logo.png")
+                #divHome
+                    a(href=`/api/products/showProducts/`) 
+                        label Products
+                #divNome
                     a(href=`/api/myProfile`) 
                         label My Profile
+                #divBasket
+                    a(href=`/api/basket`)
+                        i(class="fas fa-shopping-basket")
+                            label(id="labelBasketCount")= basket.count
             #divOrders
                 #listFilter
                     p Filter by month  
@@ -46,7 +56,7 @@ html
                             each val in orders
                                 li
                                     p(class="pAddress")= "Sent to:"
-                                        label= " " + val.address.name + ", " + val.address.street + ", " + val.address.city + ", " + val.address.country
+                                        label= " " + val.address.name + ", " + val.address.street + ", " + val.address.town + ", " + val.address.city + ", " + val.address.country
                                         label(class="labelPhoneNumber")= ". Phone number:"
                                             label= " " + val.address.phoneNumber
                                     p(class="pDateOrder")= "Ordered on:"
@@ -57,7 +67,8 @@ html
                                         label= " " + val.price + "€"
                                     each products in val.products
                                         div#divImg
-                                            img(src=`data:image/png;base64, ${pictures[countOrder][countPicture]}`, alt=`Picture of ${products.name}`)
+                                            a(href="#")
+                                                img(src=`data:image/png;base64, ${pictures[countOrder][countPicture]}`, alt=`Picture of ${products.name}`)
                                         div.divSingleProduct
                                             a(href="#")= products.name
                                             label(class="labelBy")= " by"
