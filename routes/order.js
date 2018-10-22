@@ -16,10 +16,10 @@ router.get('/', auth, async (req, res) => {
     let months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
     for( let i = 0; i < orders.length; i++ ) {
-        dateOrder.push(getData(orders[i].dateOrder));
+        dateOrder.push(getDate(orders[i].dateOrder));
     }
     for( let i = 0; i < orders.length; i++ ) {
-        dateEstimated.push(getData(orders[i].dateEstimated));
+        dateEstimated.push(getDate(orders[i].dateEstimated));
     }
     for( let i = 0; i < orders.length; i++ ) {
         pictures.push(getPictures(orders[i].products));
@@ -49,10 +49,10 @@ router.get('/filterByMonth/:month', auth, async (req, res) => {
         }
     }
     for( let i = 0; i < ordersFiltered.length; i++ ) {
-        dateOrder.push(getData(ordersFiltered[i].dateOrder));
+        dateOrder.push(getDate(ordersFiltered[i].dateOrder));
     }
     for( let i = 0; i < ordersFiltered.length; i++ ) {
-        dateEstimated.push(getData(ordersFiltered[i].dateEstimated));
+        dateEstimated.push(getDate(ordersFiltered[i].dateEstimated));
     }
     for( let i = 0; i < ordersFiltered.length; i++ ) {
         pictures.push(getPictures(ordersFiltered[i].products));
@@ -70,136 +70,107 @@ router.get('/filterByMonth/:month', auth, async (req, res) => {
     res.redirect('/api/orders');
 });
 
-router.get('/filteredByNewest', auth, async (req, res) => {
-    let pictures = [];
-    let months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-    let dateEstimated = [];
-    let dateOrder = [];
-    let orders = await Order.find({ customer: req.user._id }).populate('products address').sort({ dateOrder: -1 });
-
-    for( let i = 0; i < orders.length; i++ ) {
-        dateOrder.push(getData(orders[i].dateOrder));
-    }
-    for( let i = 0; i < orders.length; i++ ) {
-        dateEstimated.push(getData(orders[i].dateEstimated));
-    }
-    for( let i = 0; i < orders.length; i++ ) {
-        pictures.push(getPictures(orders[i].products));
-    } 
-
+router.get('/filteredByNewest', auth, async (req, res) => { 
+    const obj = await getOrdersFiltered(req.user._id, "ByNewest", { dateOrder: -1 });
     req.session.localVar = {
-        orders: orders,
-        pictures: pictures,
-        months: months,
-        dateOrder: dateOrder,
-        dateEstimated: dateEstimated,
-        filtered: "ByNewest"
+        orders: obj.orders,
+        pictures: obj.pictures,
+        months: obj.months,
+        dateOrder: obj.dateOrder,
+        dateEstimated: obj.dateEstimated,
+        filtered: obj.filtered
     }
-
     res.redirect('/api/orders');
 });
 
-router.get('/filteredByOldest', auth, async (req, res) => {
-    let pictures = [];
-    let months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-    let dateEstimated = [];
-    let dateOrder = [];
-    let orders = await Order.find({ customer: req.user._id }).populate('products address').sort({ dateOrder: 1 });
-
-    for( let i = 0; i < orders.length; i++ ) {
-        dateOrder.push(getData(orders[i].dateOrder));
-    }
-    for( let i = 0; i < orders.length; i++ ) {
-        dateEstimated.push(getData(orders[i].dateEstimated));
-    }
-    for( let i = 0; i < orders.length; i++ ) {
-        pictures.push(getPictures(orders[i].products));
-    } 
-
+router.get('/filteredByOldest', auth, async (req, res) => { 
+    const obj = await getOrdersFiltered(req.user._id, "ByOldest", { dateOrder: 1 });
     req.session.localVar = {
-        orders: orders,
-        pictures: pictures,
-        months: months,
-        dateOrder: dateOrder,
-        dateEstimated: dateEstimated,
-        filtered: "ByOldest"
+        orders: obj.orders,
+        pictures: obj.pictures,
+        months: obj.months,
+        dateOrder: obj.dateOrder,
+        dateEstimated: obj.dateEstimated,
+        filtered: obj.filtered
     }
-
     res.redirect('/api/orders');
 });
 
-router.get('/filteredBySent', auth, async (req, res) => {
+router.get('/filteredBySent', auth, async (req, res) => { 
+    const obj = await getOrdersFiltered(req.user._id, "Sent", { dateOrder: -1 });
+    req.session.localVar = {
+        orders: obj.orders,
+        pictures: obj.pictures,
+        months: obj.months,
+        dateOrder: obj.dateOrder,
+        dateEstimated: obj.dateEstimated,
+        filtered: obj.filtered
+    }
+    res.redirect('/api/orders');
+});
+
+router.get('/filteredByNotSent', auth, async (req, res) => { 
+    const obj = await getOrdersFiltered(req.user._id, "Not Sent", { dateOrder: -1 });
+    req.session.localVar = {
+        orders: obj.orders,
+        pictures: obj.pictures,
+        months: obj.months,
+        dateOrder: obj.dateOrder,
+        dateEstimated: obj.dateEstimated,
+        filtered: obj.filtered
+    }
+    res.redirect('/api/orders');
+});
+
+
+
+async function getOrdersFiltered(customerID, filter, sortP) {
     let pictures = [];
     let months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
     let dateEstimated = [];
     let dateOrder = [];
-    let orders = await Order.find({ customer: req.user._id }).populate('products address').sort({ dateOrder: -1 });
+    let orders = await Order.find({ customer: customerID }).populate('products address').sort(sortP);
     let ordersFiltered = [];
 
-    for( let i = 0; i < orders.length; i++ ) {
-        if(orders[i].dateEstimated < new Date()) {
-            ordersFiltered.push(orders[i]);
+    if(filter == "Sent" || filter == "Not Sent") {
+        if(filter == "Sent")
+        {
+            for( let i = 0; i < orders.length; i++ ) {
+                if(orders[i].dateEstimated < new Date()) {
+                    ordersFiltered.push(orders[i]);
+                }
+            }
         }
+        else
+        {
+            for( let i = 0; i < orders.length; i++ ) {
+                if(orders[i].dateEstimated >= new Date()) {
+                    ordersFiltered.push(orders[i]);
+                }
+            }
+        }
+    } else {
+        ordersFiltered = orders;
     }
-
     for( let i = 0; i < ordersFiltered.length; i++ ) {
-        dateOrder.push(getData(ordersFiltered[i].dateOrder));
+        dateOrder.push(getDate(ordersFiltered[i].dateOrder));
     }
     for( let i = 0; i < ordersFiltered.length; i++ ) {
-        dateEstimated.push(getData(ordersFiltered[i].dateEstimated));
+        dateEstimated.push(getDate(ordersFiltered[i].dateEstimated));
     }
     for( let i = 0; i < ordersFiltered.length; i++ ) {
         pictures.push(getPictures(ordersFiltered[i].products));
     } 
 
-    req.session.localVar = {
+    return obj = {
         orders: ordersFiltered,
         pictures: pictures,
         months: months,
         dateOrder: dateOrder,
         dateEstimated: dateEstimated,
-        filtered: "Sent"
+        filtered: filter
     }
-
-    res.redirect('/api/orders');
-});
-
-router.get('/filteredByNotSent', auth, async (req, res) => {
-    let pictures = [];
-    let months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-    let dateEstimated = [];
-    let dateOrder = [];
-    let orders = await Order.find({ customer: req.user._id }).populate('products address').sort({ dateOrder: -1 });
-    let ordersFiltered = [];
-
-    for( let i = 0; i < orders.length; i++ ) {
-        if(orders[i].dateEstimated >= new Date()) {
-            ordersFiltered.push(orders[i]);
-        }
-    }
-
-    for( let i = 0; i < ordersFiltered.length; i++ ) {
-        dateOrder.push(getData(ordersFiltered[i].dateOrder));
-    }
-    for( let i = 0; i < ordersFiltered.length; i++ ) {
-        dateEstimated.push(getData(ordersFiltered[i].dateEstimated));
-    }
-    for( let i = 0; i < ordersFiltered.length; i++ ) {
-        pictures.push(getPictures(ordersFiltered[i].products));
-    } 
-
-    req.session.localVar = {
-        orders: ordersFiltered,
-        pictures: pictures,
-        months: months,
-        dateOrder: dateOrder,
-        dateEstimated: dateEstimated,
-        filtered: "Not Sent"
-    }
-
-    res.redirect('/api/orders');
-});
-
+}
 
 
 function getPictures(products) {
@@ -210,7 +181,7 @@ function getPictures(products) {
     return pictures;
 }
 
-function getData(dateOrder) {
+function getDate(dateOrder) {
     let date = dateOrder;
     let month = date.getUTCMonth() + 1; //months from 1-12
     let day = date.getUTCDate();
@@ -221,7 +192,6 @@ function getData(dateOrder) {
         day: day,
         year: year
     }
-
     return objDate;
 }
 

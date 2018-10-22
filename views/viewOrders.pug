@@ -60,7 +60,7 @@ html
                 #divListOrders
                     if filteredMonth 
                         h2= "Your Orders - Ordered in: " + filteredMonth 
-                    if filtered
+                    else if filtered
                         case filtered
                             when "ByNewest"
                                 h2= "Your Orders - Filtered by latest order"
